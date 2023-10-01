@@ -117,25 +117,25 @@
     }
 
     &[aria-hidden='false'] &__bg {
-        animation: slideIn 1s var(--ease-outexpo) 0s forwards;
+        animation: slideIn 1s var(--easeOutExpo) 0s forwards;
     }
     &[aria-hidden='false'] .modal__container {
-        animation: fadeIn 0.8s var(--ease-outcubic) 0.4s forwards;
+        animation: fadeIn 0.8s var(--easeOutCubic) 0.4s forwards;
     }
 
     &[aria-hidden='false'] &__content {
-        animation: scaleIn 0.8s var(--ease-outcubic) 0.4s forwards;
+        animation: scaleIn 0.8s var(--easeOutCubic) 0.4s forwards;
     }
 
     &[aria-hidden='true'] &__bg {
-        animation: slideOut 0.6s var(--ease-inoutcubic) 0s forwards;
+        animation: slideOut 0.6s var(--easeInOutCubic) 0s forwards;
     }
 
     &[aria-hidden='true'] &__content {
-        animation: scaleOut 0.8s var(--ease-outcubic) 0.6s forwards;
+        animation: scaleOut 0.8s var(--easeOutCubic) 0.6s forwards;
     }
     &[aria-hidden='true'] &.modal__container {
-        animation: fadeOut 0.8s var(--ease-outcubic) 0.6s forwards;
+        animation: fadeOut 0.8s var(--easeOutCubic) 0.6s forwards;
     }
 
     &[aria-hidden='false'] &__content,
