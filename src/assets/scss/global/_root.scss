@@ -1,0 +1,172 @@
+@use '../__Boilerplates/foundation/_bp-mixins' as *;
+@use './valiables' as *;
+@use './config' as *;
+/**
+* CSS変数を設定
+*/
+:root {
+    /**
+    * Colors
+    */
+    @include defineColors($colors);
+
+    /**
+    * Ease
+    */
+    @include defineEase();
+
+    --color: var(--color-base);
+    --background-color: var(--color-bg);
+
+    --font-family: -apple-system, blinkmacsystemfont, 'Helvetica Neue',
+        hiragino sans, 'ヒラギノ角ゴ ProN W3', hiragino kaku gothic pron,
+        'Yu Gothic', yugothic, verdana, meiryo, 'M+ 1p', sans-serif;
+    --font-bold: 600;
+    --font-regular: 400;
+    --font-normal: 400;
+    /**
+    *  アイコンフォントファミリー
+    */
+    --icon-font-family: 'Material Symbols Outlined';
+
+    /**
+    *   ヘッダー
+    **/
+    --header-height-top: 100px;
+    --header-height-lg: 75px;
+    --header-height-md: 65px;
+    --header-height-sm: 55px;
+    /**
+    * フォーム関連
+    */
+    --input-height: 45px;
+    // --input-padding-y: .3rem;
+    // --input-padding-x: .7rem;
+    // --color-label:#888;
+
+    // 必須の背景色
+    // --form-require-color: #f24646;
+
+    --input-border-color: var(--color-gray-light);
+    --input-submit-disabled-bg: #aaa;
+    // --input-border-width: 1px;
+    // --input-border-radius: 6px;
+
+    // フォームのフォント
+    //--input-font-family: system-ui, 'Segoe UI', roboto, 'Helvetica Neue',
+    // 'Noto Sans', 'Liberation Sans', arial, sans-serif, 'Helvetica Neue',
+    // hiragino sans, 'ヒラギノ角ゴ ProN W3', hiragino kaku gothic pron,
+    // 'Yu Gothic', yugothic, verdana, meiryo, 'M+ 1p', sans-serif;
+    /**
+    * カラー関係
+    */
+    // ダークモードで構築する場合
+    @if ($enable-dark) {
+        /**
+        * Form系の変数
+        */
+        color-scheme: dark;
+        --input-color: #fff;
+        --input-bg: #3e4c59;
+        --input-border-color: #3e4c59;
+        --file-selector-button-color: #5b646b;
+        --select-bg-img: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+        --input-placeholder-color: #aaa;
+        --input-disabled-color: #999;
+        --input-disabled-bg: #444;
+        --input-disabled-border-color: #999;
+
+        /**
+        * Link
+        */
+        --link-color: #5f76e9;
+        --link-hover-color: #91a3fc;
+    } @else {
+        /**
+        * Link
+        */
+        --link-color: #0e7ae0;
+        --link-hover-color: #0b67bd;
+    }
+
+    /**
+    * Table
+    */
+    // --table-padding-x: 0.6rem;
+    // --table-padding-y: 0.4rem;
+    // --table-thead-background-color: #eee;
+    // --table-thead-color: var(--color);
+    // --table-thead-border-color: #eee;
+    // --table-tbody-background-color: #fff;
+    // --table-tbody-color: var(--color);
+    // --table-tbody-border-color: #eee;
+
+    /**
+    * Breadcrumbs
+    */
+    // --breadcrumb-padding-x: 0;
+    // --breadcrumb-padding-y: 0;
+    // --breadcrumb-margin-bottom: 0;
+    // --breadcrumb-bg: transparent;
+    // --breadcrumb-border-radius: 0;
+    // --breadcrumb-divider: "/";
+    // --breadcrumb-divider-color: #999;
+    // --breadcrumb-item-padding-x: .5rem;
+    // --breadcrumb-item-active-color:#65689f;
+
+    /**
+    *   Paginantion
+    */
+    --pagination-justify-content: center;
+    // --pagination-border-radius: 6px;
+    // --pagination-border-color: var(--color-gray-light);
+    // --pagination-wrapper-margin:0;
+    // --pagination-wrapper-padding:1rem 0 0;
+    // --pagination-justify-content:flex-start;
+    // --pagination-gap:8px;
+
+    // --pagination-padding-top:2px;
+    // --pagination-padding-bottom:2px;
+    // --pagination-padding-x:10px;
+
+    // --pagination-min-width:34px;
+    // --pagination-font-size:1rem;
+
+    // --pagination-color:var(--color);
+    // --pagination-bg-color:var(--background-color);
+    // --pagination-border-color:#dfdfdf;
+    // --pagination-border-radius:3px;
+
+    // --pagination-link-color:var(--link-color);
+    // --pagination-link-hover-color:var(--background-color);
+    // --pagination-link-hover-bg-color:var(--link-color);
+    // --pagination-link-hover-border-color:var(--link-color);
+
+    // // 現在ページの設定
+    // --pagination-current-color:#fff;
+    // --pagination-current-border-color:var(--link-color);
+    // --pagination-current-bg-color:var(--link-color);
+
+    // // [...]マークの設定
+    // --pagination-omission-padding-x:0;
+    // --pagination-omission-padding-x:0;
+    // --pagination-omission-color:var(--color);
+    // --pagination-omission-border-color:transparent;
+    // --pagination-omission-bg:transparent;
+
+    // // 矢印アイコンのサイズ
+    // --pagination-arrow-size: calc(20 / 16 * 1rem);
+    // --pagination-first-last-size:calc(20 / 16 * 1rem);
+
+    // // 最初リンクの矢印
+    // --pagination-arrow-first: "keyboard_double_arrow_left";
+
+    // // 前へリンクの矢印
+    // --pagination-arrow-prev: "chevron_left";
+
+    // // 次へリンクの矢印
+    // --pagination-arrow-next: "chevron_right";
+
+    // // 最後リンクの矢印
+    // --pagination-arrow-last: "keyboard_double_arrow_right";
+}

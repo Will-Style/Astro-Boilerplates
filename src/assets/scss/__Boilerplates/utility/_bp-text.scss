@@ -1,0 +1,66 @@
+@use '../../global' as *;
+
+@if ($enable-text) {
+    @each $breakpoint in map-keys($grid-breakpoints) {
+        @include mq-up($breakpoint) {
+            $infix: breakpoint-infix($breakpoint);
+            .#{$infix}text-left {
+                text-align: left;
+            }
+            .#{$infix}text-right {
+                text-align: right;
+            }
+            .#{$infix}text-center {
+                text-align: center;
+            }
+            .#{$infix}text-justify {
+                text-align: justify;
+            }
+            // .#{$infix}text-horizontal {
+            //     writing-mode: horizontal-tb;
+            // }
+            // .#{$infix}text-vertical-lr {
+            //     writing-mode: vertical-lr;
+            // }
+            // .#{$infix}text-vertical-rl {
+            //     writing-mode: vertical-rl;
+            // }
+        }
+
+        @include mq-down($breakpoint) {
+            $infix: breakpoint-infix($breakpoint);
+            @if ($infix != '') {
+                .-#{$infix}text-left {
+                    text-align: left;
+                }
+                .-#{$infix}text-right {
+                    text-align: right;
+                }
+                .-#{$infix}text-center {
+                    text-align: center;
+                }
+                .-#{$infix}text-justify {
+                    text-align: justify;
+                }
+                // .-#{$infix}text-horizontal {
+                //     writing-mode: horizontal-tb;
+                // }
+                // .-#{$infix}text-vertical-lr {
+                //     writing-mode: vertical-lr;
+                // }
+                // .-#{$infix}text-vertical-rl {
+                //     writing-mode: vertical-rl;
+                // }
+            }
+        }
+    }
+    .text-upper {
+        text-transform: uppercase;
+    }
+    .text-lower {
+        text-transform: lowercase;
+    }
+    .text-cap {
+        text-transform: capitalize;
+    }
+}

@@ -1,0 +1,16 @@
+AuthUserFile /var/www/.htpasswd
+AuthGroupFile /dev/null
+AuthName "Enter password"
+AuthType Basic
+order deny,allow
+require valid-user
+
+## Document rootをbuildに変更。
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    RewriteBase /
+    RewriteRule ^$ dist/ [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule (.*)$ dist/$1 [L]
+</IfModule>

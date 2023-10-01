@@ -1,0 +1,8 @@
+@use '../global/' as *;
+.contact {
+    &__content {
+        padding-bottom: 30px;
+        font-size: calc(15 / 16 * 1rem);
+        line-height: 1.8;
+    }
+}

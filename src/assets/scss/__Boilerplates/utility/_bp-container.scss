@@ -1,0 +1,58 @@
+@use '../../global' as *;
+
+@if ($enable-container) {
+    .container {
+        width: 100%;
+        max-width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+        @each $breakpoint, $width in $container-max-widths {
+            @if (breakpoint-max($breakpoint) != null) {
+                @include mq-up($breakpoint) {
+                    width: $width;
+                }
+            }
+        }
+        @each $breakpoint, $padding in $container-padding {
+            @include mq-up($breakpoint) {
+                padding-right: $padding;
+                padding-left: $padding;
+            }
+        }
+    }
+
+    .container-fluid {
+        width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+        @each $breakpoint, $padding in $container-padding {
+            @include mq-up($breakpoint) {
+                padding-right: $padding;
+                padding-left: $padding;
+            }
+        }
+    }
+
+    .container-overflow-right {
+        width: 100%;
+        max-width: 100%;
+        margin-left: auto;
+        @include container-overflow-right();
+        @each $breakpoint, $padding in $container-padding {
+            @include mq-up($breakpoint) {
+                padding-left: $padding;
+            }
+        }
+    }
+    .container-overflow-left {
+        width: 100%;
+        max-width: 100%;
+        margin-right: auto;
+        @include container-overflow-left();
+        @each $breakpoint, $padding in $container-padding {
+            @include mq-up($breakpoint) {
+                padding-right: $padding;
+            }
+        }
+    }
+}

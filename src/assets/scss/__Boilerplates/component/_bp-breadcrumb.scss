@@ -1,0 +1,29 @@
+@use '../../global' as *;
+
+@if ($enable-breadcrumb) {
+    .c-breadcrumb {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: var(--breadcrumb-justify-content, flex-start);
+        margin-bottom: var(--breadcrumb-margin-bottom, 0);
+        padding: var(--breadcrumb-padding-y, 0) var(--breadcrumb-padding-x, 0);
+        border-radius: var(--breadcrumb-border-radius, 0);
+        background-color: var(--breadcrumb-bg, transparent);
+        font-size: var(--breadcrumb-font-size, calc(14 / 16 * 1rem));
+        list-style: none;
+
+        .c-breadcrumb-item {
+            position: relative;
+            padding-right: var(--breadcrumb-item-padding-x, 0.5rem);
+            &:not(:last-child)::after {
+                content: var(--breadcrumb-divider, '/');
+                padding-left: var(--breadcrumb-item-padding-x, 0.5rem);
+                color: var(--breadcrumb-divider-color, #999);
+            }
+
+            &[aria-current] {
+                color: var(--breadcrumb-item-active-color, #65689f);
+            }
+        }
+    }
+}

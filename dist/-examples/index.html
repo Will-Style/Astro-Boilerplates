@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Form</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/yakuhanjp@3.4.1/dist/css/yakuhanjp_s.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&family=Ovo&family=Shippori+Mincho:wght@400;600&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="/assets/css/style.css" />
+	<script type="module" src="/assets/js/main.js"></script>
+</head>
+
+<body>
+	<a class="visually-hidden-focusable skip-to-content" href="#content">本文までスキップする</a>
+	<div class="intro" data-intro>
+		<div class="intro__overlay-first" data-intro-overlay-first></div>
+		<div class="intro__overlay-second" data-intro-overlay-second></div>
+	</div>
+	<div id="js-drawer" data-drawer class="modal l-drawer" aria-hidden="true" data-lenis-prevent>
+		<div class="l-drawer__bg"></div>
+		<div role="dialog" aria-modal="true" class="modal__container" data-drawer-container>
+			<div class="l-drawer__wrapper">
+				<header class="l-drawer__header">
+					<div class="l-drawer__hamburger">
+						<button class="hamburger" data-hamburger aria-haspopup="true" aria-expanded="false">
+							<span class="visually-hidden">メニューを開閉する</span>
+							<div class="hamburger__container">
+								<span class="hamburger__bar" aria-hidden="true"></span>
+								<span class="hamburger__bar" aria-hidden="true"></span>
+								<span class="hamburger__bar" aria-hidden="true"></span>
+							</div>
+						</button>
+					</div>
+				</header>
+				<div class="l-drawer__container px-30">
+					<div class="l-drawer__content">
+						<div class="grid lg:cols-3 md:cols-2 gap-0 l-drawer__nav__wrapper">
+							<nav class="l-drawer__nav" data-drawer-items-wrapper>
+								<ul class="l-drawer__nav__ul">
+									<li class="l-drawer__nav__list">
+										<a href="/" class="l-drawer__nav__link" data-drawer-close data-drawer-items>
+											<span class="l-drawer__nav__str">Home</span>
+										</a>
+									</li>
+									<li class="l-drawer__nav__list">
+										<a href="/about/" class="l-drawer__nav__link" data-drawer-close data-drawer-items>
+											<span class="l-drawer__nav__str">About</span>
+										</a>
+									</li>
+									<li class="l-drawer__nav__list">
+										<a href="/service/" class="l-drawer__nav__link" data-drawer-close data-drawer-items>
+											<span class="l-drawer__nav__str">Service</span>
+										</a>
+									</li>
+									<li class="l-drawer__nav__list">
+										<a href="/blog/" class="l-drawer__nav__link" data-drawer-close data-drawer-items>
+											<span class="l-drawer__nav__str">Blog</span>
+										</a>
+									</li>
+									<li class="l-drawer__nav__list">
+										<a href="/news/" class="l-drawer__nav__link" data-drawer-close data-drawer-items>
+											<span class="l-drawer__nav__str">News</span>
+										</a>
+									</li>
+									<li class="l-drawer__nav__list">
+										<a href="/contact/" class="l-drawer__nav__link" data-drawer-close data-drawer-items>
+											<span class="l-drawer__nav__str">Contact</span>
+										</a>
+									</li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<header role="banner" class="l-header" data-header>
+		<div class="l-header__wrapper">
+			<h1 class="l-header__logo">
+				<a href="/" class="l-header__logo__link">
+					<svg role="img" aria-label="Logo" class="l-header__logo__image" width="120" height="52" viewBox="0 0 120 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<title>Logo</title>
+						<path d="M8.46324 0V30.8342H23.718V38.6734H0V0H8.46324Z"></path>
+						<path d="M26.1158 25.5558C26.1158 17.2985 32.1759 11.7588 40.5347 11.7588C48.8412 11.7588 54.9013 17.2985 54.9013 25.5558C54.9013 33.8131 48.8412 39.3005 40.5347 39.3005C32.1759 39.3005 26.1158 33.8131 26.1158 25.5558ZM34.2134 25.5035C34.2134 29.4754 36.7732 32.0884 40.5347 32.0884C44.2439 32.0884 46.8037 29.4754 46.8037 25.5035C46.8037 21.5839 44.2439 18.9709 40.5347 18.9709C36.7732 18.9709 34.2134 21.5839 34.2134 25.5035Z"></path>
+						<path d="M58.2595 25.1377C58.2595 17.194 63.4315 11.6543 70.7976 11.6543C74.3501 11.6543 77.1712 13.0131 78.5817 15.1558L78.9996 12.5427H86.5748V37.001C86.5748 46.3558 81.1938 52 72.2604 52C64.2673 52 58.8864 47.4533 58.155 40.0322H66.3048C66.4615 42.9588 68.6557 44.6834 72.2082 44.6834C76.0741 44.6834 78.5295 42.3839 78.5295 38.6734V35.2764C76.9622 37.1578 74.0366 38.3598 70.6409 38.3598C63.327 38.3598 58.2595 32.9769 58.2595 25.1377ZM66.357 24.9286C66.357 28.6915 68.8646 31.3568 72.4171 31.3568C76.0741 31.3568 78.5295 28.796 78.5295 24.9286C78.5295 21.1136 76.0741 18.6573 72.3649 18.6573C68.8124 18.6573 66.357 21.2181 66.357 24.9286Z"></path>
+						<path d="M91.2145 25.5558C91.2145 17.2985 97.2746 11.7588 105.633 11.7588C113.94 11.7588 120 17.2985 120 25.5558C120 33.8131 113.94 39.3005 105.633 39.3005C97.2746 39.3005 91.2145 33.8131 91.2145 25.5558ZM99.3121 25.5035C99.3121 29.4754 101.872 32.0884 105.633 32.0884C109.343 32.0884 111.902 29.4754 111.902 25.5035C111.902 21.5839 109.343 18.9709 105.633 18.9709C101.872 18.9709 99.3121 21.5839 99.3121 25.5035Z"></path>
+					</svg>
+				</a>
+			</h1>
+			<nav class="l-header__gnav">
+				<ul class="l-header__gnav__ul">
+					<li class="l-header__gnav__list">
+						<a href="/about/" class="l-header__gnav__link" data-hover-animation>
+							<span class="l-header__gnav__str" data-hover-animation-target>About</span>
+						</a>
+					</li>
+					<li class="l-header__gnav__list">
+						<a href="/service/" class="l-header__gnav__link" data-hover-animation>
+							<span class="l-header__gnav__str" data-hover-animation-target>Service</span>
+						</a>
+					</li>
+					<li class="l-header__gnav__list">
+						<a href="/blog/" class="l-header__gnav__link" data-hover-animation>
+							<span class="l-header__gnav__str" data-hover-animation-target>Blog</span>
+						</a>
+					</li>
+					<li class="l-header__gnav__list">
+						<a href="/news/" class="l-header__gnav__link" data-hover-animation>
+							<span class="l-header__gnav__str" data-hover-animation-target>News</span>
+						</a>
+					</li>
+					<li class="l-header__gnav__list">
+						<a href="/contact/" class="l-header__gnav__link" data-hover-animation>
+							<span class="l-header__gnav__str" data-hover-animation-target>Contact</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+			<div class="l-header__hamburger">
+				<button class="hamburger" data-hamburger aria-haspopup="true" aria-expanded="false">
+					<span class="visually-hidden">メニューを開閉する</span>
+					<div class="hamburger__container">
+						<span class="hamburger__bar" aria-hidden="true"></span>
+						<span class="hamburger__bar" aria-hidden="true"></span>
+						<span class="hamburger__bar" aria-hidden="true"></span>
+					</div>
+				</button>
+			</div>
+		</div>
+	</header>
+	<div id="content">
+		<main id="content" class="lower contact">
+			<div class="container">
+				<header class="lower__header">
+					<h1 class="lower__header__title">
+						<div class="lower__header__title-ja">お問い合わせ</div>
+						<div class="lower__header__title-en">Contact</div>
+					</h1>
+				</header>
+			</div>
+			<div id="example-form">
+				<div class="contact__wrapper" data-not-top>
+					<div class="container">
+						<div class="contact__content">
+							<div class="grid">
+								<div class="lg:col-8 lg:start-2">
+									<div class="form__wrapper py-60">
+										<form class="form" method="post" action="?sendmail=example" data-form>
+											<input type="hidden" name="recaptcha_value" value="">
+											<!--  入力画面 -->
+											<div v-show="!isConfirm">
+												<p> 以下の内容でよろしければ【メールを送信する】ボタンを押下してください。 </p>
+												<div class="form__row mt-20">
+													<label for="form__type" class="form__label form__require">お問い合わせの種類</label>
+													<div class="form__content form__vertical">
+														<label class="form__check-label"><input name="contact_type" type="checkbox" value="ご相談" :checked="type==1" @change="notCheckedAny">ご相談</label>
+														<label class="form__check-label"><input name="contact_type" type="checkbox" value="資料請求" :checked="type==2" @change="notCheckedAny">資料請求</label>
+														<label class="form__check-label"><input name="contact_type" type="checkbox" value="オンライン相談会" :checked="type==3" @change="notCheckedAny">オンライン相談会</label>
+														<label class="form__check-label"><input name="contact_type" type="checkbox" value="事前相談" :checked="type==4" @change="notCheckedAny">事前相談</label>
+													</div>
+													<div class="form__invalid" v-if="errors.contact_type">お問い合わせの種類を選択してください。</div>
+												</div>
+												<div class="form__row">
+													<label for="form__type" class="form__label form__option">性別</label>
+													<div class="form__content form__horizontal">
+														<label class="form__check-label"><input name="gender" type="radio" value="男性" @change="notChecked">男性</label>
+														<label class="form__check-label"><input name="gender" type="radio" value="女性" @change="notChecked">女性</label>
+													</div>
+													<div class="form__invalid" v-if="errors.gender">性別を選択してください。</div>
+												</div>
+												<div class="form__row">
+													<label class="form__label form__require">数値</label>
+													<div class="form__content">
+														<input type="number" name="number" placeholder="数値" @blur="notNum" min="1">
+														<div class="form__invalid" v-if="errors.number">数値を入力してください。</div>
+													</div>
+												</div>
+												<div class="form__row">
+													<label class="form__label form__require">生年月日</label>
+													<div class="form__content form__seperate">
+														<select name="birthday.year" :value="(new Date().getFullYear() - 20)" class="form__seperate__year :sm">
+															<option :value="d" v-text="d" v-for="d in methods.year_array()"></option>
+														</select>
+														<span>年</span>
+														<select name="birthday.month" class="form__seperate__month :sm">
+															<option :value="d" v-text="d" v-for="d in methods.month_array()"></option>
+														</select>
+														<span>月</span>
+														<select name="birthday.date" class="form__seperate__date :sm">
+															<option :value="d" v-text="d" v-for="d in methods.date_array()"></option>
+														</select>
+														<span>日</span>
+													</div>
+												</div>
+												<div class="form__row">
+													<label class="form__label form__require">ご注文商品</label>
+													<div class="form__content">
+														<div v-for="(item,index) in items">
+															<div class="form__items form__seperate mt-10">
+																<select name="item_name" v-model="item.name" @change="notEmptyItem(index)" class="form__items__name">
+																	<option value="">選択してください</option>
+																	<option value="商品A">商品A</option>
+																	<option value="商品B">商品B</option>
+																	<option value="商品C">商品C</option>
+																</select>
+																<input type="number" name="item_count" v-model.number="item.count" @change="notNum" class="form__items__number" min="1">
+																<span class="form__append">個</span>
+																<button type="button" class="form__items__remove" @click="removeItem(index)"></button>
+															</div>
+															<div class="form__invalid mb-10" v-if="items[index].error">ご注文商品を選択してください。</div>
+														</div>
+														<div class="mt-10">
+															<button type="button" class="c-button c-button--fill c-button--sm" @click="addItem"><span>商品を追加する</span></button>
+														</div>
+													</div>
+												</div>
+												<div class="form__row">
+													<label class="form__label form__option">ファイル1</label>
+													<div v-if="files.file01.url == ''">
+														<div class="form__content">
+															<input type="file" accept="
+                                                            image/png,
+                                                            image/jpeg,
+                                                            image/gif,
+                                                            application/pdf
+                                                        " name="file01" @change="onUpload($event,'file01')">
+														</div>
+														<div class="form__notice mt-5"> ※ファイルサイズの上限は5MBまでです。<br> ※上限を超える場合は<a href="https://gigafile.nu/" target="_blank">ファイル便</a>等をご利用ください。<br> ※アップロード可能なファイルの種類はJPG/PNG/GIF/PDFです。 </div>
+													</div>
+													<div v-else>
+														<div class="form__content form__file">
+															<input type="hidden" name="file01" :value="files.file01.url">
+															<a :href="files.file01.url" v-text="files.file01.name"></a>
+															<button type="button" class="form__file__remove" @click="unlinkFile(files.file01.url,'file01')"></button>
+														</div>
+													</div>
+												</div>
+												<div class="form__row">
+													<label class="form__label form__require">ファイル2</label>
+													<div v-if="files.file02.url == ''">
+														<div class="form__content">
+															<input type="file" maxsize="1024*1024*8" accept="
+                                                            image/png,
+                                                            image/jpeg,
+                                                            image/gif,
+                                                            application/pdf,
+                                                            application/vnd.ms-excel,
+                                                            application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,
+                                                            application/msword,
+                                                            application/vnd.openxmlformats-officedocument.wordprocessingml.document
+                                                        " name="file02" @change="onUpload($event,'file02')">
+														</div>
+														<div class="form__notice mt-5"> ※ファイルサイズの上限は8MBまでです。<br> ※上限を超える場合は<a href="https://gigafile.nu/" target="_blank">ファイル便</a>等をご利用ください。<br> ※アップロード可能なファイルの種類はJPG/PNG/GIF/PDF/Excel/Wordです。 </div>
+													</div>
+													<div v-else>
+														<div class="form__content form__file">
+															<input type="hidden" name="file02" :value="files.file02.url">
+															<a :href="files.file02.url" v-text="files.file02.name"></a>
+															<button type="button" class="form__file__remove" @click="unlinkFile(files.file02.url,'file02')"></button>
+														</div>
+													</div>
+													<div class="form__invalid" v-if="errors.file02">ファイルを選択してください。</div>
+												</div>
+												<div class="form__row">
+													<label class="form__label form__require">お名前</label>
+													<div class="form__content">
+														<input type="text" name="name" placeholder="お名前" @blur="notEmpty">
+														<div class="form__invalid" v-if="errors.name">お名前を入力してください。</div>
+													</div>
+												</div>
+												<div class="form__row">
+													<label class="form__label form__require">フリガナ</label>
+													<div class="form__content">
+														<input type="text" name="kana" placeholder="フリガナ" @blur="notEmpty">
+														<div class="form__invalid" v-if="errors.kana">フリガナを入力してください。</div>
+													</div>
+												</div>
+												<div class="form__row">
+													<label class="form__label form__option">法人名</label>
+													<div class="form__content">
+														<input type="text" name="comp_name" placeholder="法人名">
+													</div>
+												</div>
+												<div class="form__row">
+													<label class="form__label form__option">法人名フリガナ</label>
+													<div class="form__content">
+														<input type="text" name="comp_kana" placeholder="法人名フリガナ">
+													</div>
+												</div>
+												<div class="form__row">
+													<label class="form__label form__option">郵便番号</label>
+													<div class="form__content">
+														<input type="text" name="zip" placeholder="郵便番号" data-form-zip="address" data-form-alphanum>
+													</div>
+												</div>
+												<div class="form__row">
+													<label class="form__label form__require">住所</label>
+													<div class="form__content">
+														<input type="text" name="address" placeholder="住所" @blur="notEmpty">
+														<div class="form__invalid" v-if="errors.address">住所を入力してください。</div>
+													</div>
+												</div>
+												<div class="form__row">
+													<label class="form__label form__option">郵便番号2</label>
+													<div class="form__content">
+														<input type="text" name="zip2" placeholder="郵便番号2" data-form-zip="address2" data-form-alphanum>
+													</div>
+												</div>
+												<div class="form__row">
+													<label class="form__label form__option">住所2</label>
+													<div class="form__content">
+														<input type="text" name="address2" placeholder="住所2">
+													</div>
+												</div>
+												<div class="form__row">
+													<label class="form__label form__require">連絡先電話番号</label>
+													<div class="form__content">
+														<input type="text" name="phone" placeholder="連絡先電話番号" @blur="notEmpty" data-form-alphanum>
+														<div class="form__invalid" v-if="errors.phone">連絡先電話番号を入力してください。</div>
+													</div>
+												</div>
+												<div class="form__row">
+													<label class="form__label form__require">メールアドレス</label>
+													<div class="form__content">
+														<input type="email" name="email" placeholder="メールアドレス" @blur="notEmail">
+														<div class="form__invalid" v-if="errors.email == 'empty'">メールアドレスを入力してください。</div>
+														<div class="form__invalid" v-if="errors.email == 'not_email'">メールアドレスの形式で入力してください。</div>
+													</div>
+												</div>
+												<div class="form__row">
+													<label class="form__label form__require">お問い合わせ内容</label>
+													<div class="form__content">
+														<textarea name="message" rows="10" placeholder="お問い合わせ内容を入力してください" @blur="notEmpty"></textarea>
+														<div class="form__invalid" v-if="errors.message">お問い合わせ内容を入力してください。</div>
+													</div>
+												</div>
+												<div class="form__confirm__hidden gap-y-10 form__row">
+													<div class="form__content">
+														<p class="form__pp text-center"><a href="../pp/" class="text-underline" data-window-open target="_blank" rel="noopener noreferrer">個人情報の取り扱い</a>についてご同意の上、送信してください。</p>
+													</div>
+												</div>
+												<div class="text-center pt-40">
+													<button type="submit" class="form__submit" data-form-submit v-bind:disabled="!verified" v-bind:class="{':prosessing':prosessing}" @click="confirm">送信内容を確認する</button>
+												</div>
+												<p class="form__confirm__hidden form__pp text-center pt-40 pb-60">このサイトはreCaptchaによって保護されており、<br> Googleの<a href="https://policies.google.com/privacy?hl=ja" target="_blank" rel="noopener noreferrer" class="text-underline">プライバシーポリシー</a>と<a href="https://policies.google.com/terms?hl=ja" target="_blank" rel="noopener noreferrer" class="text-underline">利用規約</a>が適用されます。</p>
+											</div>
+											<!--  確認画面 -->
+											<div v-show="isConfirm">
+												<p> 以下の内容でよろしければ【メールを送信する】ボタンを押下してください。 </p>
+												<div class="form__row mt-20">
+													<label for="form__type" class="form__label form__require">お問い合わせの種類</label>
+													<div class="form__content form__vertical">
+														<ul class="list-disc">
+															<li v-for="t in data.contact_type" v-text="t"></li>
+														</ul>
+													</div>
+												</div>
+												<div class="form__row">
+													<label class="form__label form__option">性別</label>
+													<div class="form__content">
+														<div v-text="data.gender"></div>
+													</div>
+												</div>
+												<div class="form__row">
+													<label class="form__label form__require">数値</label>
+													<div class="form__content">
+														<div v-text="data.number"></div>
+													</div>
+												</div>
+												<div class="form__row">
+													<label class="form__label form__require">生年月日</label>
+													<div class="form__content">
+														<div v-text="data.birthday"></div>
+													</div>
+												</div>
+												<div class="form__row">
+													<label class="form__label form__require">商品</label>
+													<div class="form__content">
+														<ul class="list-disc">
+															<li v-for="(v) in data.items" v-text="v.name + ' ' + v.count + '個'"></li>
+														</ul>
+													</div>
+												</div>
+												<div class="form__row" v-if="files.file01">
+													<label class="form__label form__option">ファイル1</label>
+													<div class="form__content">
+														<a :href="files.file01.url" v-text="files.file01.name"></a>
+													</div>
+												</div>
+												<div class="form__row" v-if="files.file02">
+													<label class="form__label form__option">ファイル2</label>
+													<div class="form__content">
+														<a :href="files.file02.url" v-text="files.file02.name"></a>
+													</div>
+												</div>
+												<div class="form__row">
+													<label class="form__label form__require">お名前</label>
+													<div class="form__content">
+														<div v-text="data.name"></div>
+													</div>
+												</div>
+												<div class="form__row">
+													<label class="form__label form__require">フリガナ</label>
+													<div class="form__content">
+														<div v-text="data.kana"></div>
+													</div>
+												</div>
+												<div class="form__row">
+													<label class="form__label form__option">法人名</label>
+													<div class="form__content">
+														<div v-text="data.comp_name"></div>
+													</div>
+												</div>
+												<div class="form__row">
+													<label class="form__label form__option">法人名フリガナ</label>
+													<div class="form__content">
+														<div v-text="data.comp_kana"></div>
+													</div>
+												</div>
+												<div class="form__row">
+													<label class="form__label form__option">郵便番号</label>
+													<div class="form__content">
+														<div v-text="data.zip"></div>
+													</div>
+												</div>
+												<div class="form__row">
+													<label class="form__label form__require">住所</label>
+													<div class="form__content">
+														<div v-text="data.address"></div>
+													</div>
+												</div>
+												<div class="form__row">
+													<label class="form__label form__option">郵便番号2</label>
+													<div class="form__content">
+														<div v-text="data.zip2"></div>
+													</div>
+												</div>
+												<div class="form__row">
+													<label class="form__label form__option">住所2</label>
+													<div class="form__content">
+														<div v-text="data.address2"></div>
+													</div>
+												</div>
+												<div class="form__row">
+													<label class="form__label form__require">連絡先電話番号</label>
+													<div class="form__content">
+														<div v-text="data.phone"></div>
+													</div>
+												</div>
+												<div class="form__row">
+													<label class="form__label form__require">メールアドレス</label>
+													<div class="form__content">
+														<div v-text="data.email"></div>
+													</div>
+												</div>
+												<div class="form__row">
+													<label class="form__label form__require">お問い合わせ内容</label>
+													<div class="form__content">
+														<div v-text="data.message"></div>
+													</div>
+												</div>
+												<div class="text-center pt-40">
+													<button type="submit" class="form__submit" data-form-submit v-bind:disabled="!verified" v-bind:class="{':prosessing':prosessing}" @click="submit">メールを送信する</button>
+												</div>
+												<div class="text-center pt-20">
+													<button type="button" class="form__return" data-form-return v-bind:class="{':prosessing':prosessing}" @click="returnInput">入力画面に戻る</button>
+												</div>
+												<p class="form__confirm__hidden form__pp text-center pt-40 pb-60">このサイトはreCaptchaによって保護されており、<br> Googleの<a href="https://policies.google.com/privacy?hl=ja" target="_blank" rel="noopener noreferrer" class="text-underline">プライバシーポリシー</a>と<a href="https://policies.google.com/terms?hl=ja" target="_blank" rel="noopener noreferrer" class="text-underline">利用規約</a>が適用されます。</p>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+	</div>
+	<footer class="l-footer">
+		<div class="l-footer__wrapper">
+			<div class="l-footer__content">
+			</div>
+		</div>
+	</footer>
+</body>
+
+</html>

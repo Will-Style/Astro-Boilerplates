@@ -1,0 +1,85 @@
+@use '../../global' as *;
+
+@if ($enable-grid) {
+    .grid {
+        display: grid;
+        grid-column-gap: var(--cols-gap, $grid-columns-gap);
+        grid-row-gap: var(--rows-gap, $grid-rows-gap);
+        grid-template-columns: repeat(
+            var(--grid-columns, $grid-columns),
+            minmax(0, 1fr)
+        );
+        grid-template-rows: repeat(var(--grid-rows, 1), minmax(0, 1fr));
+        width: 100%;
+        > * {
+            grid-column: auto/span $grid-columns;
+        }
+    }
+
+    @each $breakpoint in map-keys($grid-breakpoints) {
+        @include mq-up($breakpoint) {
+            $infix: breakpoint-infix($breakpoint);
+            @for $i from 1 through $grid-columns {
+                .#{$infix}cols-#{$i} {
+                    grid-template-columns: repeat(#{$i}, minmax(0, 1fr));
+                    > * {
+                        grid-column: auto;
+                    }
+                }
+            }
+        }
+        @include mq-up($breakpoint) {
+            $infix: breakpoint-infix($breakpoint);
+            @for $i from 1 through $grid-columns {
+                .#{$infix}col-#{$i} {
+                    grid-column: auto/span #{$i};
+                }
+                .#{$infix}row-#{$i} {
+                    grid-row: auto/span #{$i};
+                }
+            }
+            .#{$infix}auto-rows-1fr {
+                grid-auto-rows: 1fr;
+            }
+            .#{$infix}auto-rows-min {
+                grid-auto-rows: min-content;
+            }
+        }
+        @include media-breakpoint-up($breakpoint) {
+            $infix: breakpoint-infix($breakpoint);
+            @for $i from 1 through ($grid-columns - 1) {
+                .#{$infix}order-#{$i} {
+                    order: #{$i};
+                }
+                .#{$infix}start-#{$i} {
+                    grid-column-start: calc(#{$i} + 1);
+                }
+            }
+            .#{$infix}order-first {
+                order: -9999;
+            }
+            .#{$infix}order-last {
+                order: 9999;
+            }
+        }
+    }
+
+    @each $breakpoint in map-keys($grid-breakpoints) {
+        @include media-breakpoint-up($breakpoint) {
+            $infix: breakpoint-infix($breakpoint);
+
+            @each $size, $length in $gaps {
+                .#{$infix}gap-#{$size} {
+                    grid-column-gap: $length;
+                    grid-row-gap: $length;
+                }
+                .#{$infix}gap-x-#{$size} {
+                    grid-column-gap: $length;
+                }
+                .#{$infix}gap-y-#{$size} {
+                    grid-row-gap: $length;
+                }
+            }
+        }
+    }
+}

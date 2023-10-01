@@ -1,0 +1,110 @@
+@use '../global' as *;
+
+.c-card {
+    $parent: &;
+    &__content {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+    }
+    &__title {
+        order: 2;
+        font-size: 1rem;
+        line-height: 1.5;
+        margin-top: 1.1rem;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        &__link {
+            color: var(--color-base);
+            @include easeOutExpo(0.3s, color);
+            @include hover {
+                color: var(--color-primary);
+            }
+        }
+    }
+    &__figure {
+        order: 1;
+        margin-bottom: 0;
+    }
+    &__image__link {
+        display: block;
+        border-radius: 8px;
+        position: relative;
+        aspect-ratio: 4 / 3;
+        overflow: hidden;
+        z-index: 1;
+        @include hover {
+            #{$parent}__image {
+                transform: scale(1.05);
+            }
+        }
+    }
+    &__image {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        @include easeOutExpo(0.7s, transform);
+    }
+
+    &__time {
+        order: 3;
+        color: var(--color-gray);
+        font-size: calc(13 / 16 * 1rem);
+        line-height: 1;
+        font-weight: var(--font-regular);
+        display: inline-block;
+        margin-top: 0.4rem;
+    }
+    &__cat {
+        order: 2;
+        margin-top: 0.5rem;
+        line-height: 1.3;
+        &__link {
+            color: var(--color-gray);
+            font-size: calc(14 / 16 * 1rem);
+            line-height: 1;
+            display: inline-block;
+            @include mq-down(md) {
+                font-size: calc(15 / 16 * 1rem);
+                line-height: 20px;
+                margin-top: 0.8rem;
+            }
+            &:not(:first-child) {
+                margin-left: 0.2rem;
+                &::before {
+                    content: '/';
+                    margin-right: 0.3rem;
+                }
+            }
+            @include easeOutExpo(0.3s, color);
+            @include hover {
+                color: var(--color-primary);
+            }
+        }
+    }
+    &__tag {
+        order: 3;
+        margin-top: 0.5rem;
+        margin-left: -0.5rem;
+        line-height: 1.3;
+        &__link {
+            color: var(--color-gray);
+            font-size: calc(13 / 16 * 1rem);
+            line-height: 1;
+            display: inline-block;
+            margin-left: 0.5rem;
+            &::before {
+                content: '#';
+            }
+            @include easeOutExpo(0.3s, color);
+            @include hover {
+                color: var(--color-primary);
+            }
+        }
+    }
+}

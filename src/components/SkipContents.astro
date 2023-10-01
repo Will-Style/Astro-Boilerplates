@@ -1,0 +1,1 @@
+<a class="visually-hidden-focusable skip-to-content" href="#content">本文までスキップする</a>

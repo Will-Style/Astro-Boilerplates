@@ -1,0 +1,27 @@
+{
+  "extends": [
+    "stylelint-config-recommended-scss",
+    "stylelint-config-property-sort-order-smacss",
+    "stylelint-prettier/recommended"
+  ],
+  "plugins": ["stylelint-prettier","stylelint-scss", "stylelint-order"],
+  "ignoreFiles": ["**/node_modules/**"],
+  "rules": {
+    "prettier/prettier": [true, {"singleQuote": true, "tabWidth": 4}],
+    "length-zero-no-unit": true,
+    "color-hex-length": "short",
+    "font-family-name-quotes": "always-where-recommended",
+    "shorthand-property-no-redundant-values": true,
+    "value-keyword-case": "lower",
+    "scss/operator-no-unspaced": null,
+    "no-descending-specificity": null,
+    "scss/no-global-function-names":null,
+    "scss/comment-no-empty" : null,
+    "scss/at-if-no-null" : null,
+    "scss/operator-no-newline-after" : null,
+    "order/properties-order" :null,
+    "block-no-empty": null,
+    "property-no-unknown": null,
+    "no-duplicate-selectors":null
+  }
+}

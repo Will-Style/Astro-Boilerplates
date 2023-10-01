@@ -1,0 +1,33 @@
+@use '../global' as *;
+
+.lower {
+    &__header {
+        padding-top: clamp(80px, 10vw, 120px);
+        padding-bottom: clamp(40px, 7vw, 100px);
+
+        &__title {
+            display: flex;
+            flex-direction: column-reverse;
+            &-en {
+                font-size: clamp(50px, 6vw, 86px);
+                line-height: 1.2;
+                font-weight: var(--font-normal);
+            }
+            &-ja {
+                font-size: calc(15 / 16 * 1rem);
+                line-height: 1;
+                font-weight: var(--font-normal);
+                color: var(--color-gray);
+                margin-top: 0.3rem;
+            }
+        }
+        &--blank {
+            padding-top: clamp(50px, 6vw, 60px);
+            padding-bottom: clamp(40px, 7vw, 100px);
+        }
+    }
+    &__breadcrumb {
+        margin-top: clamp(60px, 3vw, 80px);
+        margin-bottom: clamp(30px, 3vw, 60px);
+    }
+}

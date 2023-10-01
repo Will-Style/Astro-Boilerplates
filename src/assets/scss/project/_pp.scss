@@ -1,0 +1,22 @@
+@use '../global/' as *;
+.pp {
+    &__title {
+        font-size: calc(18 / 16 * 1rem);
+    }
+    &__content {
+        font-size: calc(15 / 16 * 1rem);
+        margin-top: 1.4rem;
+    }
+    ol {
+        margin-top: 2rem;
+        padding-left: 1.3rem;
+        list-style: decimal;
+        ::marker {
+            font-family: sans-serif;
+        }
+    }
+    li {
+        margin-top: 0.6rem;
+        line-height: 1.5;
+    }
+}

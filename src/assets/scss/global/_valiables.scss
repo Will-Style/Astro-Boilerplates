@@ -1,0 +1,96 @@
+// Break Pointの設定
+$grid-breakpoints: (
+    'min': 0,
+    'xs': 414px,
+    'sm': 576px,
+    'md': 768px,
+    'lg': 1024px,
+    'xl': 1280px,
+    '2xl': 1400px,
+);
+
+$container-max-widths: (
+    'sm': 100%,
+    'md': 768px,
+    'lg': 1024px,
+    'xl': 1230px,
+    '2xl': 1360px,
+);
+
+$container-padding: (
+    'xl': 35px,
+    'sm': 24px,
+    'min': 20px,
+);
+
+// Grid gapの設定 keyがClass名になる
+$gaps: (
+    0: 0,
+    5: 5px,
+    10: 10px,
+    15: 15px,
+    20: 20px,
+    25: 25px,
+    30: 30px,
+    35: 35px,
+    40: 40px,
+    45: 45px,
+    50: 50px,
+    60: 60px,
+);
+
+// グリッドのカラム数
+$grid-columns: 12;
+// グリッドの縦Gap
+$grid-rows-gap: 15px;
+// グリッドの横Gap
+$grid-columns-gap: 15px;
+
+// Spacingを使う際の設定 keyがClass名になる
+$spacers: (
+    0: 0,
+    5: 5px,
+    10: 10px,
+    15: 15px,
+    20: 20px,
+    25: 25px,
+    30: 30px,
+    35: 35px,
+    40: 40px,
+    45: 45px,
+    50: 50px,
+    60: 60px,
+    70: 70px,
+    80: 80px,
+    90: 90px,
+    100: 100px,
+    120: 120px,
+    140: 140px,
+    160: 160px,
+    180: 180px,
+    200: 200px,
+);
+
+$colors: (
+    'base': #303234,
+    'bg': #fff,
+    'primary': #0e7ae0,
+    'secondary': #46505d,
+    'danger': #ea1515,
+    'gray': #8f8b98,
+    'gray-light': #eee,
+    // ラジオボタン・チェックボックスのアクティブな状態の色
+    'input-active': #0e7ae0,
+    // フォームのフォーカスリングの色
+    'input-focus': #3a84ef,
+    // フォームのサブミットボタンの色
+    'submit-bg': #0e7ae0,
+    // フォームのサブミットボタンの ホバー時
+    'submit-bg-hover': #0c4dc5,
+
+    // 'twitter': #1da1f2,
+    // 'facebook': #4267b2,
+    // ダークモードの場合
+    // 'base': #fff,
+    // 'bg': #272d33,,,,,,,,,,,
+);

@@ -1,0 +1,132 @@
+@use '../global' as *;
+
+// .js-mouse-stalker{
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+
+//     cursor: none;
+//     pointer-events: none;
+//     z-index: 10002;
+//     opacity: 0;
+//     // @include easeOutExpo(600ms);
+//     @include mq-down(lg){
+//          display: none;
+//     }
+//     .js-mouse-stalker__cursor,.js-mouse-stalker__follower{
+
+//         border-radius:12px;
+//         position: absolute;
+//         top: 0;
+//         left: 0;
+//         cursor: none;
+//         pointer-events: none;
+//     }
+//     .js-mouse-stalker__cursor{
+//         width: 10px;
+//         height: 10px;
+//         left: -5px;
+//         top: -5px;
+//         background-color:#fff;
+//         z-index:2;
+//         opacity: 0;
+//         @include easeOutCubic(300ms);
+//     }
+//     .js-mouse-stalker__follower{
+//         width: 30px;
+//         height: 30px;
+//         left: -15px;
+//         top: -15px;
+//         background-color: transparent;
+//         opacity: 0;
+//         z-index:1;
+//         @include easeOutExpo(800ms);
+
+//     }
+//     &.is-hover{
+//         .js-mouse-stalker__cursor{
+//             width: 40px;
+//             height: 40px;
+//             left: -20px;
+//             top: -20px;
+//             background-color:#fff;
+//             opacity:.3;
+//         }
+//         .js-mouse-stalker__follower{
+
+//             opacity: 0;
+//             // background-image: url('data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2262.325%22%20height%3D%22104.769%22%20viewBox%3D%220%200%2062.325%20104.769%22%3E%20%3Cpath%20id%3D%22%E3%83%91%E3%82%B9_1%22%20data-name%3D%22%E3%83%91%E3%82%B9%201%22%20d%3D%22M230.891%2C335.915s-8.652%2C19.19-28.306%2C18.662c-19.65.528-28.3-18.662-28.3-18.662-6.431-15.918%2C0-27.333%2C0-27.333l28.3-58.763%2C28.306%2C58.763S237.322%2C320%2C230.891%2C335.915Z%22%20transform%3D%22translate(-171.425%20-249.819)%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E');
+//             // background-size: contain;
+//             // background-repeat: no-repeat;
+//             // background-position: center center;
+//         }
+//     }
+
+//     &.is-drag{
+//         mix-blend-mode:normal;
+//         .js-mouse-stalker__cursor{
+//             width: 120px;
+//             height: 120px;
+//             left: -56px;
+//             top: -56px;
+//             background-color: #fff;
+//             opacity: 1;
+//             background-image:none;
+//         }
+//         .js-mouse-stalker__follower{
+//             width: 100px;
+//             height: 100px;
+//             left: -46px;
+//             top: -46px;
+//             z-index: 3;
+//             background-color: transparent;
+//             filter: blur(0);
+//             opacity: 1;
+//             &::before{
+//                 content:"";
+//                 background-image: url('data:image/svg+xml;charset=utf8,%3Csvg%20width%3D%2232%22%20height%3D%2214%22%20viewBox%3D%220%200%2032%2014%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%20%3Crect%20width%3D%2210.0221%22%20height%3D%220.723574%22%20transform%3D%22matrix(0.751063%200.66023%20-0.354558%200.935034%2023.5865%200)%22%20fill%3D%22%23282823%22%2F%3E%20%3Crect%20width%3D%2210.0221%22%20height%3D%220.723574%22%20transform%3D%22matrix(0.751063%20-0.66023%200.354558%200.935034%2023.2457%2013.3235)%22%20fill%3D%22%23282823%22%2F%3E%20%3Crect%20width%3D%2210.0221%22%20height%3D%220.723574%22%20transform%3D%22matrix(-0.751063%200.66023%200.354558%200.935034%207.52728%200)%22%20fill%3D%22%23282823%22%2F%3E%20%3Crect%20width%3D%2210.0221%22%20height%3D%220.723574%22%20transform%3D%22matrix(-0.751063%20-0.66023%20-0.354558%200.935034%207.86804%2013.3235)%22%20fill%3D%22%23282823%22%2F%3E%3C%2Fsvg%3E');
+//                 background-repeat: no-repeat;
+//                 background-size: contain;
+//                 position: absolute;
+//                 left: 50%;
+//                 top: 50%;
+//                 text-align: center;
+//                 white-space: nowrap;
+//                 transform: translate(-50%,-50%);
+//             }
+//         }
+//     }
+
+//     &.is-next{
+//         mix-blend-mode:normal;
+//         .js-mouse-stalker__cursor{
+//             opacity: 1;
+//             width: 120px;
+//             height: 120px;
+//             left: -60px;
+//             top: -60px;
+//             background-color: rgba(#FFF5EC,.3);
+//             border-radius: 60px;
+//             backdrop-filter: blur(5px) brightness(2);
+//         }
+//         .js-mouse-stalker__follower{
+//             filter: blur(0);
+//             opacity: 1;
+//             z-index: 2;
+//             background: transparent;
+//             &::before{
+//                 content:"";
+//                 position: absolute;
+//                 left: 50%;
+//                 top: 50%;
+//                 background-image: url('data:image/svg+xml;charset=utf8,%3Csvg%20width%3D%2228%22%20height%3D%2222%22%20viewBox%3D%220%200%2028%2022%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M18.0479%200.821389L27.8398%2010.6133C27.9466%2010.7202%2028%2010.8601%2028%2011C28%2011.14%2027.9466%2011.2799%2027.8398%2011.3867L18.0479%2021.1787C17.8344%2021.3923%2017.4881%2021.3923%2017.2745%2021.1787C17.061%2020.9652%2017.061%2020.6189%2017.2745%2020.4053L26.1329%2011.5469L0.546875%2011.5469C0.244836%2011.5469%20-4.38722e-07%2011.3021%20-4.51924e-07%2011C-4.65127e-07%2010.698%200.244835%2010.4532%200.546875%2010.4532L26.1329%2010.4532L17.2745%201.59478C17.061%201.38122%2017.061%201.03494%2017.2745%200.821389C17.488%200.607835%2017.8343%200.607835%2018.0479%200.821389Z%22%20fill%3D%22black%22%2F%3E%3C%2Fsvg%3E');
+//                 width: 21px;
+//                 height: 28px;
+//                 background-position: center center;
+//                 background-repeat: no-repeat;
+//                 background-size: contain;
+//                 transform: translate(-50%,-50%);
+//             }
+//         }
+//     }
+// }

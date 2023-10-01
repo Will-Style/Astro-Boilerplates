@@ -1,0 +1,121 @@
+@use '../../global' as *;
+
+@if ($enable-wp-blocks) {
+    .wp-block-gallery {
+        margin: 2rem 0;
+    }
+    .wp-block-pullquote {
+        margin: 2rem 0;
+        cite {
+            margin-top: 0.6rem;
+        }
+    }
+    .wp-block-quote {
+        margin: 2rem 0;
+        cite {
+            margin-top: 0.6rem;
+        }
+    }
+    .wp-block-code {
+        margin: 2rem 0;
+        background-color: var(--blockquote-bg, #272d33);
+        padding: 1rem 1.5rem 1.2rem;
+        border-radius: 4px;
+        line-height: 1.5;
+        font-size: calc(14 / 16 * 1rem);
+        color: #fff;
+        overflow-x: auto;
+    }
+    .wp-block-image {
+        margin: 2.5rem 0;
+    }
+    .wp-block-cover-image,
+    .wp-block-cover {
+        margin: 2.5rem 0;
+        margin-left: -40px;
+        margin-right: -40px;
+        border-radius: 6px;
+        overflow: hidden;
+        @media (max-width: 575px) {
+            min-height: 300px;
+            border-radius: 0;
+            margin-left: -25px;
+            margin-right: -25px;
+        }
+        img {
+            width: 100%;
+        }
+        &.is-light {
+            .wp-block-cover__inner-container {
+                color: #fff;
+            }
+        }
+    }
+    .wp-block-button__link {
+        &:hover,
+        &:focus,
+        &:active {
+            text-decoration: none;
+        }
+        &.has-background {
+            &:hover,
+            &:focus,
+            &:active {
+                color: #fff;
+            }
+        }
+    }
+    .wp-block-embed {
+        margin: 2rem 0;
+    }
+    .wp-embed-responsive .wp-embed-aspect-16-9 .wp-block-embed__wrapper:before {
+        position: relative;
+        padding-top: 0;
+    }
+    .wp-block-embed.is-type-video {
+        .wp-block-embed__wrapper {
+            position: relative;
+            padding-top: 56.25%;
+            iframe {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+    .wp-block-embed.is-type-wp-embed {
+        width: 100%;
+        overflow: hidden;
+        .wp-block-embed__wrapper {
+            display: flex;
+            justify-content: center;
+        }
+        .wp-embedded-content {
+            width: 95%;
+            margin-bottom: 0;
+            @media (max-width: 575px) {
+                width: 98%;
+            }
+        }
+        blockquote {
+            display: none !important;
+        }
+        iframe {
+            position: relative !important;
+            clip: auto !important;
+            overflow: hidden;
+            height: 152px !important;
+        }
+    }
+    .wp-block-file .wp-block-file__button {
+        display: inline-block;
+        background-color: var(--color-primary);
+        color: #fff;
+    }
+    .wp-block-media-text {
+        margin-top: 2rem;
+    }
+}

@@ -1,0 +1,7 @@
+@use '../__Boilerplates/foundation/_bp-mixins' as *;
+@use './valiables' as *;
+@use './config' as *;
+
+.\:font-regular {
+    font-weight: var(--font-regular);
+}

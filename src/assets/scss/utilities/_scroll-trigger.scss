@@ -1,0 +1,30 @@
+@use '../global' as *;
+
+[data-scroll-trigger='text'] {
+    display: flex;
+    overflow: hidden;
+    line-height: 1.15;
+    [data-str-animation] {
+        min-width: 0.24em;
+        transform: translateY(100%);
+    }
+}
+[data-scroll-trigger='top'] {
+    will-change: transition;
+
+    @include easeOutQuart(1000ms, opacity, transform);
+    opacity: 0;
+    transform: translateY(8%);
+    &.\:visible {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+[data-scroll-trigger='blur'] {
+    filter: blur(1em) brightness(1.85);
+    @include easeOutQuart(1300ms, filter);
+    &.\:visible {
+        filter: blur(0) brightness(1);
+    }
+}

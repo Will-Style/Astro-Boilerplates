@@ -1,0 +1,11 @@
+@use '../global/' as *;
+// #content{
+//     padding-top: var(--header-height-lg);
+
+//     @include mq-down(md) {
+//         padding-top: var(--header-height-md);
+//     }
+//     @include mq-down(sm) {
+//         padding-top: var(--header-height-sm);
+//     }
+// }

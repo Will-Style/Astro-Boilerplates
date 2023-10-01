@@ -1,0 +1,81 @@
+@use '../global/' as *;
+
+.l-header {
+    $parent: &;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    &__wrapper {
+        display: grid;
+        grid-template-columns: 200px 1fr 80px;
+        grid-template-areas: 'logo gnav hamburger';
+        align-items: center;
+        padding: 0 1rem 0 1.5rem;
+        height: var(--header-height-lg);
+        border-bottom: 1px solid transparent;
+        @include easeOutCubic(
+            300ms,
+            height,
+            border-bottom-color,
+            background-color
+        );
+
+        @include mq-down(lg) {
+            padding-right: 5px;
+            grid-template-columns: 1fr var(--header-height-lg);
+            grid-template-areas: 'logo hamburger';
+        }
+        @include mq-down(md) {
+            height: var(--header-height-md);
+        }
+        @include mq-down(sm) {
+            height: var(--header-height-sm);
+            padding-left: 1.2rem;
+            padding-right: 0;
+        }
+        .\:not-top & {
+            border-bottom-color: #eee;
+            background-color: #fff;
+        }
+    }
+    &__logo {
+        grid-area: logo;
+        font-size: 1px;
+        line-height: 1;
+        &__link {
+            display: inline-block;
+        }
+        svg {
+            height: 30px;
+            width: 75px;
+            fill: var(--color-base);
+        }
+    }
+    &__gnav {
+        &__ul {
+            display: flex;
+            justify-content: flex-end;
+        }
+        &__list {
+            margin-left: 1.3rem;
+        }
+        &__link {
+            color: var(--color-base);
+            font-weight: var(--font-bold);
+            font-size: calc(15 / 16 * 1rem);
+
+            @include hover {
+                color: var(--color-base);
+            }
+        }
+        @include mq-down(lg) {
+            display: none;
+        }
+    }
+
+    &__hamburger {
+        display: flex;
+        justify-content: flex-end;
+    }
+}

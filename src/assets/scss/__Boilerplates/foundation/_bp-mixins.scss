@@ -1,0 +1,556 @@
+@use '../../global/valiables' as *;
+@use '../../global/config' as *;
+
+@use 'sass:math';
+
+$ease: (
+    insine: cubic-bezier(0.47, 0, 0.745, 0.715),
+    outsine: cubic-bezier(0.39, 0.575, 0.565, 1),
+    inoutsine: cubic-bezier(0.445, 0.05, 0.55, 0.95),
+    inquad: cubic-bezier(0.55, 0.085, 0.68, 0.53),
+    outquad: cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    inoutquad: cubic-bezier(0.455, 0.03, 0.515, 0.955),
+    incubic: cubic-bezier(0.55, 0.055, 0.675, 0.19),
+    outcubic: cubic-bezier(0.215, 0.61, 0.355, 1),
+    inoutcubic: cubic-bezier(0.645, 0.045, 0.355, 1),
+    inquart: cubic-bezier(0.895, 0.03, 0.685, 0.22),
+    outquart: cubic-bezier(0.165, 0.84, 0.44, 1),
+    inoutquart: cubic-bezier(0.77, 0, 0.175, 1),
+    inquint: cubic-bezier(0.755, 0.05, 0.855, 0.06),
+    outquint: cubic-bezier(0.23, 1, 0.32, 1),
+    inoutquint: cubic-bezier(0.86, 0, 0.07, 1),
+    inexpo: cubic-bezier(0.95, 0.05, 0.795, 0.035),
+    outexpo: cubic-bezier(0.19, 1, 0.22, 1),
+    inoutexpo: cubic-bezier(1, 0, 0, 1),
+    incirc: cubic-bezier(0.6, 0.04, 0.98, 0.335),
+    outcirc: cubic-bezier(0.075, 0.82, 0.165, 1),
+    inoutcirc: cubic-bezier(0.785, 0.135, 0.15, 0.86),
+    inback: cubic-bezier(0.6, -0.28, 0.735, 0.045),
+    outback: cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    inoutback: cubic-bezier(0.68, -0.55, 0.265, 1.55),
+);
+
+@function breakpoint-next(
+    $name,
+    $breakpoints: $grid-breakpoints,
+    $breakpoint-names: map-keys($breakpoints)
+) {
+    $n: index($breakpoint-names, $name);
+    @if not $n {
+        @error "breakpoint `#{$name}` not found in `#{$breakpoints}`";
+    }
+    @return if(
+        $n < length($breakpoint-names),
+        nth($breakpoint-names, $n + 1),
+        null
+    );
+}
+
+@function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
+    $min: map-get($breakpoints, $name);
+    @return if($min != 0, $min, null);
+}
+
+@function breakpoint-max($name, $breakpoints: $grid-breakpoints) {
+    $max: map-get($breakpoints, $name);
+    @return if($max and $max > 0, $max - 0.02, null);
+}
+
+@function breakpoint-infix($name, $breakpoints: $grid-breakpoints) {
+    // $name : add_slash_first_char($name);
+
+    @if (breakpoint-min($name, $breakpoints) == null) {
+        $name: '';
+    } @else {
+        @if ($name == '2xl' or $name == '3xl') {
+            $name: '\\3#{$name}';
+        }
+        $name: '#{$name}\\:';
+    }
+    @return $name;
+}
+
+@function breakpoint-variable($name, $breakpoints: $grid-breakpoints) {
+    @return if(breakpoint-min($name, $breakpoints) == null, '', '#{$name}');
+}
+
+@mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
+    $min: breakpoint-min($name, $breakpoints);
+    @if $min {
+        @media screen and (min-width: $min) {
+            @content;
+        }
+    } @else {
+        @content;
+    }
+}
+
+@mixin media-breakpoint-down($name, $breakpoints: $grid-breakpoints) {
+    $max: breakpoint-max($name, $breakpoints);
+    @if $max {
+        @media screen and (max-width: $max) {
+            @content;
+        }
+    } @else {
+        @content;
+    }
+}
+
+@mixin media-breakpoint-between(
+    $lower,
+    $upper,
+    $breakpoints: $grid-breakpoints
+) {
+    $min: breakpoint-min($lower, $breakpoints);
+    $max: breakpoint-max($upper, $breakpoints);
+
+    @if $min != null and $max != null {
+        @media screen and (min-width: $min) and (max-width: $max) {
+            @content;
+        }
+    } @else if $max == null {
+        @include media-breakpoint-up($lower, $breakpoints) {
+            @content;
+        }
+    } @else if $min == null {
+        @include media-breakpoint-down($upper, $breakpoints) {
+            @content;
+        }
+    }
+}
+
+@mixin media-breakpoint-only($name, $breakpoints: $grid-breakpoints) {
+    $min: breakpoint-min($name, $breakpoints);
+    $next: breakpoint-next($name, $breakpoints);
+    $max: breakpoint-max($next, $breakpoints);
+
+    @if $min != null and $max != null {
+        @media (min-width: $min) and (max-width: $max) {
+            @content;
+        }
+    } @else if $max == null {
+        @include media-breakpoint-up($name, $breakpoints) {
+            @content;
+        }
+    } @else if $min == null {
+        @include media-breakpoint-down($next, $breakpoints) {
+            @content;
+        }
+    }
+}
+
+// wrapper
+@mixin mq-up($name, $breakpoints: $grid-breakpoints) {
+    @include media-breakpoint-up($name, $breakpoints) {
+        @content;
+    }
+}
+// wrapper
+@mixin mq-down($name, $breakpoints: $grid-breakpoints) {
+    @include media-breakpoint-down($name, $breakpoints) {
+        @content;
+    }
+}
+
+// wrapper
+@mixin mq-between($lower, $upper, $breakpoints: $grid-breakpoints) {
+    @include media-breakpoint-between($lower, $upper, $breakpoints) {
+        @content;
+    }
+}
+
+// wrapper
+@mixin mq-only($name, $breakpoints: $grid-breakpoints) {
+    @include media-breakpoint-only($name, $breakpoints) {
+        @content;
+    }
+}
+
+@mixin hover {
+    &:hover,
+    &:focus,
+    &:active {
+        @content;
+    }
+}
+
+@function reverse($list, $recursive: false) {
+    $result: ();
+
+    @for $i from length($list) * -1 through -1 {
+        @if type-of(nth($list, abs($i))) == list and $recursive {
+            $result: append($result, reverse(nth($list, abs($i)), $recursive));
+        } @else {
+            $result: append($result, nth($list, abs($i)));
+        }
+    }
+
+    @return $result;
+}
+
+@function getContainerPadding($breakpoint) {
+    $paddings: ();
+    $padding: null;
+    @each $bp, $width in $grid-breakpoints {
+        //     // @if( breakpoint-min($breakpoint) ){
+
+        //     // }
+        $p: map-get($container-padding, $bp);
+        @if ($p != null) {
+            $padding: $p;
+        }
+        $new: (
+            $bp: $padding,
+        );
+
+        $paddings: map-merge($paddings, $new);
+    }
+    @if (map-get($paddings, $breakpoint) != null) {
+        @return map-get($paddings, $breakpoint);
+    } @else {
+        @return 0;
+    }
+}
+
+@mixin container-overflow-right($is-absolute: false) {
+    @if ($is-absolute) {
+        $p: getContainerPadding(min);
+        @if ($p != null) {
+            width: calc(100% - $p);
+            left: $p;
+        }
+    }
+    @each $breakpoint, $width in $container-max-widths {
+        @if (breakpoint-max($breakpoint) != null) {
+            @include mq-up($breakpoint) {
+                @if ($is-absolute) {
+                    $p: getContainerPadding($breakpoint);
+                    width: min(
+                        calc($width - $p + ((100vw - $width) / 2)),
+                        100%
+                    );
+                    left: calc(((100vw - $width) / 2) + $p);
+                } @else {
+                    width: min(calc($width + ((100vw - $width) / 2)), 100%);
+                }
+            }
+        }
+    }
+}
+@mixin container-overflow-left($is-absolute: false) {
+    @if ($is-absolute) {
+        $p: getContainerPadding(min);
+        @if ($p != null) {
+            width: calc(100% - $p);
+            right: $p;
+        }
+    }
+    @each $breakpoint, $width in $container-max-widths {
+        @include mq-up($breakpoint) {
+            @if ($is-absolute) {
+                $p: getContainerPadding($breakpoint);
+                width: min(calc($width - $p + ((100vw - $width) / 2)), 100%);
+                right: calc(((100vw - $width) / 2) + $p);
+            } @else {
+                width: min(calc($width + ((100vw - $width) / 2)), 100%);
+            }
+        }
+    }
+}
+
+@function str-replace($substr, $newsubstr, $str, $all: false) {
+    $pos: str-index($str, $substr);
+
+    @while $pos != null {
+        $strlen: str-length($substr);
+        $start: str-slice($str, 0, $pos - 1);
+        $end: str-slice($str, $pos + $strlen);
+        $str: $start + $newsubstr + $end;
+
+        @if $all == true {
+            $pos: str-index($str, $substr);
+        } @else {
+            $pos: null;
+        }
+    }
+    @return $str;
+}
+
+// SVGタグをURLエンコード
+@function svgUrlEncode($svg) {
+    $repMap: (
+        '<': '%3C',
+        '>': '%3E',
+        '#': '%23',
+        '{': '%7B',
+        '}': '%7D',
+        '"': "'",
+    );
+
+    $enc: $svg;
+
+    @each $s, $r in $repMap {
+        $enc: str-replace($s, $r, $enc, true);
+    }
+    @return $enc;
+}
+
+// SVGタグをData URIスキームとしてurl関数で返す
+@function encode_svg($svg, $enc: true) {
+    @if $enc == true {
+        $svg: svgUrlEncode($svg);
+    }
+    @return url('data:image/svg+xml,#{$svg}');
+}
+
+@function toRGB($value: #ffffff) {
+    @return red($value), green($value), blue($value);
+}
+
+@function ease($key: ease) {
+    @if map-has-key($ease, $key) {
+        @return map-get($ease, $key);
+    }
+    @return null;
+}
+
+@mixin transitionBase($duration: 1s, $property...) {
+    transition-property: $property;
+    transition-duration: $duration;
+}
+
+@mixin linear($duration: 1s, $property...) {
+    @include transitionBase($duration, $property);
+    transition-timing-function: linear;
+}
+
+@mixin easeInSine($duration: 1s, $property...) {
+    @include transitionBase($duration, $property);
+    transition-timing-function: ease(insine);
+}
+
+@mixin easeOutSine($duration: 1s, $property...) {
+    @include transitionBase($duration, $property);
+    @include transitionBase($duration, $property);
+    transition-timing-function: ease(outsine);
+}
+
+@mixin easeInOutSine($duration: 1s, $property...) {
+    @include transitionBase($duration, $property);
+    transition-timing-function: ease(inoutsine);
+}
+
+@mixin easeInQuad($duration: 1s, $property...) {
+    @include transitionBase($duration, $property);
+    transition-timing-function: ease(inquad);
+}
+
+@mixin easeOutQuad($duration: 1s, $property...) {
+    @include transitionBase($duration, $property);
+    transition-timing-function: ease(outquad);
+}
+
+@mixin easeInOutQuad($duration: 1s, $property...) {
+    @include transitionBase($duration, $property);
+    transition-timing-function: ease(inoutquad);
+}
+
+@mixin easeInCubic($duration: 1s, $property...) {
+    @include transitionBase($duration, $property);
+    transition-timing-function: ease(incubic);
+}
+
+@mixin easeOutCubic($duration: 1s, $property...) {
+    @include transitionBase($duration, $property);
+    transition-timing-function: ease(outcubic);
+}
+
+@mixin easeInOutCubic($duration: 1s, $property...) {
+    @include transitionBase($duration, $property);
+    transition-timing-function: ease(inoutcubic);
+}
+
+@mixin easeInQuart($duration: 1s, $property...) {
+    @include transitionBase($duration, $property);
+    transition-timing-function: ease(inquart);
+}
+
+@mixin easeOutQuart($duration: 1s, $property...) {
+    @include transitionBase($duration, $property);
+    transition-timing-function: ease(outquart);
+}
+
+@mixin easeInOutQuart($duration: 1s, $property...) {
+    @include transitionBase($duration, $property);
+    transition-timing-function: ease(inoutquart);
+}
+
+@mixin easeInQuint($duration: 1s, $property...) {
+    @include transitionBase($duration, $property);
+    transition-timing-function: ease(inquint);
+}
+
+@mixin easeOutQuint($duration: 1s, $property...) {
+    @include transitionBase($duration, $property);
+    transition-timing-function: ease(outquint);
+}
+
+@mixin easeInOutQuint($duration: 1s, $property...) {
+    @include transitionBase($duration, $property);
+    transition-timing-function: ease(inoutquint);
+}
+
+@mixin easeInExpo($duration: 1s, $property...) {
+    @include transitionBase($duration, $property);
+    transition-timing-function: ease(inexpo);
+}
+
+@mixin easeOutExpo($duration: 1s, $property...) {
+    @include transitionBase($duration, $property);
+    transition-timing-function: ease(outexpo);
+}
+
+@mixin easeInOutExpo($duration: 1s, $property...) {
+    @include transitionBase($duration, $property);
+    transition-timing-function: ease(inoutexpo);
+}
+
+@mixin easeInCirc($duration: 1s, $property...) {
+    @include transitionBase($duration, $property);
+    transition-timing-function: ease(incirc);
+}
+
+@mixin easeOutCirc($duration: 1s, $property...) {
+    @include transitionBase($duration, $property);
+    transition-timing-function: ease(outcirc);
+}
+
+@mixin easeInOutCirc($duration: 1s, $property...) {
+    @include transitionBase($duration, $property);
+    transition-timing-function: ease(inoutcirc);
+}
+
+@mixin easeInBack($duration: 1s, $property...) {
+    @include transitionBase($duration, $property);
+    transition-timing-function: ease(inback);
+}
+
+@mixin easeOutBack($duration: 1s, $property...) {
+    @include transitionBase($duration, $property);
+    transition-timing-function: ease(outback);
+}
+
+@mixin easeInOutBack($duration: 1s, $property...) {
+    @include transitionBase($duration, $property);
+    transition-timing-function: ease(inoutback);
+}
+
+@mixin in-sine($duration: 1s, $property...) {
+    @include easeInSine($duration: 1s, $property...);
+}
+
+@mixin out-sine($duration: 1s, $property...) {
+    @include easeOutSine($duration: 1s, $property...);
+}
+
+@mixin inout-sine($duration: 1s, $property...) {
+    @include easeInOutSine($duration: 1s, $property...);
+}
+
+@mixin in-quad($duration: 1s, $property...) {
+    @include easeInQuad($duration: 1s, $property...);
+}
+
+@mixin out-quad($duration: 1s, $property...) {
+    @include easeOutQuad($duration: 1s, $property...);
+}
+
+@mixin inout-quad($duration: 1s, $property...) {
+    @include easeInOutQuad($duration: 1s, $property...);
+}
+
+@mixin in-cubic($duration: 1s, $property...) {
+    @include easeInCubic($duration: 1s, $property...);
+}
+
+@mixin out-cubic($duration: 1s, $property...) {
+    @include easeOutCubic($duration: 1s, $property...);
+}
+
+@mixin inout-cubic($duration: 1s, $property...) {
+    @include easeInOutCubic($duration: 1s, $property...);
+}
+
+@mixin in-quart($duration: 1s, $property...) {
+    @include easeInQuart($duration: 1s, $property...);
+}
+
+@mixin out-quart($duration: 1s, $property...) {
+    @include easeOutQuart($duration: 1s, $property...);
+}
+
+@mixin inout-quart($duration: 1s, $property...) {
+    @include easeInOutQuart($duration: 1s, $property...);
+}
+
+@mixin in-quint($duration: 1s, $property...) {
+    @include easeInQuint($duration: 1s, $property...);
+}
+
+@mixin out-quint($duration: 1s, $property...) {
+    @include easeOutQuint($duration: 1s, $property...);
+}
+
+@mixin inout-quint($duration: 1s, $property...) {
+    @include easeInOutQuint($duration: 1s, $property...);
+}
+
+@mixin in-expo($duration: 1s, $property...) {
+    @include easeInExpo($duration: 1s, $property...);
+}
+
+@mixin out-expo($duration: 1s, $property...) {
+    @include easeOutExpo($duration: 1s, $property...);
+}
+
+@mixin inout-expo($duration: 1s, $property...) {
+    @include easeInOutExpo($duration: 1s, $property...);
+}
+
+@mixin in-circ($duration: 1s, $property...) {
+    @include easeInCirc($duration: 1s, $property...);
+}
+
+@mixin out-circ($duration: 1s, $property...) {
+    @include easeOutCirc($duration: 1s, $property...);
+}
+
+@mixin inout-circ($duration: 1s, $property...) {
+    @include easeInOutCirc($duration: 1s, $property...);
+}
+
+@mixin in-back($duration: 1s, $property...) {
+    @include easeInBack($duration: 1s, $property...);
+}
+
+@mixin out-back($duration: 1s, $property...) {
+    @include easeOutBack($duration: 1s, $property...);
+}
+
+@mixin inout-back($duration: 1s, $property...) {
+    @include easeInOutBack($duration: 1s, $property...);
+}
+
+@mixin defineEase() {
+    @each $key, $e in $ease {
+        --ease-#{$key}: #{$e};
+    }
+}
+
+@mixin defineColors($colorMap) {
+    @each $key, $color in $colorMap {
+        $rgb: toRGB($color);
+        --color-#{$key}: #{$color};
+        --color-#{$key}-rgb: #{$rgb};
+    }
+}

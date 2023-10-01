@@ -1,0 +1,30 @@
+@use '../../global' as *;
+
+@if ($enable-hide) {
+    @each $breakpoint in map-keys($grid-breakpoints) {
+        @include media-breakpoint-up($breakpoint) {
+            $infix: breakpoint-infix($breakpoint);
+
+            .#{$infix}hide {
+                display: none;
+            }
+        }
+        @include media-breakpoint-down($breakpoint) {
+            $infix: breakpoint-infix($breakpoint);
+            @if ($infix != '') {
+                .-#{$infix}hide {
+                    display: none;
+                }
+            }
+        }
+        @include media-breakpoint-only($breakpoint) {
+            $infix: breakpoint-infix($breakpoint);
+
+            @if ($infix != '' and $breakpoint != '3xl') {
+                .#{$infix}only-hide {
+                    display: none;
+                }
+            }
+        }
+    }
+}

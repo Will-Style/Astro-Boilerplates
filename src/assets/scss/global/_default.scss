@@ -1,0 +1,118 @@
+@use '../global/' as *;
+
+body:not(.wp-admin),
+.editor-styles-wrapper {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    background-color: var(--background-color);
+    color: var(--color);
+    font-family: var(--font-family);
+    font-size: 1rem;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: var(--font-normal, 400);
+    line-height: 1.6;
+    word-wrap: break-word;
+    font-synthesis: none;
+    direction: ltr;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+dt,
+strong,
+b {
+    font-weight: var(--font-bold, 600);
+}
+h1 {
+    font-size: var(--h1-size, 2.5rem);
+}
+h2 {
+    font-size: var(--h2-size, 2rem);
+}
+h3 {
+    font-size: var(--h3-size, 1.75rem);
+}
+h4 {
+    font-size: var(--h4-size, 1.5rem);
+}
+h5 {
+    font-size: var(--h5-size, 1.25rem);
+}
+h6 {
+    font-size: var(--h6-size, 1.1rem);
+}
+
+img,
+svg {
+    max-width: 100%;
+    height: auto;
+}
+button {
+    color: var(--color);
+}
+a {
+    color: var(--link-color);
+    &:hover,
+    &:active,
+    &:focus {
+        color: var(--link-hover-color);
+    }
+}
+small {
+    font-size: 90%;
+}
+summary {
+    display: block;
+    list-style: none;
+    cursor: pointer;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+#page {
+    width: 100%;
+}
+
+@media print {
+    body {
+        -webkit-print-color-adjust: exact;
+        width: 1191px;
+        zoom: 0.8;
+    }
+}
+
+ul.list-disc {
+    // list-style: disc;
+    // ::marker {
+    //     color: var(--color-gray-dark, #9a9aac);
+    // }
+    li {
+        padding-left: 1.3rem;
+        position: relative;
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0.3rem;
+            top: 0.7rem;
+            background-color: var(--color-gray, #aaa);
+            width: 5px;
+            height: 5px;
+            border-radius: 4px;
+        }
+    }
+}
+ol.list-order {
+    padding-left: 1.3rem;
+    list-style: decimal;
+    ::marker {
+        font-family: var(--font-family);
+    }
+}

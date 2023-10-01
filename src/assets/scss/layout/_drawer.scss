@@ -1,0 +1,204 @@
+@use '../global' as *;
+
+.l-drawer {
+    display: none;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 10000;
+    will-change: opacity;
+
+    &__bg {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--color-base);
+        z-index: 0;
+        -webkit-transform: translateZ(0);
+    }
+
+    &__header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        align-items: center;
+        height: var(--header-height-lg);
+        padding: 0 1rem 0 1.5rem;
+
+        @include mq-down(lg) {
+            padding-right: 5px;
+            grid-template-columns: 1fr var(--header-height-lg);
+        }
+        @include mq-down(md) {
+            height: var(--header-height-md);
+        }
+        @include mq-down(sm) {
+            height: var(--header-height-sm);
+            padding-left: 1.2rem;
+            padding-right: 0;
+        }
+    }
+    &__hamburger {
+        display: flex;
+        justify-content: flex-end;
+        .hamburger__bar::before {
+            background-color: #fff;
+        }
+        @include mq-down(lg) {
+            right: 5px;
+            top: 0;
+        }
+        @include mq-down(sm) {
+            right: 0;
+        }
+    }
+    .modal__container {
+        width: 100%;
+        height: 100%;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+        position: relative;
+        z-index: 4;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+        @include mq-up(lg) {
+            display: grid;
+            grid-template-rows: 60px 1fr 100px;
+        }
+    }
+    &__container {
+        @include mq-up(lg) {
+            display: flex;
+            align-items: center;
+        }
+    }
+    &__content {
+        width: 100%;
+        margin-top: 10px;
+        margin-bottom: 60px;
+        padding-left: 10px;
+        padding-right: 10px;
+        @include mq-up(sm) {
+            margin-top: 5vw;
+            margin-bottom: 10vw;
+        }
+        @include mq-up(lg) {
+            margin-top: 0;
+            margin-bottom: 0;
+            padding-left: 60px;
+            padding-right: 60px;
+        }
+    }
+    &__nav {
+        &__list {
+            margin-top: 0.8rem;
+        }
+        &__link {
+            display: inline-flex;
+            color: #fff;
+            font-weight: var(--font-bold);
+            font-size: clamp(40px, 8vw, 60px);
+
+            @include hover {
+                color: #fff;
+            }
+        }
+    }
+
+    &.is-open {
+        z-index: 10000;
+        display: block;
+    }
+
+    &[aria-hidden='false'] &__bg {
+        animation: slideIn 1s var(--ease-outexpo) 0s forwards;
+    }
+    &[aria-hidden='false'] .modal__container {
+        animation: fadeIn 0.8s var(--ease-outcubic) 0.4s forwards;
+    }
+
+    &[aria-hidden='false'] &__content {
+        animation: scaleIn 0.8s var(--ease-outcubic) 0.4s forwards;
+    }
+
+    &[aria-hidden='true'] &__bg {
+        animation: slideOut 0.6s var(--ease-inoutcubic) 0s forwards;
+    }
+
+    &[aria-hidden='true'] &__content {
+        animation: scaleOut 0.8s var(--ease-outcubic) 0.6s forwards;
+    }
+    &[aria-hidden='true'] &.modal__container {
+        animation: fadeOut 0.8s var(--ease-outcubic) 0.6s forwards;
+    }
+
+    &[aria-hidden='false'] &__content,
+    &[aria-hidden='true'] &__bg,
+    &[aria-hidden='true'] &__content {
+        will-change: transform, opacity;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateY(100%);
+        }
+        to {
+            transform: translateY(0%);
+        }
+    }
+
+    @keyframes scaleIn {
+        from {
+            opacity: 0;
+            transform: scale(1.01);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    @keyframes scaleOut {
+        from {
+            opacity: 0;
+            transform: scale(1.01);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    @keyframes slideOut {
+        from {
+            transform: translateY(0);
+        }
+        to {
+            transform: translateY(-100%);
+        }
+    }
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadeOut {
+        from {
+            opacity: 1;
+        }
+        to {
+            opacity: 0;
+        }
+    }
+}

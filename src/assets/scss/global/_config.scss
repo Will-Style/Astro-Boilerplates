@@ -1,0 +1,31 @@
+// ダークモードを有効にする
+$enable-dark: false;
+
+// Container Utility を使うかどうか
+$enable-container: true;
+// Grid System Utility を使うかどうか
+$enable-grid: true;
+// Flex Utility を使うかどうか
+$enable-flex: true;
+// Spacing Utility を使うかどうか（.mb-10等...）
+$enable-spacing: true;
+// Hide Utility を使うかどうか
+$enable-hide: true;
+// Text Utility を使うかどうか
+$enable-text: true;
+
+// Table Content を使うかどうか
+$enable-table: true;
+// Formを有効にするかどうか
+$enable-form: true;
+
+// Breadcrumb Component CSSを使用するかどうか
+$enable-breadcrumb: true;
+// Tab Component CSSを使用するかどうか
+$enable-tab: true;
+// Accordion Component CSSを使用するかどうか
+$enable-accordion: true;
+// Pagination Component CSSを使用するかどうか
+$enable-pagination: true;
+
+$enable-wp-blocks: true;

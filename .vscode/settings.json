@@ -1,0 +1,13 @@
+{
+    "path-autocomplete.pathMappings": {
+        "/": "${folder}/public/",
+        "./": "${folder}/",
+    },
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": false,
+      "source.fixAll.stylelint": false
+    },
+  
+    "css.validate": false,
+    "scss.validate": false,
+}

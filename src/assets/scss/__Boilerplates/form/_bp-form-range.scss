@@ -1,0 +1,125 @@
+@use '../../global' as *;
+
+@if ($enable-form) {
+    body:not(.wp-admin) {
+        [type='range'] {
+            &:not(.-unstyled) {
+                padding: 0; // Need to reset padding
+                background-color: transparent;
+                appearance: none;
+
+                &::-moz-focus-outer {
+                    border: 0;
+                }
+
+                &::-webkit-slider-thumb {
+                    width: 18px;
+                    height: 18px;
+                    margin-top: -6px;
+                    border-radius: 100%;
+                    background-color: var(
+                        --input-active-bg,
+                        var(--color-primary)
+                    );
+                    appearance: none;
+                    @include easeOutExpo(0.3s, box-shadow);
+                    &:active {
+                        box-shadow: 0
+                            0
+                            0
+                            3px
+                            rgba(
+                                var(--color-input-focus-rgb, 36, 44, 229),
+                                0.3
+                            );
+                    }
+                }
+                // &:not(:disabled){
+                //     &::-webkit-slider-thumb {
+
+                //         cursor: grab;
+                //         &:active {
+                //             cursor: grabbing;
+                //         }
+                //     }
+                // }
+                &::-webkit-slider-runnable-track {
+                    height: 5px;
+                    background-color: var(--input-border-color, #eee);
+                    color: transparent; // Why?
+                }
+                &:focus {
+                    outline: 0;
+
+                    &::-webkit-slider-thumb {
+                        box-shadow: 0
+                            0
+                            0
+                            3px
+                            rgba(
+                                var(--color-input-focus-rgb, 36, 44, 229),
+                                0.3
+                            );
+                    }
+                    &::-moz-range-thumb {
+                        box-shadow: 0
+                            0
+                            0
+                            3px
+                            rgba(
+                                var(--color-input-focus-rgb, 36, 44, 229),
+                                0.3
+                            );
+                    }
+                }
+                &::-moz-range-thumb {
+                    width: 14px;
+                    height: 14px;
+                    margin-top: -4px;
+                    border-radius: 100%;
+                    background-color: var(
+                        --input-active-bg,
+                        var(--color-primary)
+                    );
+                    appearance: none;
+                    @include easeOutExpo(0.3s, box-shadow);
+
+                    &:active {
+                        box-shadow: 0
+                            0
+                            0
+                            3px
+                            rgba(
+                                var(--color-input-focus-rgb, 36, 44, 229),
+                                0.3
+                            );
+                    }
+                }
+
+                &::-moz-range-track {
+                    height: 5px;
+                    background-color: var(--input-border-color, #eee);
+                    color: transparent; // Why?
+                }
+
+                &:disabled {
+                    pointer-events: none;
+
+                    &::-webkit-slider-thumb {
+                        background-color: var(
+                            --input-range-disabled-color,
+                            #ccc
+                        );
+                    }
+
+                    &::-moz-range-thumb {
+                        background-color: var(
+                            --input-range-disabled-color,
+                            #ccc
+                        );
+                    }
+                }
+            }
+        }
+    }
+}

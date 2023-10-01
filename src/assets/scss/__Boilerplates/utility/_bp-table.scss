@@ -1,0 +1,173 @@
+@use '../../global' as *;
+
+@if ($enable-table) {
+    table {
+        width: 100%;
+        border-collapse: collapse;
+
+        thead,
+        tfoot {
+            vertical-align: inherit;
+            tr {
+                th,
+                td {
+                    padding-top: var(--table-padding-y, 0.5rem);
+                    padding-right: var(--table-padding-x, 1rem);
+                    padding-bottom: var(--table-padding-y, 0.5rem);
+                    padding-left: var(--table-padding-x, 1rem);
+                    border: 1px solid var(--table-thead-border-color, #eee);
+                    background-color: var(
+                        --table-thead-background-color,
+                        #fafafa
+                    );
+                    color: var(--table-thead-color, var(--color-base));
+                    text-align: left;
+                }
+            }
+        }
+        tbody {
+            vertical-align: inherit;
+
+            tr {
+                th,
+                td {
+                    padding-top: var(--table-padding-y, 0.5rem);
+                    padding-right: var(--table-padding-x, 1rem);
+                    padding-bottom: var(--table-padding-y, 0.5rem);
+                    padding-left: var(--table-padding-x, 1rem);
+                    border: 1px solid var(--table-tbody-border-color, #eee);
+                    background-color: var(
+                        --table-tbody-background-color,
+                        var(--color-bg)
+                    );
+                    color: var(--table-tbody-color, var(--color-base));
+                    text-align: left;
+                    vertical-align: middle;
+                }
+            }
+        }
+
+        &.border-less {
+            thead,
+            tbody {
+                tr {
+                    th,
+                    td {
+                        padding-right: 0;
+                        padding-left: 0;
+                        border: none;
+                    }
+                }
+            }
+        }
+        &.bg-less {
+            thead,
+            tbody {
+                tr {
+                    th,
+                    td {
+                        background-color: transparent;
+                    }
+                }
+            }
+        }
+        &.vertical-align-top {
+            thead,
+            tbody {
+                tr {
+                    th,
+                    td {
+                        vertical-align: top;
+                    }
+                }
+            }
+        }
+        &.vertical-align-middle {
+            thead,
+            tbody {
+                tr {
+                    th,
+                    td {
+                        vertical-align: middle;
+                    }
+                }
+            }
+        }
+        &.vertical-align-bottom {
+            thead,
+            tbody {
+                tr {
+                    th,
+                    td {
+                        vertical-align: bottom;
+                    }
+                }
+            }
+        }
+        &.thead-align-top {
+            thead {
+                tr {
+                    th,
+                    td {
+                        vertical-align: top;
+                    }
+                }
+            }
+        }
+        &.thead-align-middle {
+            thead {
+                tr {
+                    th,
+                    td {
+                        vertical-align: middle;
+                    }
+                }
+            }
+        }
+        &.thead-align-bottom {
+            thead {
+                tr {
+                    th,
+                    td {
+                        vertical-align: bottom;
+                    }
+                }
+            }
+        }
+        &.tbody-align-top {
+            tbody {
+                tr {
+                    th,
+                    td {
+                        vertical-align: top;
+                    }
+                }
+            }
+        }
+        &.tbody-align-middle {
+            tbody {
+                tr {
+                    th,
+                    td {
+                        vertical-align: middle;
+                    }
+                }
+            }
+        }
+        &.tbody-align-bottom {
+            tbody {
+                tr {
+                    th,
+                    td {
+                        vertical-align: bottom;
+                    }
+                }
+            }
+        }
+    }
+    .table-responsive {
+        max-width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}

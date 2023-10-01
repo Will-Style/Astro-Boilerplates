@@ -1,0 +1,102 @@
+@use '../../global' as *;
+
+@if ($enable-form) {
+    body:not(.wp-admin) {
+        [type='checkbox'],
+        [type='radio'] {
+            &:not(.-unstyled) {
+                width: var(--checkbox-size, 18px);
+                height: var(--checkbox-size, 18px);
+                margin-top: var(
+                    --checkbox-margin-top,
+                    0.25rem
+                ); // line-height minus check height
+                margin-right: 0.4rem;
+                border: var(--input-border-width, 1px)
+                    solid
+                    var(--input-border-color, #dee2e6);
+                background-color: var(--input-bg, #fff);
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: contain;
+                vertical-align: top;
+                cursor: pointer;
+                appearance: none;
+                print-color-adjust: exact; // Keep themed appearance for print
+                @include easeOutExpo(
+                    0.3s,
+                    border-color,
+                    box-shadow,
+                    background-color
+                );
+
+                // &:active {
+                //     filter: $form-check-input-active-filter;
+                // }
+
+                &:focus {
+                    border-color: rgba(
+                        var(--color-input-focus-rgb, 36, 44, 229),
+                        0.4
+                    );
+                    outline: 0;
+                    box-shadow: 0
+                        0
+                        0
+                        3px
+                        rgba(var(--color-input-focus-rgb, 36, 44, 229), 0.3);
+                }
+
+                &:checked {
+                    border-color: var(--color-input-active);
+                    background-color: var(--color-input-active);
+                }
+
+                // &[type="checkbox"]:indeterminate {
+                //     background-color: $form-check-input-indeterminate-bg-color;
+                //     border-color: $form-check-input-indeterminate-border-color;
+
+                //     @if $enable-gradients {
+                //         --#{$prefix}form-check-bg-image: #{escape-svg($form-check-input-indeterminate-bg-image)}, var(--#{$prefix}gradient);
+                //     } @else {
+                //         --#{$prefix}form-check-bg-image: #{escape-svg($form-check-input-indeterminate-bg-image)};
+                //     }
+                // }
+
+                &:disabled {
+                    pointer-events: none;
+                    filter: none;
+                    // opacity: $form-check-input-disabled-opacity;
+                }
+
+                // Use disabled attribute in addition of :disabled pseudo-class
+                // See: https://github.com/twbs/bootstrap/issues/28247
+                &[disabled],
+                &:disabled {
+                    ~ .form-check-label {
+                        cursor: default;
+                        // opacity: $form-check-label-disabled-opacity;
+                    }
+                }
+            }
+        }
+
+        [type='checkbox'] {
+            border-radius: var(--check-border-radius, 4px);
+
+            &:checked {
+                background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
+            }
+        }
+
+        [type='radio'] {
+            border-radius: 50%;
+            &:checked {
+                background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23fff'/%3e%3c/svg%3e");
+            }
+        }
+        .form__check-label {
+            cursor: pointer;
+        }
+    }
+}

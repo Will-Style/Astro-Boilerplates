@@ -1,0 +1,88 @@
+@use '../global' as *;
+
+.sidebar {
+    max-width: 400px;
+    @include mq-down(lg) {
+        margin-top: 40px;
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-bottom: 30px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    @include mq-up(lg) {
+        max-width: 250px;
+        position: sticky;
+        top: 100px;
+        padding-bottom: 60px;
+    }
+    &__title {
+        &:not(:first-child) {
+            padding-top: 1.2rem;
+        }
+        font-size: calc(17 / 16 * 1rem);
+        color: var(--color-gray);
+        font-weight: 500;
+        &__link {
+            color: var(--color-gray);
+            font-weight: 500;
+            @include easeOutQuart(0.3s, color);
+            @include hover {
+                color: var(--color-secondary);
+            }
+        }
+    }
+
+    &__link {
+        color: var(--color-base);
+        font-size: calc(13 / 16 * 1rem);
+
+        position: relative;
+        margin-top: 0;
+        padding-left: 13px;
+        @include easeOutQuart(0.3s, color);
+        @include hover {
+            color: var(--color-gray);
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            left: 2px;
+            top: 0.3rem;
+            width: 4px;
+            height: 4px;
+            border-radius: 3px;
+            background-color: var(--color-gray);
+        }
+    }
+    &__child {
+        &__item {
+            position: relative;
+            margin-top: 0.2rem;
+        }
+        &__link {
+            color: var(--color-base);
+            font-size: calc(13 / 16 * 1rem);
+            @include easeOutQuart(0.3s, color);
+            @include hover {
+                color: var(--color-secondary);
+            }
+
+            &::before {
+                content: '';
+                position: absolute;
+                left: 3px;
+                top: 0.6rem;
+                width: 3px;
+                height: 3px;
+                border-radius: 3px;
+                background-color: var(--color-gray);
+            }
+        }
+    }
+    &__archive {
+        width: 100%;
+        margin-top: 0.6rem;
+    }
+}

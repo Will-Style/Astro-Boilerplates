@@ -1,0 +1,74 @@
+@use '../global' as *;
+
+.hamburger {
+    $parent: &;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include mq-down(md) {
+        height: var(--header-height-md);
+    }
+    @include mq-down(sm) {
+        height: var(--header-height-sm);
+    }
+    &__container {
+        position: absolute;
+
+        top: 50%;
+        height: 1px;
+        width: 26px;
+    }
+    &__bar {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        transform-origin: center center;
+        @include easeOutExpo(1s, transform);
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--color-base);
+        }
+        &:not(:first-child, :last-child) {
+            transition-delay: 0.3s;
+            transform-origin: left center;
+            @include easeInOutExpo(0.7s, transform);
+        }
+        &:first-child {
+            transform: translateY(-6px);
+        }
+        &:last-child {
+            transform: translateY(6px);
+        }
+    }
+
+    &[aria-expanded='true'] {
+        #{$parent}__bar {
+            // &::before{
+            //     background-color: #fff;
+            // }
+            &:not(:first-child, :last-child) {
+                transition-delay: 0s;
+                transform: scaleX(0);
+                transform-origin: right center;
+            }
+            &:first-child {
+                top: 0;
+                transform: rotate(-40deg);
+                // transition-delay: 0.5s;
+            }
+            &:last-child {
+                top: 0;
+                transform: rotate(40deg);
+                // transition-delay: 0.5s;
+            }
+        }
+    }
+}

@@ -1,0 +1,9 @@
+@use '../../global' as *;
+
+@if ($enable-accordion) {
+    [data-accordion] {
+        [data-accordion-content] {
+            overflow: hidden;
+        }
+    }
+}

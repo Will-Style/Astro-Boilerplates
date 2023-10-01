@@ -1,0 +1,5 @@
+@use '../global/' as *;
+
+.\:color-gray {
+    color: var(--color-gray);
+}

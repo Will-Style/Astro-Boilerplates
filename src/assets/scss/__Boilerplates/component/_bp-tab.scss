@@ -1,0 +1,44 @@
+// @use "../../global" as *;
+
+// @if ($enable-tab) {
+//     .c-tab {
+//         .c-tab__nav {
+//             display: flex;
+//             flex-wrap: wrap;
+//             margin-right: -2px;
+//             margin-bottom: 20px;
+//             margin-left: -2px;
+//             border-bottom: 1px solid #ddd;
+//             .c-tab__nav--item {
+//                 display: block;
+//                 margin: 0 2px -1px;
+//                 padding: 10px 20px;
+//                 transition: background-color 0.3s cubic-bezier(0.19, 1, 0.22, 1),
+//                     border-color 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+//                 border: 1px solid #ddd;
+//                 border-radius: 4px 4px 0 0;
+//                 border-bottom-color: transparent;
+//                 color: currentcolor;
+//                 font-size: 14px;
+//                 &:hover {
+//                     background-color: #f2f2f2;
+//                 }
+//                 &:focus:not(:focus-visible) {
+//                     outline: 0;
+//                 }
+//                 &.-tab-active {
+//                     border-color: #ddd;
+//                     border-bottom-color: #fff;
+//                     background-color: #fff;
+//                     color: blue;
+//                 }
+//             }
+//         }
+//         .c-tab__pane {
+//             display: none;
+//             &.-tab-active {
+//                 display: block;
+//             }
+//         }
+//     }
+// }

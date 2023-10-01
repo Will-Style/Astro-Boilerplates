@@ -1,0 +1,190 @@
+@use '../../global' as *;
+
+@if ($enable-pagination) {
+    .c-pagination {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: var(--pagination-justify-content, flex-start);
+        width: 100%;
+        margin: var(--pagination-wrapper-margin, 0);
+        padding: var(--pagination-wrapper-padding, 1rem 0 0);
+        list-style: none;
+        .c-pagination__item {
+            margin-right: calc(var(--pagination-gap, 8px) / 2);
+            margin-left: calc(var(--pagination-gap, 8px) / 2);
+            padding: 0;
+            span,
+            a {
+                display: inline-block;
+                min-width: var(--pagination-min-width, 34px);
+                padding-top: var(--pagination-padding-top, 2px);
+                padding-right: var(--pagination-padding-x, 10px);
+                padding-bottom: var(--pagination-padding-bottom, 2px);
+                padding-left: var(--pagination-padding-x, 10px);
+                border: 1px solid var(--pagination-border-color, #dfdfdf);
+                border-radius: var(--pagination-border-radius, 3px);
+                background-color: var(
+                    --pagination-bg-color,
+                    var(--background-color)
+                );
+                color: var(--pagination-color, var(--color));
+                font-size: var(--pagination-font-size, 1rem);
+                text-align: center;
+                text-decoration: none;
+            }
+            a {
+                background-color: var(
+                    --pagination-bg-color,
+                    var(--background-color)
+                );
+                color: var(--pagination-link-color, var(--link-color));
+                @include easeOutQuart(
+                    300ms,
+                    background-color,
+                    color,
+                    border-color
+                );
+                @include hover {
+                    border-color: var(
+                        --pagination-link-hover-border-color,
+                        var(--link-hover-color)
+                    );
+                    background-color: var(
+                        --pagination-link-hover-bg-color,
+                        var(--link-hover-color)
+                    );
+                    color: var(
+                        --pagination-link-hover-color,
+                        var(--background-color)
+                    );
+                }
+            }
+            .current {
+                border-color: var(
+                    --pagination-current-border-color,
+                    var(--link-color)
+                );
+                background-color: var(
+                    --pagination-current-bg-color,
+                    var(--link-color)
+                );
+                color: var(--pagination-current-color, #fff);
+            }
+            .extend {
+                padding-right: var(--pagination-omission-padding-x, 0);
+                padding-left: var(--pagination-omission-padding-x, 0);
+                border-color: var(
+                    --pagination-omission-border-color,
+                    transparent
+                );
+                background-color: var(--pagination-omission-bg, transparent);
+                color: var(--pagination-omission-color, var(--color));
+            }
+
+            .first {
+                position: relative;
+                overflow: hidden;
+                text-indent: -999px;
+                white-space: nowrap;
+                &::before {
+                    content: var(
+                        --pagination-arrow-first,
+                        'keyboard_double_arrow_left'
+                    );
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    font-family: var(
+                        --icon-font-family,
+                        'Material Symbols Outlined'
+                    );
+                    font-size: var(
+                        --pagination-first-last-size,
+                        calc(18 / 16 * 1rem)
+                    );
+                    line-height: 1;
+                    text-indent: 0;
+                    white-space: nowrap;
+                }
+            }
+            .previouspostslink {
+                position: relative;
+                overflow: hidden;
+                text-indent: -999px;
+                white-space: nowrap;
+                &::before {
+                    content: var(--pagination-arrow-prev, 'chevron_left');
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    font-family: var(
+                        --icon-font-family,
+                        'Material Symbols Outlined'
+                    );
+                    font-size: var(
+                        --pagination-arrow-size,
+                        calc(18 / 16 * 1rem)
+                    );
+                    line-height: 1;
+                    text-indent: 0;
+                    white-space: nowrap;
+                }
+            }
+            .nextpostslink {
+                position: relative;
+                overflow: hidden;
+                text-indent: -999px;
+                white-space: nowrap;
+                &::before {
+                    content: var(--pagination-arrow-next, 'chevron_right');
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    font-family: var(
+                        --icon-font-family,
+                        'Material Symbols Outlined'
+                    );
+                    font-size: var(
+                        --pagination-arrow-size,
+                        calc(18 / 16 * 1rem)
+                    );
+
+                    line-height: 1;
+                    text-indent: 0;
+                    white-space: nowrap;
+                }
+            }
+
+            .last {
+                position: relative;
+                overflow: hidden;
+                text-indent: -999px;
+                white-space: nowrap;
+                &::before {
+                    content: var(
+                        --pagination-arrow-last,
+                        'keyboard_double_arrow_right'
+                    );
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    font-family: var(
+                        --icon-font-family,
+                        'Material Symbols Outlined'
+                    );
+                    font-size: var(
+                        --pagination-first-last-size,
+                        calc(18 / 16 * 1rem)
+                    );
+                    line-height: 1;
+                    text-indent: 0;
+                    white-space: nowrap;
+                }
+            }
+        }
+    }
+}
