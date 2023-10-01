@@ -89,8 +89,10 @@ export default class {
                         this._closeAll(accordionObj);
                     }
 
+                    el.classList.add(this.active_class);
                     this._animation(content, "open", accordionObj.duration, detail);
                 } else {
+                    el.classList.remove(this.active_class);
                     this._close(content, accordionObj.duration, detail);
                 }
             }

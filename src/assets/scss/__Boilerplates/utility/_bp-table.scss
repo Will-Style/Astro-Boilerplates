@@ -47,7 +47,7 @@
             }
         }
 
-        &.border-less {
+        &.\:border-less {
             thead,
             tbody {
                 tr {
@@ -60,7 +60,7 @@
                 }
             }
         }
-        &.bg-less {
+        &.\:bg-less {
             thead,
             tbody {
                 tr {
@@ -71,7 +71,7 @@
                 }
             }
         }
-        &.vertical-align-top {
+        &.\:vertical-align-top {
             thead,
             tbody {
                 tr {
@@ -82,7 +82,7 @@
                 }
             }
         }
-        &.vertical-align-middle {
+        &.\:vertical-align-middle {
             thead,
             tbody {
                 tr {
@@ -93,7 +93,7 @@
                 }
             }
         }
-        &.vertical-align-bottom {
+        &.\:vertical-align-bottom {
             thead,
             tbody {
                 tr {
@@ -104,7 +104,7 @@
                 }
             }
         }
-        &.thead-align-top {
+        &.\:thead-align-top {
             thead {
                 tr {
                     th,
@@ -114,7 +114,7 @@
                 }
             }
         }
-        &.thead-align-middle {
+        &.\:thead-align-middle {
             thead {
                 tr {
                     th,
@@ -124,7 +124,7 @@
                 }
             }
         }
-        &.thead-align-bottom {
+        &.\:thead-align-bottom {
             thead {
                 tr {
                     th,
@@ -134,7 +134,7 @@
                 }
             }
         }
-        &.tbody-align-top {
+        &.\:tbody-align-top {
             tbody {
                 tr {
                     th,
@@ -144,7 +144,7 @@
                 }
             }
         }
-        &.tbody-align-middle {
+        &.\:tbody-align-middle {
             tbody {
                 tr {
                     th,
@@ -154,7 +154,7 @@
                 }
             }
         }
-        &.tbody-align-bottom {
+        &.\:tbody-align-bottom {
             tbody {
                 tr {
                     th,
