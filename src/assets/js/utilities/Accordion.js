@@ -1,4 +1,7 @@
 import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default class {
     accordion_wrapper = "[data-accordion]";
@@ -150,6 +153,7 @@ export default class {
                 ease: "expo.out",
                 onComplete: () => {
                     detail.removeAttribute("open");
+                    ScrollTrigger.refresh();
                 },
             });
         }
