@@ -115,7 +115,6 @@
             font-size: calc(18 / 16 * 1rem);
             margin-bottom: 0;
             font-weight: var(--font-bold);
-            background-color: #fff;
             padding: 0 25px;
             z-index: 2;
             position: relative;
@@ -134,7 +133,6 @@
             margin-left: auto;
             z-index: 2;
             position: relative;
-            background-color: #fff;
             padding: 0 25px;
             padding-right: 80px;
             @include mq-down(lg) {

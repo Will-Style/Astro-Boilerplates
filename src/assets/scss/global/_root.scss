@@ -18,9 +18,10 @@
     --color: var(--color-base);
     --background-color: var(--color-bg);
 
-    --font-family: -apple-system, blinkmacsystemfont, 'Helvetica Neue',
-        hiragino sans, 'ヒラギノ角ゴ ProN W3', hiragino kaku gothic pron,
-        'Yu Gothic', yugothic, verdana, meiryo, 'M+ 1p', sans-serif;
+    --font-family: yakuhanjp, -apple-system, blinkmacsystemfont,
+        'Helvetica Neue', hiragino sans, 'ヒラギノ角ゴ ProN W3',
+        hiragino kaku gothic pron, 'Yu Gothic', yugothic, verdana, meiryo,
+        'M+ 1p', sans-serif;
     --font-bold: 600;
     --font-regular: 400;
     --font-normal: 400;
@@ -79,14 +80,14 @@
         /**
         * Link
         */
-        --link-color: #5f76e9;
-        --link-hover-color: #91a3fc;
+        --link-color: var(--color-primary);
+        --link-hover-color: var(--color-secondary);
     } @else {
         /**
         * Link
         */
-        --link-color: #0e7ae0;
-        --link-hover-color: #0b67bd;
+        --link-color: var(--color-primary);
+        --link-hover-color: var(--color-secondary);
     }
 
     /**

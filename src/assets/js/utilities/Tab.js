@@ -12,7 +12,7 @@ export default class {
     tab_list = "[data-tab-list]";
     tab_item = "[data-tab-item]";
     tab_pane = "[data-tab-pane]";
-    active_class = "-tab-active";
+    active_class = "is-active";
 
     constructor() {
         this.run(document);

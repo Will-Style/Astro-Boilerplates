@@ -8,7 +8,7 @@ export default class {
     accordion_details = "[data-accordion-details]";
     accordion_summary = "[data-accordion-summary]";
     accordion_content = "[data-accordion-content]";
-    active_class = ":is-accordion-active";
+    active_class = ":is-active";
 
     details = [];
     summary = [];
@@ -52,7 +52,12 @@ export default class {
                     details.forEach((detail, index) => {
                         const summary = detail.querySelector(this.accordion_summary);
                         const content = detail.querySelector(this.accordion_content);
+                        
+                        if (detail.hasAttribute("open")) {
 
+                            summary.classList.add(this.active_class);
+                            content.classList.add(this.active_class);
+                        }
                         this._addEvent(summary, detail, content, index, accordionObj);
                     });
                 }
@@ -127,8 +132,10 @@ export default class {
         const duration = d != undefined ? d : accordionObj.duration;
         if (accordionObj.details.length > 0) {
             accordionObj.details.forEach((detail) => {
+                const summary = detail.querySelector(this.accordion_summary);
                 const content = detail.querySelector(this.accordion_content);
                 if (detail.hasAttribute("open")) {
+                    summary.classList.remove(this.active_class);
                     this._animation(content, "close", duration, detail);
                 }
             });
