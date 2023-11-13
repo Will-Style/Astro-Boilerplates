@@ -29,12 +29,14 @@ const { title, namespace='page' , blank = false } = Astro.props;
 	<body>
         { !blank && <SkipContents />}
         { !blank && <Intro />}
-        { !blank && <Drawer />}
-        { !blank && <Header />}
-        <div id="content">
-            <slot />
+        <div id="page">
+            { !blank && <Drawer />}
+            { !blank && <Header />}
+            <div id="content">
+                <slot />
+            </div>
+            { !blank && <Footer namespace={namespace} />}
         </div>
-        { !blank && <Footer namespace={namespace} />}
 	</body>
 </html>
 <script>

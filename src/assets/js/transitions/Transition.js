@@ -3,8 +3,12 @@ import gsap from "gsap";
 export default class {
 
     constructor(){
-        this.run();
+        window.addEventListener('load',()=>{
+            this.run();
+
+        });
     }
+  
     run(){
 
         // ローディングの確認をしたいときはtrueに
@@ -12,14 +16,22 @@ export default class {
         const keyName = 'visited';
         const keyValue = true;
 
-        this.visited = sessionStorage.getItem(keyName);
-        if ( !this.visited || debug ) {
-            //sessionStorageにキーと値を追加
-            sessionStorage.setItem(keyName, keyValue);
-        
+        // this.visited = sessionStorage.getItem(keyName);
+        this.visited = this.parseURL(document.referrer);
+        if(document.referrer == location.href){
+            debug = true;
+        }
+        if ( this.parseURL(document.referrer) != location.protocol + '//' + location.host || debug ) {
+      
             //ここに初回アクセス時の処理
             // ローディングアニメーションなど
 
+            gsap.set('[data-intro]',{
+                opacity:1,
+            });
+            gsap.set('#page',{
+                opacity:1,
+            });
             const intro = document.querySelector("[data-intro]");
             if(intro){
                 const tl = gsap.timeline();
@@ -55,15 +67,22 @@ export default class {
                 gsap.set('[data-intro]',{
                     display:"none",
                 });
-                gsap.from("#content",{
-                    opacity:0,
-                    y : "40px",
+
+                const header = document.querySelectorAll('[data-header]');
+                gsap.set(header,
+                {
+                    opacity: 1,
+                });
+                gsap.to("#page",{
+                    opacity: 1,
                     duration:.6,
+                    delay: .1,
                     ease:"Power4.easeOut",
                     onComplete(){
-                        gsap.set("#content",{
-                            "clearProps":"all"
-                        });
+                        const TransitionEnd = new CustomEvent('TransitionEnd');
+                        dispatchEvent(TransitionEnd);
+
+                    
                     }
                 });
             }
@@ -77,19 +96,37 @@ export default class {
                 if(this.preventCheck(link)){
                     return; 
                 }
+                let delay = .3;
                 // ページ遷移をキャンセルする
                 e.preventDefault();
+                if(link.getAttribute('data-drawer-close') !== null){
+                    delay = 1;
+                }
                 // ページ遷移前のアニメーション
-                gsap.to("#content",{
+                gsap.to("#page",{
                     opacity:0,
-                    y : "-40px",
                     ease:"Expo.easeInOut",
                     duration:.6,
+                    delay:delay,
                     onComplete(){
                         window.location.href = link.href;
                     }
                 });
             });
+        });
+
+        // キャッシュから表示したときの挙動（ブラウザバックなど）
+        window.addEventListener('pageshow', (e) => {
+            if (e.persisted) {
+                gsap.set("#page",{
+                    "opacity" :1,
+                });
+                const header = document.querySelectorAll('[data-header]');
+                gsap.set(header,
+                {
+                    opacity: 1,
+                });
+            }
         });
     }
 
@@ -126,5 +163,13 @@ export default class {
             return r;
         });
         return r;
+    }
+    parseURL(url) {
+        if(!url){
+            return "";
+        }
+        const a=document.createElement('a');
+        a.href=url;
+        return a.protocol + '//' + a.host;
     }
 };
