@@ -8,6 +8,8 @@ import sharp from 'sharp';
 import fs from 'fs'
 import path from 'path'
 
+const assets_path = "assets/"
+
 // envファイルのtrueやfalseをbooleanに変換する
 const envString2Boolean = () => ({
     configResolved: config => {
@@ -51,7 +53,7 @@ export default defineConfig({
                 input: ['src/assets/js/app.js'],
                 
                 output: {
-                    entryFileNames: `assets/js/main.js`,
+                    entryFileNames: `${assets_path}js/main.js`,
                     // chunkFileNames:  assetInfo => {
                     //     // if(assetInfo.name == "app"){
                     //     //     return `assets/js/[name].js`
@@ -61,15 +63,15 @@ export default defineConfig({
                     assetFileNames: (assetInfo) => {
                         let extType = assetInfo.name.split('.').pop();
                         if (/ttf|oft|eot|woff|woff2/i.test(extType)) {
-                            return `assets/webfonts/[name][extname]`;
+                            return `${assets_path}webfonts/[name][extname]`;
                         }
                         if (/png|webp|avif|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
-                            return `assets/images/[name][extname]`;
+                            return `${assets_path}images/[name][extname]`;
                         }
                         if (/css/i.test(extType)) {
-                            return `assets/css/style[extname]`;
+                            return `${assets_path}css/style[extname]`;
                         }
-                        return `assets/[name].[ext]`
+                        return `${assets_path}[name].[ext]`
                         // return `assets/${extType}/[name].[hash][extname]`;
                     }
                 }
@@ -101,11 +103,11 @@ const syncImages = () => {
 
    
     chokidar.watch('./src/assets/images/**/*', {ignored: /[\/\\]\./}).on('add', async (path, stats) => {
-        syncDirectory("./src/assets/images","./public/assets/images")
+        syncDirectory("./src/assets/images",`./public/${assets_path}images`)
     });
     chokidar.watch('./src/assets/images/**/*', {ignored: /[\/\\]\./}).on('change', async (path) => {
         
-        syncFile(path.replace('src/assets/images/', ''),"./src/assets/images","./public/assets/images")
+        syncFile(path.replace('src/assets/images/', ''),"./src/assets/images",`./public/${assets_path}images`)
     });
 
     chokidar.watch('./src/assets/images/**/*', {ignored: /[\/\\]\./}).on('unlink', (path) => {
@@ -256,7 +258,7 @@ const syncImages = () => {
         
     }
 
-    syncDirectory("./src/assets/images","./public/assets/images")
+    syncDirectory("./src/assets/images",`./public/${assets_path}images`)
 }
 
 function OptimizeImage() {
