@@ -8,7 +8,7 @@ export default defineComponent({
 
             const el = ( event.target ) ?  event.target : event;
             const name = el.getAttribute('name');
-            if(el.value === ""){
+            if(el.value === "" || el.value == "選択してください"){
                 errors.value[name] = true;
             }else{
                 errors.value[name] = false;

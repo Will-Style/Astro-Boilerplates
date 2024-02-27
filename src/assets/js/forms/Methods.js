@@ -47,11 +47,13 @@ export default defineComponent({
                 if (!accepts.includes(file.type)) {
                     alert("ファイルタイプが正しくありません。");
                     ev.target.value = "";
+                    ev.target.removeAttribute("style")
                     return;
                 }
                 if (file.size > calc){
                     alert(`ファイルサイズが大きすぎます。`);
                     ev.target.value = "";
+                    ev.target.removeAttribute("style")
                     return;
                 }
             
@@ -79,6 +81,7 @@ export default defineComponent({
                 if (res.status) {
                     callback(res);
                 } else {
+                    ev.target.removeAttribute("style")
                     alert(`Error uploading image: ${res.msg}`);
                 }
             } catch (e) {
