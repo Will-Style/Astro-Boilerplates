@@ -1,7 +1,7 @@
 import barba from "@barba/core";
 import Validates from "/src/assets/js/forms/Validates";
 import Methods from "/src/assets/js/forms/Methods";
-import { createApp,ref } from "https://unpkg.com/vue@3/dist/vue.esm-browser.prod.js";
+import { createApp,ref } from "https://unpkg.com/vue@3.4.21/dist/vue.esm-browser.prod.js";
 
 export default class {
     // フォームのIDを指定
