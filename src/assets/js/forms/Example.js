@@ -245,7 +245,6 @@ export default class {
                     if(window.location.search){
                         type.value = params.get('type')
                         errors.value.contact_type = false
-                        console.log(errors.value)
                         isValidates();
                     }
 
