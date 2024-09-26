@@ -159,8 +159,8 @@
 													<div class="form__row mt-20">
 														<label for="form__type" class="form__label form__require">お問い合わせの種類</label>
 														<div class="form__content form__vertical">
-															<label class="form__check-label"><input name="contact_type" type="radio" value="ご相談" :checked="type==1" @change="notChecked">ご相談</label>
-															<label class="form__check-label"><input name="contact_type" type="radio" value="資料請求" :checked="type==2" @change="notChecked">資料請求</label>
+															<label class="form__check-label"><input name="contact_type" type="checkbox" value="ご相談" :checked="type==1" @change="notChecked">ご相談</label>
+															<label class="form__check-label"><input name="contact_type" type="checkbox" value="資料請求" :checked="type==2" @change="notChecked">資料請求</label>
 														</div>
 														<div class="form__invalid" v-if="errors.contact_type">お問い合わせの種類を選択してください。</div>
 													</div>

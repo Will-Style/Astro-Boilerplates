@@ -26,14 +26,17 @@ export default class {
             //ここに初回アクセス時の処理
             // ローディングアニメーションなど
 
-            gsap.set('[data-intro]',{
-                opacity:1,
-            });
-            gsap.set('#page',{
-                opacity:1,
-            });
+           
             const intro = document.querySelector("[data-intro]");
             if(intro){
+
+                gsap.set('[data-intro]',{
+                    opacity:1,
+                });
+                gsap.set('#page',{
+                    opacity:1,
+                });
+
                 const tl = gsap.timeline();
                 
                 // ここにロゴアニメーションを挿入する
@@ -68,24 +71,27 @@ export default class {
                     display:"none",
                 });
 
-                const header = document.querySelectorAll('[data-header]');
+            }
+            const header = document.querySelectorAll('[data-header]');
+            if(header){
                 gsap.set(header,
                 {
                     opacity: 1,
                 });
-                gsap.to("#page",{
-                    opacity: 1,
-                    duration:.6,
-                    delay: .1,
-                    ease:"Power4.easeOut",
-                    onComplete(){
-                        const TransitionEnd = new CustomEvent('TransitionEnd');
-                        dispatchEvent(TransitionEnd);
-
-                    
-                    }
-                });
             }
+            
+            gsap.to("#page",{
+                opacity: 1,
+                duration:.6,
+                delay: .1,
+                ease:"Power4.easeOut",
+                onComplete(){
+                    const TransitionEnd = new CustomEvent('TransitionEnd');
+                    dispatchEvent(TransitionEnd);
+
+                
+                }
+            });
         }
         
         const links = document.querySelectorAll("a");
@@ -143,7 +149,7 @@ export default class {
         }
         // アンカーリンクなら無効
         const attr_href = link.getAttribute("href");
-        if (attr_href.startsWith('#') ){
+        if (attr_href.startsWith('#') || attr_href.startsWith(location.pathname + '#') || attr_href.startsWith(location.protocol + '//' + location.host + location.pathname + '#')){
             return true;
         }
         if (attr_href.startsWith('tel:') ){

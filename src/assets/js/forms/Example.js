@@ -241,10 +241,10 @@ export default class {
 
 
                     const params = new URLSearchParams(window.location.search);
-                    const type = ref()
+                    const type = ref();
                     if(window.location.search){
-                        type.value = params.get('type')
-                        errors.value.contact_type = false
+                        type.value = params.get('type');
+                        errors.value.contact_type = false;
                         isValidates();
                     }
 
