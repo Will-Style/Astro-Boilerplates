@@ -149,6 +149,7 @@ export default class {
                     // バリデーション関連
                     const validates = Validates.setup(errors,verified,isValidates);
                     const notEmpty = validates.notEmpty;
+                    const notEmptyKana = validates.notEmptyKana;
                     const notEmail = validates.notEmail;
                     const notChecked = validates.notChecked;
                     const notCheckedAny = validates.notCheckedAny;
@@ -253,6 +254,8 @@ export default class {
                         errors,
 
                         notEmpty,
+                        notEmptyKana,
+                    
                         notEmail,
                         notChecked,
                         notCheckedAny,

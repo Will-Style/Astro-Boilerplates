@@ -174,8 +174,9 @@
 													<div class="form__row">
 														<label class="form__label form__require">フリガナ</label>
 														<div class="form__content">
-															<input type="text" name="kana" placeholder="フリガナ" @blur="notEmpty">
-															<div class="form__invalid" v-if="errors.kana">フリガナを入力してください。</div>
+															<input type="text" name="kana" placeholder="フリガナ" @blur="notEmptyKana">
+															<div class="form__invalid" v-if="errors.kana == 'empty'">フリガナを入力してください。</div>
+															<div class="form__invalid" v-if="errors.kana == 'not_kana'">全角カタカナで入力してください。</div>
 														</div>
 													</div>
 													<div class="form__row">

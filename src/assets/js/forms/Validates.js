@@ -16,6 +16,23 @@ export default defineComponent({
             isValidates();
         };
 
+        const notEmptyKana = (event) => {
+
+            const el = ( event.target ) ?  event.target : event;
+            const name = el.getAttribute('name');
+           
+            if(el.value === ""){
+                errors.value[name] = 'empty';
+            }else{
+                if(el.value.match(/^[ァ-ヶー\u3000]*$/)){
+                    errors.value[name] = false;
+                }else{
+                    errors.value[name] = 'not_kana';
+                }
+            }
+            isValidates();
+        };
+
          
         const notEmail = (event) => {
             const el = ( event.target ) ?  event.target : event;
@@ -75,6 +92,7 @@ export default defineComponent({
 
         return {
             notEmpty,
+            notEmptyKana,
             notEmail,
             notChecked,
             notCheckedAny,
