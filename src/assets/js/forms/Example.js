@@ -36,6 +36,8 @@ export default class {
                     
                     const data = ref({});
 
+                    const year = ref((new Date().getFullYear() - 20))
+
                     // 確認画面表示処理
                     const confirm = (e) => {
                         e.preventDefault();
@@ -276,7 +278,8 @@ export default class {
                         files,
                         onUpload,
                         unlinkFile,
-                        type
+                        type,
+                        year
                     };
                 }
             });

@@ -31,7 +31,7 @@ import Layout from '/src/layouts/Layout.astro';
                                             <p>
                                                 以下の内容でよろしければ【メールを送信する】ボタンを押下してください。
                                             </p>
-                                            <div class="form__row mt-20">
+                                            <!-- <div class="form__row mt-20">
                                                 <label for="form__type" class="form__label form__require">お問い合わせの種類</label>
                                                 <div class="form__content form__vertical">
                                                     <label class="form__check-label"><input name="contact_type" type="checkbox" value="ご相談" :checked="type==1" @change="notCheckedAny">ご相談</label>
@@ -40,8 +40,21 @@ import Layout from '/src/layouts/Layout.astro';
                                                     <label class="form__check-label"><input name="contact_type" type="checkbox" value="事前相談" :checked="type==4" @change="notCheckedAny">事前相談</label>
                                                 </div>
                                                 <div class="form__invalid" v-if="errors.contact_type">お問い合わせの種類を選択してください。</div>
+                                            </div> -->
+                                            <div class="form__row">
+                                                <label class="form__label form__require">お問い合わせの種類</label>
+                                                <div class="form__content">
+                                                    <select name="contact_type" @change="notEmpty" class="form__items__name">
+                                                        <option value="">選択してください</option>
+                                                        <option value="ご相談">ご相談</option>
+                                                        <option value="資料請求">資料請求</option>
+                                                        <option value="オンライン相談会">オンライン相談会</option>
+                                                    </select>
+                                                    <div class="form__invalid mb-10" v-if="errors.contact_type">お問い合わせの種類を選択してください。</div>
+                                                   
+                                                </div>
                                             </div>
-                                            
+
                                             <div class="form__row">
                                                 <label for="form__type" class="form__label form__option">性別</label>
                                                 <div class="form__content form__horizontal">
@@ -61,7 +74,7 @@ import Layout from '/src/layouts/Layout.astro';
                                             <div class="form__row">
                                                 <label class="form__label form__require">生年月日</label>
                                                 <div class="form__content form__seperate">
-                                                    <select name="birthday.year" :value="(new Date().getFullYear() - 20)" class="form__seperate__year :sm">
+                                                    <select name="birthday.year" class="form__seperate__year :sm" v-model="year">
                                                         <option :value="d" v-text="d" v-for="d in methods.year_array()"></option>
                                                     </select>
                                                     <span>年</span>
@@ -309,6 +322,7 @@ import Layout from '/src/layouts/Layout.astro';
                                                     <a :href="files.file02.url" v-text="files.file02.name"></a>
                                                 </div>
                                             </div>
+
                                             <div class="form__row">
                                                 <label class="form__label form__require">お名前</label>
 
