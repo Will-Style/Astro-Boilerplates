@@ -1,5 +1,5 @@
 
-import { defineComponent } from "vue/dist/vue.esm-bundler.js";
+import { defineComponent } from "vue/dist/vue.esm-browser.prod.js";
 
 export default defineComponent({
     setup() {
