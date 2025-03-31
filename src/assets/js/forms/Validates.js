@@ -1,5 +1,5 @@
 
-import { defineComponent } from "https://unpkg.com/vue@3.4.21/dist/vue.esm-browser.prod.js";
+import { defineComponent } from "vue";
 
 export default defineComponent({
     setup(errors,verified,isValidates) {
