@@ -2,6 +2,8 @@
 @use '../../global/config' as *;
 
 @use 'sass:math';
+@use 'sass:color';
+@use 'sass:map';
 
 $ease: (
     'InSine': cubic-bezier(0.47, 0, 0.745, 0.715),
@@ -33,7 +35,7 @@ $ease: (
 @function breakpoint-next(
     $name,
     $breakpoints: $grid-breakpoints,
-    $breakpoint-names: map-keys($breakpoints)
+    $breakpoint-names: map.keys($breakpoints)
 ) {
     $n: index($breakpoint-names, $name);
     @if not $n {
@@ -47,12 +49,12 @@ $ease: (
 }
 
 @function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
-    $min: map-get($breakpoints, $name);
+    $min: map.get($breakpoints, $name);
     @return if($min != 0, $min, null);
 }
 
 @function breakpoint-max($name, $breakpoints: $grid-breakpoints) {
-    $max: map-get($breakpoints, $name);
+    $max: map.get($breakpoints, $name);
     @return if($max and $max > 0, $max - 0.02, null);
 }
 
@@ -195,7 +197,7 @@ $ease: (
         //     // @if( breakpoint-min($breakpoint) ){
 
         //     // }
-        $p: map-get($container-padding, $bp);
+        $p: map.get($container-padding, $bp);
         @if ($p != null) {
             $padding: $p;
         }
@@ -203,10 +205,10 @@ $ease: (
             $bp: $padding,
         );
 
-        $paddings: map-merge($paddings, $new);
+        $paddings: map.merge($paddings, $new);
     }
-    @if (map-get($paddings, $breakpoint) != null) {
-        @return map-get($paddings, $breakpoint);
+    @if (map.get($paddings, $breakpoint) != null) {
+        @return map.get($paddings, $breakpoint);
     } @else {
         @return 0;
     }
@@ -304,12 +306,12 @@ $ease: (
 }
 
 @function toRGB($value: #ffffff) {
-    @return red($value), green($value), blue($value);
+    @return color.red($value), color.green($value), color.blue($value);
 }
 
 @function ease($key: ease) {
-    @if map-has-key($ease, $key) {
-        @return map-get($ease, $key);
+    @if map.has-key($ease, $key) {
+        @return map.get($ease, $key);
     }
     @return null;
 }

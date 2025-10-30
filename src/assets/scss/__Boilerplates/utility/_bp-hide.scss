@@ -1,7 +1,9 @@
 @use '../../global' as *;
 
+@use 'sass:map';
+
 @if ($enable-hide) {
-    @each $breakpoint in map-keys($grid-breakpoints) {
+    @each $breakpoint in map.keys($grid-breakpoints) {
         @include media-breakpoint-up($breakpoint) {
             $infix: breakpoint-infix($breakpoint);
 

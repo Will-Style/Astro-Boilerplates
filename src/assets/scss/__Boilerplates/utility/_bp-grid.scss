@@ -1,5 +1,7 @@
 @use '../../global' as *;
 
+@use 'sass:map';
+
 @if ($enable-grid) {
     .grid {
         display: grid;
@@ -16,7 +18,7 @@
         }
     }
 
-    @each $breakpoint in map-keys($grid-breakpoints) {
+    @each $breakpoint in map.keys($grid-breakpoints) {
         @include mq-up($breakpoint) {
             $infix: breakpoint-infix($breakpoint);
             @for $i from 1 through $grid-columns {
@@ -64,7 +66,7 @@
         }
     }
 
-    @each $breakpoint in map-keys($grid-breakpoints) {
+    @each $breakpoint in map.keys($grid-breakpoints) {
         @include media-breakpoint-up($breakpoint) {
             $infix: breakpoint-infix($breakpoint);
 

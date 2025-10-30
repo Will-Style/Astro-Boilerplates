@@ -14,7 +14,6 @@ export default class {
     }
     
     run() {
-
     }
     intro_animation(){
         
