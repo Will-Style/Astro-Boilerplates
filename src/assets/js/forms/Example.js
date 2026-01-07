@@ -27,6 +27,7 @@ export default class {
                         email: null,
                         message: null,
                         items: null,
+                        privacy_agree: null,
                     });
 
                     const methods = Methods.setup();

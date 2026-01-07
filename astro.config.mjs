@@ -81,7 +81,7 @@ export default defineConfig({
     integrations: [
         // 相対パスにしたい場合は下記を有効にする
         // relativeLinks(),
-        htmlBeautifier(),
+        // htmlBeautifier(),
         OptimizeImage()
         // image({
         //     cacheDir: "./.cache/image"

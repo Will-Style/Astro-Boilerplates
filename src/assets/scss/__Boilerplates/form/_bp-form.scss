@@ -68,6 +68,12 @@
         &__pp {
             font-size: calc(14 / 16 * 1rem);
             line-height: 1.6;
+            &__agree {
+                font-size: calc(14 / 16 * 1rem);
+                input {
+                    margin-top: 0.2rem !important;
+                }
+            }
         }
         &__vertical {
             display: flex;
