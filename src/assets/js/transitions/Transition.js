@@ -99,6 +99,9 @@ export default class {
         links.forEach((link) => {
 
             link.addEventListener("click", (e) => {
+                if( e.ctrlKey || e.metaKey ){
+                    return
+                }
                 if(this.preventCheck(link)){
                     return; 
                 }
