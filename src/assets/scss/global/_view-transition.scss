@@ -1,0 +1,37 @@
+// 画面遷移(cross-document View Transitions API)
+// 対応ブラウザではページ遷移時にクロスフェードする
+// 非対応ブラウザは通常の即時遷移にフォールバックする
+@view-transition {
+    navigation: auto;
+}
+
+
+/* View Transition のカスタム設定 */
+::view-transition-old(root) {
+  animation: fade-and-scale-out 0.6s var(--easeOutCubic);
+}
+::view-transition-new(root) {
+  animation: fade-and-scale-in 0.6s var(--easeOutCubic);
+}
+
+/* アニメーション設定 */
+@keyframes fade-and-scale-out {
+  to {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+}
+@keyframes fade-and-scale-in {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+}
+
+// アニメーションを減らす設定のユーザーには無効化
+@media (prefers-reduced-motion: reduce) {
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+        animation: none;
+    }
+}

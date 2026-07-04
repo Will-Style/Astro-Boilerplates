@@ -33,6 +33,8 @@ export default defineConfig({
 
     base:  "",
     publicDir: 'public',
+    // Astro 3以降はデフォルトtrue(HTMLの改行・空白を削除)なので無効化する
+    compressHTML: false,
     server: {
         open: true,
         host: true,
@@ -44,14 +46,21 @@ export default defineConfig({
         // },
         
         plugins: [
-            sassGlobImports(),
+            // vite-plugin-sass-glob-import は「?direct」付き以外のクエリ付きid
+            // (Astro 5 のdevが使う「?inline」など)を処理しないため、
+            // クエリを除去してから渡す
+            (() => {
+                const base = sassGlobImports();
+                return {
+                    ...base,
+                    transform: (src, id) => base.transform(src, id.split('?')[0])
+                };
+            })(),
             envString2Boolean()
         ],
         build: {
             outDir: 'dist',
             rollupOptions: {
-                input: ['src/assets/js/app.js'],
-                
                 output: {
                     entryFileNames: `${assets_path}js/main.js`,
                     // chunkFileNames:  assetInfo => {

@@ -22,6 +22,7 @@ const { title, namespace='page' , blank = false } = Astro.props;
 	<head>
 		<meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="view-transition" content="same-origin">
 		<title>{title}</title>
         <Meta />
         <script src="/src/assets/js/app.js"></script>
@@ -39,5 +40,3 @@ const { title, namespace='page' , blank = false } = Astro.props;
         </div>
 	</body>
 </html>
-<script>
-</script>

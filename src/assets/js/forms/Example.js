@@ -1,4 +1,3 @@
-import barba from "@barba/core";
 import Validates from "/src/assets/js/forms/Validates";
 import Methods from "/src/assets/js/forms/Methods";
 import { createApp,ref } from "vue/dist/vue.esm-browser.prod.js";

@@ -13,6 +13,7 @@
     "font-family-name-quotes": "always-where-recommended",
     "shorthand-property-no-redundant-values": true,
     "value-keyword-case": "lower",
+    "scss/at-rule-no-unknown": [true, { "ignoreAtRules": ["view-transition"] }],
     "scss/operator-no-unspaced": null,
     "no-descending-specificity": null,
     "scss/no-global-function-names":null,

@@ -64,9 +64,11 @@ export default class {
             }
         } else {
             //ここに通常アクセス時の処理
+            // ページ間のフェードは cross-document View Transitions(CSS)が担うため、
+            // ここでは即時表示にする
             const intro = document.querySelector("[data-intro]");
             if(intro){
-                
+
                 gsap.set('[data-intro]',{
                     display:"none",
                 });
@@ -79,50 +81,13 @@ export default class {
                     opacity: 1,
                 });
             }
-            
-            gsap.to("#page",{
+
+            gsap.set("#page",{
                 opacity: 1,
-                duration:.6,
-                delay: .1,
-                ease:"Power4.easeOut",
-                onComplete(){
-                    const TransitionEnd = new CustomEvent('TransitionEnd');
-                    dispatchEvent(TransitionEnd);
-
-                
-                }
             });
+            const TransitionEnd = new CustomEvent('TransitionEnd');
+            dispatchEvent(TransitionEnd);
         }
-        
-        const links = document.querySelectorAll("a");
-        
-        links.forEach((link) => {
-
-            link.addEventListener("click", (e) => {
-                if( e.ctrlKey || e.metaKey ){
-                    return
-                }
-                if(this.preventCheck(link)){
-                    return; 
-                }
-                let delay = .3;
-                // ページ遷移をキャンセルする
-                e.preventDefault();
-                if(link.getAttribute('data-drawer-close') !== null){
-                    delay = 1;
-                }
-                // ページ遷移前のアニメーション
-                gsap.to("#page",{
-                    opacity:0,
-                    ease:"Expo.easeInOut",
-                    duration:.6,
-                    delay:delay,
-                    onComplete(){
-                        window.location.href = link.href;
-                    }
-                });
-            });
-        });
 
         // キャッシュから表示したときの挙動（ブラウザバックなど）
         window.addEventListener('pageshow', (e) => {
@@ -139,40 +104,6 @@ export default class {
         });
     }
 
-    preventCheck(link){
-        const href = link.href;
-        // 外部リンクなら無効
-        const domain = location.protocol + '//' + location.host;
-        if (!href.startsWith(domain)) {
-            return true;
-        }
-        const target = link.getAttribute('target');
-        if((target == "_blank" || target == "_new") && target){
-            return true;
-        }
-        // アンカーリンクなら無効
-        const attr_href = link.getAttribute("href");
-        if (attr_href.startsWith('#') || attr_href.startsWith(location.pathname + '#') || attr_href.startsWith(location.protocol + '//' + location.host + location.pathname + '#')){
-            return true;
-        }
-        if (attr_href.startsWith('tel:') ){
-            return true;
-        }
-        // 拡張子が該当する場合はtarget="_blank"に
-        if (/\.(xlsx?|docx?|pptx?|pdf|jpe?g|png|gif|svg)/.test(href.toLowerCase())) {
-            return true;
-        }
-        // 該当クラスに属していればBarbaを無効に
-        let ignoreClasses = ["no-trans",'ab-item'];
-        let r = false;
-        ignoreClasses.some((cls) => {
-            if(link.classList.contains(cls)){
-                r = true;
-            }
-            return r;
-        });
-        return r;
-    }
     parseURL(url) {
         if(!url){
             return "";

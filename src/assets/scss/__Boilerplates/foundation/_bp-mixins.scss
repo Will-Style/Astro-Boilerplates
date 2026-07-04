@@ -4,6 +4,8 @@
 @use 'sass:math';
 @use 'sass:color';
 @use 'sass:map';
+@use 'sass:list';
+@use 'sass:meta';
 
 $ease: (
     'InSine': cubic-bezier(0.47, 0, 0.745, 0.715),
@@ -37,25 +39,30 @@ $ease: (
     $breakpoints: $grid-breakpoints,
     $breakpoint-names: map.keys($breakpoints)
 ) {
-    $n: index($breakpoint-names, $name);
+    $n: list.index($breakpoint-names, $name);
     @if not $n {
         @error "breakpoint `#{$name}` not found in `#{$breakpoints}`";
     }
-    @return if(
-        $n < length($breakpoint-names),
-        nth($breakpoint-names, $n + 1),
-        null
-    );
+    @if $n < list.length($breakpoint-names) {
+        @return list.nth($breakpoint-names, $n + 1);
+    }
+    @return null;
 }
 
 @function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
     $min: map.get($breakpoints, $name);
-    @return if($min != 0, $min, null);
+    @if $min != 0 {
+        @return $min;
+    }
+    @return null;
 }
 
 @function breakpoint-max($name, $breakpoints: $grid-breakpoints) {
     $max: map.get($breakpoints, $name);
-    @return if($max and $max > 0, $max - 0.02, null);
+    @if $max and $max > 0 {
+        @return $max - 0.02;
+    }
+    @return null;
 }
 
 @function breakpoint-infix($name, $breakpoints: $grid-breakpoints) {
@@ -73,7 +80,10 @@ $ease: (
 }
 
 @function breakpoint-variable($name, $breakpoints: $grid-breakpoints) {
-    @return if(breakpoint-min($name, $breakpoints) == null, '', '#{$name}');
+    @if breakpoint-min($name, $breakpoints) == null {
+        @return '';
+    }
+    @return '#{$name}';
 }
 
 @mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
@@ -179,11 +189,14 @@ $ease: (
 @function reverse($list, $recursive: false) {
     $result: ();
 
-    @for $i from length($list) * -1 through -1 {
-        @if type-of(nth($list, abs($i))) == list and $recursive {
-            $result: append($result, reverse(nth($list, abs($i)), $recursive));
+    @for $i from list.length($list) * -1 through -1 {
+        @if meta.type-of(list.nth($list, math.abs($i))) == list and $recursive {
+            $result: list.append(
+                $result,
+                reverse(list.nth($list, math.abs($i)), $recursive)
+            );
         } @else {
-            $result: append($result, nth($list, abs($i)));
+            $result: list.append($result, list.nth($list, math.abs($i)));
         }
     }
 
@@ -306,7 +319,9 @@ $ease: (
 }
 
 @function toRGB($value: #ffffff) {
-    @return color.red($value), color.green($value), color.blue($value);
+    @return color.channel($value, 'red', $space: rgb),
+        color.channel($value, 'green', $space: rgb),
+        color.channel($value, 'blue', $space: rgb);
 }
 
 @function ease($key: ease) {

@@ -3,12 +3,12 @@
     "scripts": {
         "style:lint": "stylelint \"src/**/*.scss\"",
         "es:lint": "eslint \"src/**/*.js\"",
-        "lint": "npm run style:lint -- --fix && npm run es:lint -- --fix",
-        "dev": "npm run lint && astro dev --host",
-        "start": "npm run lint && astro dev",
+        "lint": "pnpm run style:lint --fix && pnpm run es:lint --fix",
+        "dev": "pnpm run lint && astro dev --host",
+        "start": "pnpm run lint && astro dev",
         "build": "astro build",
         "prod": "astro build",
-        "preview": "npm run lint && astro preview",
+        "preview": "pnpm run lint && astro preview",
         "astro": "astro"
     },
     "browserslist": [
@@ -17,8 +17,6 @@
         "> 0.2%"
     ],
     "dependencies": {
-        "@barba/core": "^2.9.7",
-        "@barba/prefetch": "^2.1.10",
         "@splidejs/splide": "^4.1.4",
         "@studio-freight/lenis": "^1.0.11",
         "destyle.css": "^4.0.0",
@@ -37,26 +35,34 @@
         "vue": "^3.5.13"
     },
     "devDependencies": {
-        "astro": "^2.2.2",
-        "astro-html-beautifier": "^1.0.4",
-        "astro-relative-links": "^0.3.0",
+        "astro": "^5.18.2",
+        "astro-html-beautifier": "^1.0.5",
+        "astro-relative-links": "^0.4.2",
         "autoprefixer": "^10.4.14",
+        "chokidar": "^3.6.0",
         "css-declaration-sorter": "^6.4.0",
         "css-mqpacker": "^7.0.0",
         "eslint": "^8.37.0",
         "eslint-config-prettier": "^8.8.0",
         "eslint-plugin-prettier": "^4.2.1",
         "sass": "^1.60.0",
-        "sharp": "^0.32.1",
-        "sort-css-media-queries": "^2.1.1",
+        "sharp": "^0.35.3",
+        "sort-css-media-queries": "2.2.0",
         "stylelint": "^15.4.0",
-        "stylelint-config-prettier": "^9.0.5",
         "stylelint-config-property-sort-order-smacss": "^9.1.0",
         "stylelint-config-recommended-scss": "^9.0.1",
         "stylelint-order": "^6.0.3",
         "stylelint-prettier": "^3.0.0",
         "stylelint-scss": "^4.6.0",
-        "vite-plugin-sass-glob-import": "^2.0.0"
+        "typescript": "^5.9.2",
+        "vite-plugin-sass-glob-import": "^6.0.3"
+    },
+    "pnpm": {
+        "onlyBuiltDependencies": [
+            "@parcel/watcher",
+            "esbuild",
+            "sharp"
+        ]
     },
     "type": "module",
     "private": true,
