@@ -1,7 +1,8 @@
 module.exports = {
     plugins: [
-        require( "css-mqpacker")({
-            sort : require('sort-css-media-queries')
+        // css-mqpacker(非推奨)の後継。メディアクエリをmobile-first順に統合・ソートする
+        require("postcss-sort-media-queries")({
+            sort: "mobile-first"
         }),
         require("autoprefixer")(),
         // require('postcss-aspect-ratio-polyfill'),

@@ -5,8 +5,8 @@
 @if ($enable-grid) {
     .grid {
         display: grid;
-        grid-column-gap: var(--cols-gap, $grid-columns-gap);
-        grid-row-gap: var(--rows-gap, $grid-rows-gap);
+        column-gap: var(--cols-gap, $grid-columns-gap);
+        row-gap: var(--rows-gap, $grid-rows-gap);
         grid-template-columns: repeat(
             var(--grid-columns, $grid-columns),
             minmax(0, 1fr)
@@ -72,14 +72,14 @@
 
             @each $size, $length in $gaps {
                 .#{$infix}gap-#{$size} {
-                    grid-column-gap: $length;
-                    grid-row-gap: $length;
+                    column-gap: $length;
+                    row-gap: $length;
                 }
                 .#{$infix}gap-x-#{$size} {
-                    grid-column-gap: $length;
+                    column-gap: $length;
                 }
                 .#{$infix}gap-y-#{$size} {
-                    grid-row-gap: $length;
+                    row-gap: $length;
                 }
             }
         }

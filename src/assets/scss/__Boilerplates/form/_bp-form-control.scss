@@ -6,15 +6,15 @@
         select,
         textarea {
             &:not(
-                    [type='checkbox'],
-                    [type='range'],
-                    [type='radio'],
-                    [type='hidden'],
-                    [type='submit'],
-                    [type='button'],
-                    [type='reset'],
-                    .-unstyled
-                ) {
+                [type='checkbox'],
+                [type='range'],
+                [type='radio'],
+                [type='hidden'],
+                [type='submit'],
+                [type='button'],
+                [type='reset'],
+                .-unstyled
+            ) {
                 display: block;
                 max-width: 100%;
                 width: 100%;

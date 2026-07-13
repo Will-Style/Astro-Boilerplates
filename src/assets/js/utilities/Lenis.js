@@ -1,5 +1,5 @@
 
-import Lenis from '@studio-freight/lenis';
+import Lenis from 'lenis';
 import { UAParser } from 'ua-parser-js';
 
 import gsap from "gsap";

@@ -14,6 +14,7 @@
     "shorthand-property-no-redundant-values": true,
     "value-keyword-case": "lower",
     "scss/at-rule-no-unknown": [true, { "ignoreAtRules": ["view-transition"] }],
+    "property-no-deprecated": [true, { "ignoreProperties": ["clip"] }],
     "scss/operator-no-unspaced": null,
     "no-descending-specificity": null,
     "scss/no-global-function-names":null,

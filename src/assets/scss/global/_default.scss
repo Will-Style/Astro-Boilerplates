@@ -12,7 +12,7 @@ body:not(.wp-admin),
     -moz-osx-font-smoothing: grayscale;
     font-weight: var(--font-normal, 400);
     line-height: 1.6;
-    word-wrap: break-word;
+    overflow-wrap: break-word;
     font-synthesis: none;
     direction: ltr;
     -webkit-text-size-adjust: 100%;

@@ -1,4 +1,4 @@
-@use '../__Boilerplates/foundation/_bp-mixins' as *;
+@use '../__Boilerplates/foundation/bp-mixins' as *;
 @use './valiables' as *;
 @use './config' as *;
 /**
@@ -18,10 +18,10 @@
     --color: var(--color-base);
     --background-color: var(--color-bg);
 
-    --font-family: yakuhanjp, -apple-system, blinkmacsystemfont,
-        'Helvetica Neue', hiragino sans, 'ヒラギノ角ゴ ProN W3',
-        hiragino kaku gothic pron, 'Yu Gothic', yugothic, verdana, meiryo,
-        'M+ 1p', sans-serif;
+    --font-family:
+        yakuhanjp, -apple-system, blinkmacsystemfont, 'Helvetica Neue',
+        hiragino sans, 'ヒラギノ角ゴ ProN W3', hiragino kaku gothic pron,
+        'Yu Gothic', yugothic, verdana, meiryo, 'M+ 1p', sans-serif;
     --font-bold: 600;
     --font-regular: 400;
     --font-normal: 400;
