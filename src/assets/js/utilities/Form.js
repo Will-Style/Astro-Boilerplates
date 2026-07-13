@@ -12,8 +12,8 @@ export default class{
         this.alphanum(document);
     }
 	append_api (){
-        const form = document.querySelector('form')
-        if(!form) return
+        const form = document.querySelector('form');
+        if(!form) return;
         const script_ajax_zip = document.createElement('script');
         script_ajax_zip.setAttribute("src", this.ajax_zip_api ); 
         document.body.appendChild(script_ajax_zip);
