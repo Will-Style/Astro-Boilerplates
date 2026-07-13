@@ -5,27 +5,26 @@
     navigation: auto;
 }
 
-
 /* View Transition のカスタム設定 */
 ::view-transition-old(root) {
-  animation: fade-and-scale-out 0.6s var(--easeOutCubic);
+    animation: fade-and-scale-out 0.6s var(--easeOutCubic);
 }
 ::view-transition-new(root) {
-  animation: fade-and-scale-in 0.6s var(--easeOutCubic);
+    animation: fade-and-scale-in 0.6s var(--easeOutCubic);
 }
 
 /* アニメーション設定 */
 @keyframes fade-and-scale-out {
-  to {
-    opacity: 0;
-    transform: translateY(-40px);
-  }
+    to {
+        opacity: 0;
+        transform: translateY(-40px);
+    }
 }
 @keyframes fade-and-scale-in {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
 }
 
 // アニメーションを減らす設定のユーザーには無効化

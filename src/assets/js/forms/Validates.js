@@ -24,7 +24,7 @@ export default defineComponent({
             if(el.value === ""){
                 errors.value[name] = 'empty';
             }else{
-                if(el.value.match(/^[ァ-ヶー\u3000]*$/)){
+                if (el.value.match(/^[ ァ-ヶー\u3000]*$/)) {
                     errors.value[name] = false;
                 }else{
                     errors.value[name] = 'not_kana';
