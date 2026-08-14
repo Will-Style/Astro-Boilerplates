@@ -1,46 +1,52 @@
-
 <header role="banner" class="l-header" data-header>
     <div class="l-header__wrapper">
         <h1 class="l-header__logo">
             <a href="/" class="l-header__logo__link">
-                <svg role="img" aria-label="Logo" class="l-header__logo__image" width="120" height="52" viewBox="0 0 120 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <title>Logo</title>
-                    <path d="M8.46324 0V30.8342H23.718V38.6734H0V0H8.46324Z" />
-                    <path d="M26.1158 25.5558C26.1158 17.2985 32.1759 11.7588 40.5347 11.7588C48.8412 11.7588 54.9013 17.2985 54.9013 25.5558C54.9013 33.8131 48.8412 39.3005 40.5347 39.3005C32.1759 39.3005 26.1158 33.8131 26.1158 25.5558ZM34.2134 25.5035C34.2134 29.4754 36.7732 32.0884 40.5347 32.0884C44.2439 32.0884 46.8037 29.4754 46.8037 25.5035C46.8037 21.5839 44.2439 18.9709 40.5347 18.9709C36.7732 18.9709 34.2134 21.5839 34.2134 25.5035Z" />
-                    <path d="M58.2595 25.1377C58.2595 17.194 63.4315 11.6543 70.7976 11.6543C74.3501 11.6543 77.1712 13.0131 78.5817 15.1558L78.9996 12.5427H86.5748V37.001C86.5748 46.3558 81.1938 52 72.2604 52C64.2673 52 58.8864 47.4533 58.155 40.0322H66.3048C66.4615 42.9588 68.6557 44.6834 72.2082 44.6834C76.0741 44.6834 78.5295 42.3839 78.5295 38.6734V35.2764C76.9622 37.1578 74.0366 38.3598 70.6409 38.3598C63.327 38.3598 58.2595 32.9769 58.2595 25.1377ZM66.357 24.9286C66.357 28.6915 68.8646 31.3568 72.4171 31.3568C76.0741 31.3568 78.5295 28.796 78.5295 24.9286C78.5295 21.1136 76.0741 18.6573 72.3649 18.6573C68.8124 18.6573 66.357 21.2181 66.357 24.9286Z" />
-                    <path d="M91.2145 25.5558C91.2145 17.2985 97.2746 11.7588 105.633 11.7588C113.94 11.7588 120 17.2985 120 25.5558C120 33.8131 113.94 39.3005 105.633 39.3005C97.2746 39.3005 91.2145 33.8131 91.2145 25.5558ZM99.3121 25.5035C99.3121 29.4754 101.872 32.0884 105.633 32.0884C109.343 32.0884 111.902 29.4754 111.902 25.5035C111.902 21.5839 109.343 18.9709 105.633 18.9709C101.872 18.9709 99.3121 21.5839 99.3121 25.5035Z" /> 
-                </svg>                                           
+                <svg role="img" aria-label="will style" width="92" height="22" viewBox="0 0 92 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <title>will style</title>
+                    <path d="M54.832 4.15918H59.1104L61.916 11.2773L64.7686 4.15918H67.9424L60.9043 21.1221H57.7764L60.3984 14.6973L56.9482 6.56348H54.832V15.7607H51.8877V6.56348H49.8184V4.15918H51.8877V0H54.832V4.15918ZM90.2061 12.9883C91.0338 12.9884 91.6775 13.6352 91.6777 14.4668C91.6777 15.2987 91.034 15.9462 90.2061 15.9463C89.3781 15.9463 88.7344 15.2987 88.7344 14.4668C88.7346 13.6351 89.3782 12.9883 90.2061 12.9883ZM27.876 15.8076H24.8857V0.046875H27.876V15.8076ZM34.4541 15.8076H31.4639V0.046875H34.4541V15.8076ZM72.5879 15.8076H69.5977V0.046875H72.5879V15.8076ZM80.96 3.88281C84.226 3.88281 86.756 6.24001 86.71 9.79883C86.71 10.0761 86.71 10.5381 86.6641 10.8154H78.0156C78.1996 12.3405 79.4878 13.2654 81.1436 13.2656C82.2935 13.2656 82.9383 13.0344 83.4902 12.4336L85.6064 13.958C84.3184 15.3908 83.03 15.8076 80.96 15.8076C77.74 15.8076 75.0723 13.4038 75.0723 9.79883C75.0723 6.19381 77.74 3.88284 80.96 3.88281ZM4.50781 11.8789L6.62402 5.17676H9.24609L11.4082 12.0176L13.5244 5.17676H15.916L12.5576 15.8066H10.2578L7.95801 8.55078L5.6582 15.8066H3.31152L0 5.17676H2.3457L4.50781 11.8789ZM21.4355 15.8066H18.4922V5.17676H21.4355V15.8066ZM44.0215 4.11328C46.0915 4.11328 48.2537 5.08396 48.3457 7.62598H45.5859C45.5399 6.79423 44.7123 6.47085 44.0684 6.4707C43.3324 6.4707 42.6416 6.74815 42.6416 7.58008C42.6419 8.04202 43.1482 8.31909 43.792 8.50391L45.6318 8.96582C48.2078 9.6591 48.5303 11.4623 48.5303 12.248C48.5301 14.5588 46.2755 15.7139 43.9756 15.7139C41.8138 15.7137 39.5598 14.3738 39.5137 11.9707H42.2275C42.3197 12.8025 43.24 13.4495 44.2979 13.4033C45.1259 13.4033 45.7695 12.941 45.7695 12.2939C45.8155 11.6932 45.4021 11.4153 44.5742 11.2305L43.0557 10.8613C40.2041 10.0757 39.9278 8.73537 39.9277 7.44141C39.9277 5.639 41.8137 4.11348 44.0215 4.11328ZM81.0059 6.4248C79.4419 6.42487 78.2456 7.30297 78.0156 8.82812H83.8584C83.6284 7.30292 82.4779 6.4248 81.0059 6.4248ZM19.9639 0.046875C20.7917 0.046875 21.4353 0.693687 21.4355 1.52539C21.4355 2.35732 20.7919 3.00488 19.9639 3.00488C19.1359 3.00484 18.4922 2.3573 18.4922 1.52539C18.4924 0.693712 19.1361 0.0469141 19.9639 0.046875Z" fill="currentColor"/>
+                </svg>                                                                                  
             </a>
         </h1>
         <nav class="l-header__gnav">
             <ul class="l-header__gnav__ul">
                 <li class="l-header__gnav__list">
                     <a href="/about/" class="l-header__gnav__link" data-hover-animation>
-                        <span class="l-header__gnav__str" data-hover-animation-target>About</span>
+                        <span class="l-header__gnav__str" data-hover-animation-target>私たちについて</span>
                     </a>
                 </li>
                 <li class="l-header__gnav__list">
-                    <a href="/service/" class="l-header__gnav__link" data-hover-animation>
-                        <span class="l-header__gnav__str" data-hover-animation-target>Service</span>
+                    <a href="/services/" class="l-header__gnav__link" data-hover-animation>
+                        <span class="l-header__gnav__str" data-hover-animation-target>提供できること</span>
+                    </a>
+                </li>
+                
+                <li class="l-header__gnav__list">
+                    <a href="/faq/" class="l-header__gnav__link" data-hover-animation>
+                        <span class="l-header__gnav__str" data-hover-animation-target>FAQ</span>
+                    </a>
+                </li>
+                <li class="l-header__gnav__list">
+                    <a href="/company/" class="l-header__gnav__link" data-hover-animation>
+                        <span class="l-header__gnav__str" data-hover-animation-target>企業<span translate="no">情報</span></span>
+                    </a>
+                </li>
+                <li class="l-header__gnav__list">
+                    <a href="/recruit/" class="l-header__gnav__link" data-hover-animation>
+                        <span class="l-header__gnav__str" data-hover-animation-target>採用<span translate="no">情報</span></span>
                     </a>
                 </li>
                 <li class="l-header__gnav__list">
                     <a href="/blog/" class="l-header__gnav__link" data-hover-animation>
-                        <span class="l-header__gnav__str" data-hover-animation-target>Blog</span>
-                    </a>
-                </li>
-                <li class="l-header__gnav__list">
-                    <a href="/news/" class="l-header__gnav__link" data-hover-animation>
-                        <span class="l-header__gnav__str" data-hover-animation-target>News</span>
-                    </a>
-                </li>
-                <li class="l-header__gnav__list">
-                    <a href="/contact/" class="l-header__gnav__link" data-hover-animation>
-                        <span class="l-header__gnav__str" data-hover-animation-target>Contact</span>
+                        <span class="l-header__gnav__str" data-hover-animation-target>ブログ</span>
                     </a>
                 </li>
             </ul>
         </nav>
+        <a href="/contact/" class="l-header__contact" data-hover-animation>
+            
+            <span class="l-header__contact__str" data-hover-animation-target>お問い合わせ</span>
+        </a>
         <div class="l-header__hamburger">
             <button class="hamburger" data-hamburger aria-haspopup="true" aria-expanded="false">
                 <span class="visually-hidden">メニューを開閉する</span>

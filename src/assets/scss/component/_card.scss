@@ -2,20 +2,36 @@
 
 .c-card {
     $parent: &;
+
     &__content {
         position: relative;
         display: flex;
         flex-direction: column;
+        gap: 10px;
+        @include mq-down(md) {
+            gap: 8px;
+        }
     }
     &__title {
         order: 2;
-        font-size: 1rem;
+        font-size: calc(14 / 16 * 1rem);
         line-height: 1.5;
-        margin-top: 1.1rem;
-        overflow: hidden;
+        margin-top: 0;
         display: -webkit-box;
         -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
         -webkit-line-clamp: 2;
+        height: 3rem;
+        width: 100%;
+
+        @include mq-down(lg) {
+            font-size: calc(13 / 16 * 1rem);
+            line-height: 1.5;
+            height: 2.6rem;
+        }
+        @include easeOutExpo(300ms, color);
+
         &__link {
             color: var(--color-base);
             @include easeOutExpo(0.3s, color);
@@ -27,12 +43,26 @@
     &__figure {
         order: 1;
         margin-bottom: 0;
+        background-color: var(--color-gray-light);
+        display: block;
+        position: relative;
+        aspect-ratio: 16 / 10;
+        overflow: hidden;
+        z-index: 1;
+        picture {
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            @include easeOutExpo(0.7s, transform);
+        }
     }
     &__image__link {
         display: block;
-        border-radius: 8px;
         position: relative;
-        aspect-ratio: 4 / 3;
+        aspect-ratio: 16 / 10;
         overflow: hidden;
         z-index: 1;
         @include hover {
@@ -47,8 +77,12 @@
         top: 0;
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
         @include easeOutExpo(0.7s, transform);
+        padding: 20px;
+        @include mq-down(md) {
+            padding: 12px;
+        }
     }
 
     &__time {

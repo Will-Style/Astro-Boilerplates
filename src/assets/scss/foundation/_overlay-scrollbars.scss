@@ -1,0 +1,3 @@
+// utilities/Scrollbar.js が使う OverlayScrollbars 本体のスタイル。
+// 見た目の上書きは foundation/_highlight.scss（[data-scrollbars]）側で行う
+@use 'overlayscrollbars/overlayscrollbars.css';

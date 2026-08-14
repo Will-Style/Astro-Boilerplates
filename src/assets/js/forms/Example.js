@@ -209,36 +209,44 @@ export default class {
                             return false;
                         }
                         prosessing.value = true;
-                        await methods.validate_upload(ev,(res) => {
-                            
-                            files.value[name] = res;
+                        try {
+                            await methods.validate_upload(ev,(res) => {
+
+                                files.value[name] = res;
+
+                                if(errors.value[name] !== undefined){
+                                    errors.value[name] = false;
+                                }
+                            });
+                        } finally {
+                            // 失敗時もフラグを解除して操作不能にならないようにする
                             prosessing.value = false;
-                            
-                            if(errors.value[name] !== undefined){
-                                errors.value[name] = false;
-                            }
-                        });
-                        isValidates();
+                            isValidates();
+                        }
                     };
 
                      // ファイル削除処理
-                     const unlinkFile = (url,name) => {
+                     const unlinkFile = async (url,name) => {
                         if(prosessing.value){
                             return false;
                         }
                         prosessing.value = true;
-                        methods.unlink_file(url,() => {
-                            files.value[name] =  {
-                                url:"",
-                                name:""
-                            };
+                        try {
+                            await methods.unlink_file(url,() => {
+                                files.value[name] =  {
+                                    url:"",
+                                    name:""
+                                };
+
+                                if(errors.value[name] !== undefined){
+                                    errors.value[name] = true;
+                                }
+                            });
+                        } finally {
+                            // 失敗時もフラグを解除して操作不能にならないようにする
                             prosessing.value = false;
-                            
-                            if(errors.value[name] !== undefined){
-                                errors.value[name] = true;
-                            }
-                        });
-                        isValidates();
+                            isValidates();
+                        }
                     };
 
 

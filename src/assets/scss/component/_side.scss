@@ -1,0 +1,57 @@
+@use '../global' as *;
+
+.c-side {
+    $parent: &;
+
+    position: sticky;
+    top: clamp(60px, 8vw, 80px);
+
+    @include mq-down(lg) {
+        display: none;
+    }
+    &__wrapper {
+        height: 100%;
+    }
+
+    &__item {
+        margin-top: 0.4rem;
+    }
+
+    &__link {
+        font-size: calc(14 / 16 * 1rem);
+        color: var(--color-gray-dark);
+        position: relative;
+        @include easeInOutCirc(0.3s, padding-left);
+        @include hover {
+            color: var(--color-gray-dark);
+        }
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 6px;
+            width: 5px;
+            height: 5px;
+            background-color: rgba(var(--color-gray-dark-rgb), 0.8);
+            opacity: 0;
+            border-radius: 4px;
+            @include easeInOutCirc(0.3s, opacity);
+        }
+        &.\:active {
+            color: var(--color-base);
+            padding-left: 12px;
+            &::before {
+                opacity: 1;
+            }
+        }
+    }
+    &__child {
+        #{$parent}__link {
+            padding-left: 24px;
+            font-size: calc(15 / 16 * 1rem);
+            &::before {
+                content: none;
+            }
+        }
+    }
+}

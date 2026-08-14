@@ -1,64 +1,150 @@
 @use '../global' as *;
 
 .l-drawer {
-    display: none;
+    // <dialog> の UA スタイル（枠・余白・背景・inset:0 + margin:auto の中央寄せ）を打ち消し、
+    // 右上に寄せたパネルとして置き直す。非表示は dialog:not([open]) が受け持つ
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    max-height: none;
+
     position: fixed;
     right: 0;
     top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: 10000;
+    left: auto;
+    bottom: auto;
+    overflow: clip;
     will-change: opacity;
 
-    &__bg {
-        position: fixed;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: var(--color-base);
-        z-index: 0;
-        -webkit-transform: translateZ(0);
+    width: 660px;
+    margin: 10px;
+    max-width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    border-radius: 6px;
+    @include mq-down(sm) {
+        // margin: 5px;
+        // max-width: calc(100% - 10px);
+        // height:calc(100% - 10px);
+    }
+    // 暗幕。クリックで閉じる処理は Drawer.js（dialog 自身が click の target になる）
+    &::backdrop {
+        background-color: rgba(0, 0, 0, 0.2);
+        opacity: 0;
+        backdrop-filter: blur(10px);
     }
 
     &__header {
         position: sticky;
         top: 0;
         z-index: 10;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
         align-items: center;
-        height: var(--header-height-lg);
-        padding: 0 1rem 0 1.5rem;
+        height: 60px;
+        gap: 8px;
+        padding: 5px 10px;
 
-        @include mq-down(lg) {
-            padding-right: 5px;
-            grid-template-columns: 1fr var(--header-height-lg);
+        @include mq-down(md) {
+            padding-right: 8px;
+            height: 56px;
+        }
+    }
+
+    &__header__contact {
+        $parent: &;
+        border: 1px solid var(--color-border);
+        border-radius: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-base);
+        width: 36px;
+        height: 36px;
+        @include easeOutCubic(0.3s, border-color, background);
+
+        svg {
+            width: 20px;
+            // path に inline fill があるため path 自体を上書きしてテーマ色に追従させる
+            path {
+                fill: var(--color-base);
+            }
         }
         @include mq-down(md) {
-            height: var(--header-height-md);
+            width: 40px;
+            height: 40px;
+            font-size: 12px;
+            line-height: 1;
         }
-        @include mq-down(sm) {
-            height: var(--header-height-sm);
-            padding-left: 1.2rem;
-            padding-right: 0;
+        @include hover {
+            color: var(--color-base);
+            border: 1px solid var(--color-bg-beige-light);
+            background-color: var(--color-bg-beige-light);
         }
     }
     &__hamburger {
-        display: flex;
-        justify-content: flex-end;
+        .hamburger {
+            width: 36px;
+            height: 36px;
+            background-color: var(--color-bg-beige);
+            @include easeOutCubic(0.3s, background-color);
+            @include mq-down(md) {
+                width: 40px;
+                height: 40px;
+            }
+            &:hover {
+                background-color: var(--color-bg-beige-light);
+            }
+        }
         .hamburger__bar::before {
-            background-color: #fff;
-        }
-        @include mq-down(lg) {
-            right: 5px;
-            top: 0;
-        }
-        @include mq-down(sm) {
-            right: 0;
+            background-color: var(--color-base);
         }
     }
-    .modal__container {
-        width: 100%;
+
+    .theme-switch {
+        grid-area: theme;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        // background-color: var(--color-bg);
+        border: 1px solid var(--color-border);
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        aspect-ratio: 1 / 1;
+        cursor: pointer;
+        @include easeOutCubic(0.3s, border-color, background);
+        &:hover {
+            border: 1px solid var(--color-bg-beige-light);
+            background-color: var(--color-bg-beige-light);
+        }
+        // ライト＝太陽 / ダーク＝月。既定は太陽を表示
+        .theme-switch__sun {
+            display: none;
+        }
+        svg {
+            width: 20px;
+            // path に inline fill があるため path 自体を上書きしてテーマ色に追従させる
+            path {
+                fill: var(--color-base);
+            }
+        }
+        @include mq-down(md) {
+            width: 40px;
+            height: 40px;
+        }
+    }
+    // ダークテーマ（html.theme:dark）ではアイコンを月に入れ替える
+    :root.theme\:dark & .theme-switch {
+        .theme-switch__sun {
+            display: block;
+        }
+        .theme-switch__moon {
+            display: none;
+        }
+    }
+    &__scroller {
         height: 100%;
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
@@ -67,80 +153,200 @@
         &::-webkit-scrollbar {
             display: none;
         }
-        @include mq-up(lg) {
-            display: grid;
-            grid-template-rows: 60px 1fr 100px;
-        }
+    }
+    &__wrapper {
+        min-height: 100%;
+        display: flex;
     }
     &__container {
-        @include mq-up(lg) {
-            display: flex;
-            align-items: center;
+        border-radius: 4px;
+        display: grid;
+        grid-template-rows: 50px 1fr 80px;
+        position: relative;
+        @include mq-down(md) {
+            grid-template-rows: 40px 1fr 80px;
+        }
+        @include mq-down(sm) {
+            display: block;
+        }
+        &::after {
+            content: '';
+            position: absolute;
+            background-color: var(--color-white);
+            width: 100%;
+            height: 100%;
+            right: 0;
+            top: 0;
+            border-radius: 6px;
+            transform-origin: right top;
         }
     }
+
     &__content {
         width: 100%;
-        margin-top: 10px;
-        margin-bottom: 60px;
-        padding-left: 10px;
-        padding-right: 10px;
+        padding-left: 24px;
+        padding-right: 24px;
+        position: relative;
+        z-index: 2;
+        padding-top: 0;
+        padding-bottom: 40px;
         @include mq-up(sm) {
-            margin-top: 5vw;
-            margin-bottom: 10vw;
+            padding-left: 30px;
+            padding-right: 30px;
+            padding-top: 30px;
         }
         @include mq-up(lg) {
-            margin-top: 0;
-            margin-bottom: 0;
-            padding-left: 60px;
-            padding-right: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-left: 70px;
+            padding-right: 70px;
+            padding-top: 60px;
+            padding-bottom: 60px;
         }
     }
-    &__nav {
-        &__list {
-            margin-top: 0.8rem;
-        }
-        &__link {
-            display: inline-flex;
-            color: #fff;
-            font-weight: var(--font-bold);
-            font-size: clamp(40px, 8vw, 60px);
+    &__bottom {
+        margin-top: auto;
+        padding-top: 24px;
+        padding-bottom: 24px;
+        padding-right: 16px;
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        border-top: 1px solid var(--color-border);
 
-            @include hover {
-                color: #fff;
+        position: relative;
+        z-index: 2;
+        @include mq-down(md) {
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+    }
+    &__links {
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+        gap: 40px;
+        @include mq-down(sm) {
+            flex-direction: column;
+            gap: 10px;
+        }
+        &__items {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        &__label {
+            font-size: 12px;
+            line-height: 13px;
+            color: var(--color-gray);
+            font-weight: normal;
+            @include mq-down(md) {
+                font-size: calc(15 / 16 * 1rem);
+            }
+        }
+        &__ul {
+            display: flex;
+            align-items: center;
+            font-size: 13px;
+            line-height: 13px;
+            @include mq-down(md) {
+                font-size: calc(16 / 16 * 1rem);
+            }
+        }
+        &__li {
+            text-align: center;
+            a {
+                color: var(--color-base);
+                display: inline-flex;
+                align-items: center;
+                min-width: 45px;
+                height: 26px;
+                padding-left: 10px;
+                padding-right: 10px;
+                justify-content: center;
             }
         }
     }
+    &__nav {
+        flex: 0 0 calc(50% - 30px);
+        @include mq-down(md) {
+            flex: 0 0 calc(100%);
+        }
+        &__title {
+            width: 100%;
+            font-size: 12px;
+            line-height: 12px;
+            color: var(--color-gray);
+            padding-left: 0.1rem;
+        }
+        &__wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
 
-    &.is-open {
-        z-index: 10000;
+        &__list {
+            margin-top: 0.7rem;
+        }
+        &__link {
+            display: inline-flex;
+            color: var(--color-base);
+            font-weight: var(--font-bold);
+            font-size: calc(16 / 16 * 1rem);
+            line-height: 1.4;
+            @include mq-down(md) {
+                font-size: calc(19 / 16 * 1rem);
+                line-height: 1.8;
+            }
+            @include hover {
+                color: var(--color-base);
+            }
+        }
+        &__child {
+            & .l-drawer__nav__list {
+                margin-top: 0.3rem;
+            }
+            & .l-drawer__nav__link {
+                display: inline-flex;
+                color: var(--color-gray);
+                font-weight: var(--font-bold);
+                font-size: calc(14 / 16 * 1rem);
+                line-height: 1.3;
+                @include mq-down(md) {
+                    font-size: calc(17 / 16 * 1rem);
+                    line-height: 1.8;
+                }
+                @include hover {
+                    color: var(--color-gray);
+                }
+            }
+        }
+    }
+    &[open] {
         display: block;
     }
 
-    &[aria-hidden='false'] &__bg {
-        animation: slideIn 1s var(--easeOutExpo) 0s forwards;
-    }
-    &[aria-hidden='false'] .modal__container {
-        animation: fadeIn 0.8s var(--easeOutCubic) 0.4s forwards;
-    }
-
-    &[aria-hidden='false'] &__content {
-        animation: scaleIn 0.8s var(--easeOutCubic) 0.4s forwards;
+    // 閉じるアニメーションの間も [open] は付いたままなので、
+    // 開く側の指定はすべて :not(.is-closing) で絞る
+    &[open]:not(.is-closing)::backdrop {
+        animation: fadeIn 1s var(--easeOutExpo) 0s forwards;
     }
 
-    &[aria-hidden='true'] &__bg {
-        animation: slideOut 0.6s var(--easeInOutCubic) 0s forwards;
+    &[open]:not(.is-closing) .l-drawer__container::after {
+        animation: scaleIn 0.4s var(--easeOutExpo) 0s forwards;
     }
 
-    &[aria-hidden='true'] &__content {
-        animation: scaleOut 0.8s var(--easeOutCubic) 0.6s forwards;
-    }
-    &[aria-hidden='true'] &.modal__container {
-        animation: fadeOut 0.8s var(--easeOutCubic) 0.6s forwards;
+    &.is-closing::backdrop {
+        animation: fadeOut 0.6s var(--easeInOutCubic) 0s forwards;
     }
 
-    &[aria-hidden='false'] &__content,
-    &[aria-hidden='true'] &__bg,
-    &[aria-hidden='true'] &__content {
+    &.is-closing .l-drawer__container::after {
+        animation: scaleOut 0.4s var(--easeOutExpo) 0.1s forwards;
+    }
+
+    &[open] .l-drawer__content,
+    &.is-closing .l-drawer__content {
         will-change: transform, opacity;
         -webkit-backface-visibility: hidden;
         backface-visibility: hidden;
@@ -155,24 +361,46 @@
         }
     }
 
+    --h-top: 8px;
+    --h-right: 8px;
+    @include mq-down(sm) {
+        --h-top: -2px;
+        --h-right: 0;
+    }
     @keyframes scaleIn {
         from {
-            opacity: 0;
-            transform: scale(1.01);
+            width: 36px;
+            height: 36px;
+            right: var(--h-right);
+            top: var(--h-top);
+            border-radius: 30px;
         }
         to {
-            opacity: 1;
-            transform: scale(1);
+            width: 100%;
+            height: 100%;
+            right: 0;
+            top: 0;
+            border-radius: 6px;
         }
+
+        // to {
+        //     transform: scale(1);
+        // }
     }
     @keyframes scaleOut {
         from {
-            opacity: 0;
-            transform: scale(1.01);
+            width: 100%;
+            height: 100%;
+            right: 0;
+            top: 0;
+            border-radius: 6px;
         }
         to {
-            opacity: 1;
-            transform: scale(1);
+            width: 36px;
+            height: 36px;
+            right: var(--h-right);
+            top: var(--h-top);
+            border-radius: 30px;
         }
     }
 

@@ -6,12 +6,17 @@
     top: 0;
     width: 100%;
     z-index: 100;
+    --color-header: var(--color-base);
+    --white-header: var(--color-white);
+    --secondary-header: var(--color-bg-beige-light);
+
     &__wrapper {
         display: grid;
-        grid-template-columns: 200px 1fr 80px;
-        grid-template-areas: 'logo gnav hamburger';
+        grid-template-columns: 200px 1fr 120px 40px;
+        grid-template-areas: 'logo gnav cta theme hamburger';
         align-items: center;
-        padding: 0 1rem 0 1.5rem;
+        padding: 0 10px 0 1.5rem;
+        column-gap: 10px;
         height: var(--header-height-lg);
         border-bottom: 1px solid transparent;
         @include easeOutCubic(
@@ -22,21 +27,20 @@
         );
 
         @include mq-down(lg) {
-            padding-right: 5px;
-            grid-template-columns: 1fr var(--header-height-lg);
-            grid-template-areas: 'logo hamburger';
+            grid-template-columns: 1fr 110px 40px;
+            grid-template-areas: 'logo cta theme hamburger';
         }
         @include mq-down(md) {
+            padding-right: 15px;
+            column-gap: 6px;
+            grid-template-columns: 1fr 100px 40px;
+            grid-template-areas: 'logo cta hamburger';
             height: var(--header-height-md);
         }
         @include mq-down(sm) {
             height: var(--header-height-sm);
             padding-left: 1.2rem;
-            padding-right: 0;
-        }
-        .\:not-top & {
-            border-bottom-color: #eee;
-            background-color: #fff;
+            padding-right: 10px;
         }
     }
     &__logo {
@@ -47,35 +51,109 @@
             display: inline-block;
         }
         svg {
-            height: 30px;
-            width: 75px;
-            fill: var(--color-base);
+            // fill: var(--color-header);
+
+            color: var(--color-header);
         }
     }
     &__gnav {
+        padding-right: 20px;
         &__ul {
             display: flex;
             justify-content: flex-end;
-        }
-        &__list {
-            margin-left: 1.3rem;
+            gap: 1.5rem;
+            @include mq-down(xl) {
+                gap: 20px;
+            }
         }
         &__link {
-            color: var(--color-base);
+            color: var(--color-header);
             font-weight: var(--font-bold);
-            font-size: calc(15 / 16 * 1rem);
-
+            font-size: calc(13 / 16 * 1rem);
+            white-space: nowrap;
             @include hover {
-                color: var(--color-base);
+                color: var(--color-header);
+            }
+            @include mq-down(xl) {
+                font-size: calc(12 / 16 * 1rem);
             }
         }
         @include mq-down(lg) {
             display: none;
         }
     }
+    &__contact {
+        $parent: &;
+        grid-area: cta;
+        background-color: var(--color-primary);
+        color: var(--color-white);
+        border-radius: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 10px;
+        height: 42px;
+        font-size: calc(13 / 16 * 1rem);
+        line-height: 1;
+        @include easeOutExpo(0.7s, background-color, color);
+
+        @include mq-down(md) {
+            // display: none;
+            height: 36px;
+            font-size: 12px;
+            line-height: 1;
+        }
+        @include hover {
+            color: var(--color-white);
+        }
+    }
 
     &__hamburger {
         display: flex;
         justify-content: flex-end;
+        .hamburger {
+            @include easeOutQuart(300ms, background-color);
+
+            &:hover {
+                background-color: var(--secondary-header);
+            }
+        }
+    }
+    .theme-switch {
+        grid-area: theme;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--color-white);
+        border-radius: 50%;
+        aspect-ratio: 1 / 1;
+        cursor: pointer;
+        @include easeOutQuart(0.3s);
+        &:hover {
+            background-color: var(--secondary-header);
+        }
+        // ライト＝太陽 / ダーク＝月。既定は太陽を表示
+        .theme-switch__sun {
+            display: none;
+        }
+        svg {
+            width: 20px;
+            // path に inline fill があるため path 自体を上書きしてテーマ色に追従させる
+            path {
+                fill: var(--color-base);
+            }
+        }
+        @include mq-down(md) {
+            display: none;
+        }
+    }
+    // ダークテーマ（html.theme:dark）ではアイコンを月に入れ替える
+    :root.theme\:dark & .theme-switch {
+        .theme-switch__sun {
+            display: block;
+        }
+        .theme-switch__moon {
+            display: none;
+        }
     }
 }

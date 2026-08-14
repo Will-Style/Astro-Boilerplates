@@ -1,5 +1,25 @@
 @use '../global' as *;
 
+// セクションの頭に置く小見出し。行頭のドットで本文と区別する
+.lead-title {
+    color: var(--color-gray-dark);
+    font-size: clamp(12px, 1vw, 14px);
+    padding-left: 14px;
+    position: relative;
+    &::before {
+        content: '';
+        position: absolute;
+        left: 2px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 5px;
+        height: 5px;
+        border-radius: 5px;
+        background-color: var(--color-gray-dark);
+        opacity: 0.8;
+    }
+}
+
 .c-title {
     $parent: &;
     &--reverse {

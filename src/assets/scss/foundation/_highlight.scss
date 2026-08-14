@@ -1,0 +1,21 @@
+// コードハイライト（utilities/Highlight.js）の配色。
+// テーマは highlight.js/styles/ の他のファイルに差し替えられる
+@use 'highlight.js/styles/atom-one-dark.css';
+
+pre code.hljs {
+    border-radius: 2px;
+    overflow: hidden !important;
+    font-size: 14px;
+    line-height: 1.6;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+}
+
+// 暗い下地のコードブロックに出る横スクロールバー（utilities/Scrollbar.js）
+[data-scrollbars] {
+    .os-scrollbar-handle {
+        background-color: rgba(var(--color-white-rgb), 0.3) !important;
+        height: 4px !important;
+        border-radius: 2px !important;
+    }
+}

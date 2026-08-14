@@ -6,19 +6,19 @@ $grid-breakpoints: (
     'md': 768px,
     'lg': 1024px,
     'xl': 1280px,
-    '2xl': 1400px,
+    '2xl': 1480px,
 );
 
 $container-max-widths: (
     'sm': 100%,
-    'md': 768px,
-    'lg': 1024px,
-    'xl': 1230px,
-    '2xl': 1360px,
+    'xl': 100%,
+    '2xl': 1800px,
 );
 
 $container-padding: (
-    'xl': 35px,
+    '2xl': 80px,
+    'lg': 60px,
+    'md': 40px,
     'sm': 24px,
     'min': 20px,
 );
@@ -74,11 +74,21 @@ $spacers: (
 $colors: (
     'base': #303234,
     'bg': #fff,
+
+    'bg-gray': #f1f1f3,
+    'bg-gray-light': #f8f8f9,
+
+    'white': #fff,
+
     'primary': #0e7ae0,
-    'secondary': #46505d,
+    'secondary': #0d68be,
     'danger': #ea1515,
+
     'gray': #8f8b98,
-    'gray-light': #eee,
+    'gray-dark': #5b5f66,
+    'gray-light': #eaeaeb,
+    'border': #e2e2e5,
+
     // ラジオボタン・チェックボックスのアクティブな状態の色
     'input-active': #0e7ae0,
     // フォームのフォーカスリングの色
@@ -91,6 +101,5 @@ $colors: (
     // 'twitter': #1da1f2,
     // 'facebook': #4267b2,
     // ダークモードの場合
-    // 'base': #fff,
-     // 'bg': #272d33,,,,
+     // 'base': #fff,
 );

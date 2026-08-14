@@ -122,14 +122,15 @@ import Layout from '/src/layouts/Layout.astro';
                                                             image/png,
                                                             image/jpeg,
                                                             image/gif,
-                                                            application/pdf
+                                                            application/pdf,
+                                                            application/zip
                                                         "
                                                         name="file01" @change="onUpload($event,'file01')">
                                                     </div>
                                                     <div class="form__notice mt-5">
-                                                        ※ファイルサイズの上限は5MBまでです。<br>
+                                                        ※ファイルサイズの上限は10MBまでです。<br>
                                                         ※上限を超える場合は<a href="https://gigafile.nu/" target="_blank">ファイル便</a>等をご利用ください。<br>
-                                                        ※アップロード可能なファイルの種類はJPG/PNG/GIF/PDFです。
+                                                        ※アップロード可能なファイルの種類はJPG/PNG/GIF/PDF/ZIPです。
                                                     </div>
                                                 </div>
                                                 <div v-else>
@@ -147,24 +148,21 @@ import Layout from '/src/layouts/Layout.astro';
                                                 <div v-if="files.file02.url == ''">
                                                     <div class="form__content">
                                                         <input type="file"
-                                                        maxsize="1024*1024*8"
+                                                        maxsize="1024*1024*10"
                                                         accept="
                                                             image/png,
                                                             image/jpeg,
                                                             image/gif,
                                                             application/pdf,
-                                                            application/vnd.ms-excel,
-                                                            application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,
-                                                            application/msword,
-                                                            application/vnd.openxmlformats-officedocument.wordprocessingml.document
+                                                            application/zip
                                                         "
                                                         name="file02" 
                                                         @change="onUpload($event,'file02')">
                                                     </div>
                                                     <div class="form__notice mt-5">
-                                                        ※ファイルサイズの上限は8MBまでです。<br>
+                                                        ※ファイルサイズの上限は10MBまでです。<br>
                                                         ※上限を超える場合は<a href="https://gigafile.nu/" target="_blank">ファイル便</a>等をご利用ください。<br>
-                                                        ※アップロード可能なファイルの種類はJPG/PNG/GIF/PDF/Excel/Wordです。
+                                                        ※アップロード可能なファイルの種類はJPG/PNG/GIF/PDF/ZIPです。
                                                     </div>
                                                 </div>
                                                 <div v-else>

@@ -1,0 +1,31 @@
+@use '../global/' as *;
+
+// よくあるご質問。Q&A そのものの見た目は component/_qa.scss、
+// 脇の追従ナビは component/_side.scss（+ utilities/StickySide.js）が持つ。
+.faq {
+    &__page__wrapper {
+        padding-bottom: clamp(60px, 8vw, 120px);
+    }
+
+    // 見出しと Q&A のひとまとまり。カテゴリごとにこれを繰り返す
+    &__wrapper {
+        padding-bottom: clamp(50px, 7vw, 100px);
+
+        .qa {
+            margin-top: 18px;
+        }
+    }
+
+    // サイドナビのアンカーで飛んだとき、固定ヘッダーの下へ潜らせない。
+    // StickySide の判定位置（header の実高さ + 40）と合わせている
+    section[id] {
+        scroll-margin-top: calc(var(--header-height-lg) + 40px);
+
+        @include mq-down(md) {
+            scroll-margin-top: calc(var(--header-height-md) + 40px);
+        }
+        @include mq-down(sm) {
+            scroll-margin-top: calc(var(--header-height-sm) + 40px);
+        }
+    }
+}

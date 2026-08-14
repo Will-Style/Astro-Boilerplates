@@ -8,6 +8,7 @@ import Drawer from './Drawer';
 import Quicklink from './Quicklink';
 import LinkHoverAnimation from './LinkHoverAnimation';
 import ScrollTrigger from './ScrollTrigger';
+import Scrollbar from './Scrollbar';
 import SmoothScroll from './SmoothScroll';
 import NewWindow from './NewWindow';
 import Share from './Share';
@@ -15,6 +16,10 @@ import Lenis from './Lenis';
 import Slider from './Slider';
 import ArchiveSelect from './ArchiveSelect';
 import Copyright from './Copyright';
+import Highlight from './Highlight';
+import StickySide from './StickySide';
+import LazyVideo from './LazyVideo';
+import Video from './Video';
 
 export { 
     Globals,
@@ -28,9 +33,14 @@ export {
     Drawer,
     Quicklink,
     ScrollTrigger,
+    Scrollbar,
     SmoothScroll,
     // Lenis,
     Slider,
     ArchiveSelect,
-    Copyright
+    Copyright,
+    Highlight,
+    StickySide,
+    LazyVideo,
+    Video
 };

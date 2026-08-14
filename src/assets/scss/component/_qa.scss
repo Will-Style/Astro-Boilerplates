@@ -1,0 +1,103 @@
+@use '../global' as *;
+
+.qa {
+    $parent: &;
+    overflow: hidden;
+    margin-top: 1rem;
+    border-top: 1px solid rgba(var(--color-border-rgb), 0.5);
+    &__details {
+        position: relative;
+        overflow: hidden;
+        border-bottom: 1px solid rgba(var(--color-border-rgb), 0.5);
+        @include easeOutCubic(0.3s, background-color, border-color);
+
+        &:hover {
+            background-color: rgba(var(--color-white-rgb), 0.5);
+            .theme\:dark & {
+                background-color: rgba(#1a1717, 0.5);
+            }
+        }
+        &[open] {
+            background-color: var(--color-white);
+            border-bottom-color: transparent;
+
+            .theme\:dark & {
+                background-color: #1a1717;
+            }
+            #{$parent}__summary {
+                &::after {
+                    transform: rotate(0deg);
+                }
+            }
+        }
+    }
+    &__summary {
+        padding: 30px 0;
+        padding-right: 42px;
+        padding-left: 62px;
+        font-weight: 500;
+        font-size: calc(16 / 16 * 1rem);
+        line-height: 1.5;
+        @include mq-down(md) {
+            padding-left: 45px;
+            font-size: calc(15 / 16 * 1rem);
+            line-height: 1.4;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        &::before {
+            content: 'Q.';
+            font-size: calc(18 / 16 * 1rem);
+            font-weight: 400;
+            position: absolute;
+            left: 24px;
+            top: 29px;
+            @include mq-down(md) {
+                font-size: calc(16 / 16 * 1rem);
+                top: 20px;
+                left: 18px;
+            }
+        }
+        &::after {
+            content: '';
+            position: absolute;
+            right: 20px;
+            top: 29px;
+            width: 12px;
+            height: 12px;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            background-image: url('data:image/svg+xml;charset=utf8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M15.3632%2014.3869C15.4276%2014.4508%2015.4788%2014.5268%2015.5137%2014.6106C15.5486%2014.6944%2015.5666%2014.7842%2015.5666%2014.875C15.5666%2014.9658%2015.5486%2015.0556%2015.5137%2015.1394C15.4788%2015.2232%2015.4276%2015.2992%2015.3632%2015.3631C15.2993%2015.4276%2015.2233%2015.4787%2015.1395%2015.5136C15.0557%2015.5485%2014.9658%2015.5665%2014.8751%2015.5665C14.7843%2015.5665%2014.6945%2015.5485%2014.6107%2015.5136C14.5269%2015.4787%2014.4509%2015.4276%2014.387%2015.3631L8.00008%208.96938L1.61321%2015.3631C1.54929%2015.4276%201.47325%2015.4787%201.38948%2015.5136C1.3057%2015.5485%201.21584%2015.5665%201.12508%2015.5665C1.03432%2015.5665%200.944462%2015.5485%200.860684%2015.5136C0.776905%2015.4787%200.700867%2015.4276%200.636955%2015.3631C0.572517%2015.2992%200.521371%2015.2232%200.486467%2015.1394C0.451564%2015.0556%200.433594%2014.9658%200.433594%2014.875C0.433594%2014.7842%200.451564%2014.6944%200.486467%2014.6106C0.521371%2014.5268%200.572517%2014.4508%200.636955%2014.3869L7.03071%208.00001L0.636955%201.61313C0.507496%201.48367%200.434767%201.30809%200.434767%201.12501C0.434767%200.941923%200.507496%200.766339%200.636955%200.63688C0.766414%200.507422%200.941998%200.434692%201.12508%200.434692C1.30816%200.434692%201.48375%200.507422%201.61321%200.63688L8.00008%207.03063L14.387%200.63688C14.5164%200.507422%2014.692%200.434692%2014.8751%200.434692C15.0582%200.434692%2015.2337%200.507422%2015.3632%200.63688C15.4927%200.766339%2015.5654%200.941923%2015.5654%201.12501C15.5654%201.30809%2015.4927%201.48367%2015.3632%201.61313L8.96946%208.00001L15.3632%2014.3869Z%22%20fill%3D%22%23797979%22%2F%3E%3C%2Fsvg%3E');
+            @include easeInOutBack(0.4s, transform);
+            transform: rotate(-45deg);
+            @include mq-down(sm) {
+                width: 10px;
+                height: 10px;
+                top: 22px;
+            }
+        }
+    }
+    &__content {
+        font-size: calc(14 / 16 * 1rem);
+        line-height: 1.8;
+        @include mq-down(md) {
+            line-height: 1.6;
+        }
+        &.is-active {
+            #{$parent}__inner {
+                border-top: none;
+                padding-top: 0;
+            }
+        }
+    }
+    &__inner {
+        padding-left: 62px;
+        padding-right: 30px;
+        padding-bottom: 1.2rem;
+        @include mq-down(md) {
+            padding-left: 45px;
+            padding-right: 20px;
+        }
+    }
+}

@@ -80,6 +80,9 @@ summary::-webkit-details-marker {
 #page {
     width: 100%;
     opacity: 0;
+    // 記事内スライダーのように、意図してコンテナ幅から食み出す要素の横スクロールを止める。
+    // hidden と違い clip は position: sticky を殺さない
+    overflow: clip;
 }
 
 @media print {

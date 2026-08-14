@@ -15,6 +15,35 @@ export interface Props {
 }
 
 const { title, namespace='page' , blank = false } = Astro.props;
+
+// WP記事埋め込み(wp-embed)のiframe高さ追従。埋め込み先の /embed/ が自身の実コンテンツ高さを
+// postMessage で通知してくるので、それをiframeに反映する。本番テーマではWP本体の
+// wp-embed.min.js（wp.receiveEmbedMessage）が担当するため、プレビュー時のみ最小実装を補う。
+const wpEmbedResizeScript = `
+(() => {
+    window.addEventListener("message", (e) => {
+        // 埋め込み先が送るのは {message:"height", value:N, secret:"..."} のフラットな形
+        const data = e.data;
+        if (!data || data.message !== "height") return;
+        if (typeof data.secret !== "string" || /[^a-zA-Z0-9]/.test(data.secret)) return;
+        // 本家と同じクランプ（200〜1000px）
+        let height = parseInt(data.value, 10);
+        if (height > 1000) height = 1000;
+        else if (!(height > 200)) height = 200;
+        document.querySelectorAll('iframe[data-secret="' + data.secret + '"]').forEach((iframe) => {
+            if (iframe.contentWindow !== e.source) return;
+            iframe.height = height;
+        });
+    });
+    // 埋め込み先は load 時に自発的に高さを送るが、取りこぼした場合に備えて ready を投げる
+    document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll("iframe.wp-embedded-content").forEach((iframe) => {
+            const secret = iframe.getAttribute("data-secret");
+            if (secret) iframe.contentWindow.postMessage({ message: "ready", secret }, "*");
+        });
+    });
+})();
+`;
 ---
 
 <!DOCTYPE html>
@@ -23,6 +52,9 @@ const { title, namespace='page' , blank = false } = Astro.props;
 		<meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="view-transition" content="same-origin">
+        {/* WordPress標準のブロックスタイル。本番テーマではWP本体のwp-block-libraryが出力するため、プレビュー時のみ読み込む */}
+        {import.meta.env.DEV && <link rel="stylesheet" href="/assets/css/wp-blocks.css" />}
+        {import.meta.env.DEV && <script is:inline set:html={wpEmbedResizeScript} />}
 		<title>{title}</title>
         <Meta />
         <script src="/src/assets/js/app.js"></script>

@@ -1,23 +1,27 @@
 @use '../../global' as *;
 
 @if ($enable-wp-blocks) {
+    // ブロック間の余白は clamp() で画面幅に追従させる（本文側の .blog__body > * とセット）
+    p.wp-block-paragraph {
+        margin-top: clamp(15px, 2vw, 24px);
+    }
     .wp-block-gallery {
-        margin: 2rem 0;
+        margin: clamp(20px, 4vw, 50px) 0;
     }
     .wp-block-pullquote {
-        margin: 2rem 0;
+        margin: clamp(20px, 4vw, 50px) 0;
         cite {
             margin-top: 0.6rem;
         }
     }
     .wp-block-quote {
-        margin: 2rem 0;
+        margin: clamp(20px, 4vw, 50px) 0;
         cite {
             margin-top: 0.6rem;
         }
     }
     .wp-block-code {
-        margin: 2rem 0;
+        margin: clamp(20px, 4vw, 50px) 0;
         background-color: var(--blockquote-bg, #272d33);
         padding: 1rem 1.5rem 1.2rem;
         border-radius: 4px;
@@ -27,11 +31,11 @@
         overflow-x: auto;
     }
     .wp-block-image {
-        margin: 2.5rem 0;
+        margin: clamp(20px, 4vw, 50px) 0;
     }
     .wp-block-cover-image,
     .wp-block-cover {
-        margin: 2.5rem 0;
+        margin: clamp(20px, 4vw, 50px) 0;
         margin-left: -40px;
         margin-right: -40px;
         border-radius: 6px;
@@ -52,10 +56,18 @@
         }
     }
     .wp-block-button__link {
+        line-height: 1;
+        background-color: var(--color-primary);
+        color: var(--color-white);
+        @include easeOutQuart(0.3s, background);
         &:hover,
         &:focus,
         &:active {
             text-decoration: none;
+        }
+        @include hover {
+            background-color: var(--color-secondary);
+            color: var(--color-white);
         }
         &.has-background {
             &:hover,
@@ -66,7 +78,7 @@
         }
     }
     .wp-block-embed {
-        margin: 2rem 0;
+        margin-top: 20px;
     }
     .wp-embed-responsive .wp-embed-aspect-16-9 .wp-block-embed__wrapper:before {
         position: relative;
@@ -107,7 +119,10 @@
             position: relative !important;
             clip: auto !important;
             overflow: hidden;
-            height: 152px !important;
+            // 高さは埋め込み先が postMessage で通知する実コンテンツ高さを
+            // wp-embed.min.js が iframe に反映する。固定値で潰すと内容が収まらず
+            // iframe 内にスクロールバーが出る（cross-origin なので親からは消せない）
+            min-height: 152px;
         }
     }
     .wp-block-file .wp-block-file__button {
@@ -117,5 +132,36 @@
     }
     .wp-block-media-text {
         margin-top: 2rem;
+    }
+    .wp-block-video {
+        margin: clamp(20px, 4vw, 50px) 0;
+        video {
+            aspect-ratio: 16 / 9;
+            height: auto !important;
+        }
+        figcaption {
+            font-size: calc(12 / 16 * 1rem);
+            line-height: 1.6;
+            color: var(--color-gray-dark);
+            padding-top: 10px;
+        }
+    }
+    .wp-element-caption {
+        font-size: calc(12 / 16 * 1rem);
+        line-height: 1.6;
+        color: var(--color-gray-dark);
+        padding-top: 6px;
+    }
+
+    .wp-block-table thead {
+        border-bottom: none;
+    }
+    .wp-block-table table thead tr th,
+    .wp-block-table table thead tr td,
+    .wp-block-table table tfoot tr th,
+    .wp-block-table table tfoot tr td,
+    .wp-block-table table tbody tr th,
+    .wp-block-table table tbody tr td {
+        border-color: var(--color-border);
     }
 }

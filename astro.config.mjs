@@ -87,7 +87,8 @@ export default defineConfig({
         // relativeLinks(),
         // htmlBeautifier(),
         ClientChunkFileNames(),
-        OptimizeImage()
+        OptimizeImage(),
+        WpBlocksPreviewStyle()
         // image({
         //     cacheDir: "./.cache/image"
         // }),
@@ -194,6 +195,31 @@ function ClientChunkFileNames() {
                         return `${assets_path}js/chunks/${name}.[hash].js`
                     }
                 }
+            }
+        }
+    }
+}
+
+const WP_BLOCKS_SRC = './node_modules/@wordpress/block-library/build-style/style.css'
+const WP_BLOCKS_DEST = `./public/${assets_path}css/wp-blocks.css`
+
+// WordPress標準のブロックCSSをプレビュー用にpublicへ配置する
+// 本番テーマではWP本体が出力するwp-block-libraryを使うため、devサーバ時のみ配置し、
+// ビルド時は削除してdistに含めない（Layout.astro側もimport.meta.env.DEVで出し分けている）
+function WpBlocksPreviewStyle() {
+    return {
+        name: 'WordPress block style for preview',
+        hooks: {
+            'astro:server:start': async () => {
+                if (!fs.existsSync(WP_BLOCKS_SRC)) {
+                    console.warn(`[wp-blocks] ${WP_BLOCKS_SRC} が見つかりません。pnpm install を実行してください`)
+                    return
+                }
+                await fsp.mkdir(path.dirname(WP_BLOCKS_DEST), { recursive: true })
+                await fsp.copyFile(WP_BLOCKS_SRC, WP_BLOCKS_DEST)
+            },
+            'astro:build:start': async () => {
+                await fsp.rm(WP_BLOCKS_DEST, { force: true })
             }
         }
     }

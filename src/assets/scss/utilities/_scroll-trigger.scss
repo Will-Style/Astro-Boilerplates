@@ -21,6 +21,41 @@
     }
 }
 
+// 位置を動かさずに濃度だけで出す。すでに組み上がっているレイアウト
+// （リストやナビ）に使うと、要素がずれずに現れる
+[data-scroll-trigger='fade'] {
+    will-change: opacity;
+
+    opacity: 0;
+    // transition は :visible が付いた瞬間だけ有効にする。
+    // 初期状態側に持たせると、ページ遷移(View Transitions)やロードのタイミングで
+    // 初期状態そのものがアニメーションし、登場アニメと二重に見える
+    &.\:visible {
+        @include easeOutQuart(800ms, opacity);
+        opacity: 1;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        opacity: 1 !important;
+    }
+}
+
+// 下辺から現れる。画像やサムネイルなど、矩形で見せたいものに使う。
+// 中身は動かさず、切り抜きだけを開くので object-fit の画像とも噛み合う
+[data-scroll-trigger='mask'] {
+    will-change: clip-path;
+
+    clip-path: inset(100% 0 0 0);
+    &.\:visible {
+        @include easeOutQuart(1000ms, clip-path);
+        clip-path: inset(0 0 0 0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        clip-path: inset(0 0 0 0) !important;
+    }
+}
+
 [data-scroll-trigger='blur'] {
     filter: blur(1em) brightness(1.85);
     @include easeOutQuart(1300ms, filter);
