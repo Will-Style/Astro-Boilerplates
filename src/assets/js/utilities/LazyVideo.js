@@ -8,8 +8,11 @@
 // 1 フレーム目を出す（判定は videoPolicy に集約）。
 // この環境では再生する手段が無くなるので、[data-video-controls] が付いた動画
 // （ブログ本文）には controls を出して、ユーザー操作で再生できるようにする。
+//
+// モバイルでも再生させたい動画には [data-video-autoplay] を付ける。画面幅の判定
+// だけを飛ばすので、省データ・モーション低減の環境では従来どおり静止画になる。
 
-import { prefersStillVideo, onStillVideoChange, stillFrameTime } from './VideoPolicy';
+import { allowsAutoplay, onStillVideoChange, stillFrameTime } from './VideoPolicy';
 
 // 監視中の動画。二重登録を防ぐのと、DOM から外れたものを掃除するために持っている
 const observed = new Set();
@@ -21,7 +24,7 @@ const pending = (v) => !v.src && !v.querySelector("source[src]");
 
 // 自動再生しない環境で、ユーザーが自分で再生できるようにするか。
 // 自動再生する環境（PC）では演出の邪魔になるので出さない
-const showsControls = (v) => v.hasAttribute("data-video-controls") && prefersStillVideo();
+const showsControls = (v) => v.hasAttribute("data-video-controls") && !allowsAutoplay(v);
 
 // 環境に合わせて controls を付け外しする。画面幅やモーション設定は途中で変わるため、
 // 監視に載せるときと判定が変わったときの両方から呼ぶ
@@ -98,13 +101,17 @@ function observer() {
             return;
         }
         // 自動再生しない環境では静止画のまま出す
-        if (prefersStillVideo()) {
+        if (!allowsAutoplay(v)) {
             loadStill(v);
             v.pause();
             return;
         }
         if (pending(v)) load(v);
         v.muted = true;           // 属性だけでなくプロパティでも確実に
+        // iOS は muted と inline 指定の両方が揃っていないと play() を弾く。
+        // [data-video-autoplay] は書き手が付ける属性なので、付け漏れても
+        // 再生できるようここで揃えておく（プロパティは属性に反映される）
+        v.playsInline = true;
         v.play().catch(() => {});
     }), { rootMargin: "200px" });
     return io;
@@ -148,11 +155,13 @@ function pruneLazyVideos() {
     });
 }
 
-// 監視中の動画をすべて止める。画面幅やモーション設定が途中で変わり、
-// 自動再生しない条件に入ったときに使う（IntersectionObserver は交差状態が
-// 変わらないと発火しないので、再生中のものはこれが無いと動いたまま残る）
-function pauseAll() {
+// 自動再生しない条件に入った動画を止める。画面幅やモーション設定は途中で変わるが、
+// IntersectionObserver は交差状態が変わらないと発火しないので、これが無いと
+// 再生中のものが動いたまま残る。
+// [data-video-autoplay] は幅の条件を見ないため、判定は動画ごとに取り直す
+function pauseDisallowed() {
     observed.forEach((v) => {
+        if (allowsAutoplay(v)) return;
         v.removeAttribute("autoplay");
         v.pause();
     });
@@ -163,7 +172,7 @@ export default class{
         this.run();
 
         onStillVideoChange(() => {
-            if (prefersStillVideo()) pauseAll();
+            pauseDisallowed();
             // 自動再生する / しないが入れ替わるので controls も合わせ直す
             observed.forEach(applyControls);
         });

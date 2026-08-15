@@ -40,6 +40,15 @@ export const prefersStillVideoBase = () => prefersReducedMotion() || prefersSave
 // 動画を再生せず静止画（poster、無ければ 1 フレーム目）で見せるべきか
 export const prefersStillVideo = () => prefersStillVideoBase() || isNarrowViewport();
 
+// 画面幅の条件だけを免除して自動再生する動画かどうか。
+// [data-video-autoplay] を付けた動画は、モバイルでも再生したいという明示の指定として
+// 扱い、幅の判定を飛ばす。ただし省データ・モーション低減は利用者側の設定なので
+// ここでも尊重する（免除すると設定を無視することになる）
+export const allowsAutoplay = (v) =>
+    v.hasAttribute("data-video-autoplay")
+        ? !prefersStillVideoBase()
+        : !prefersStillVideo();
+
 // 判定が変わったときに呼び戻す（画面幅の変更、モーション低減の切り替え）。
 // 再生中の動画を止め直すために使う
 export function onStillVideoChange(fn) {
