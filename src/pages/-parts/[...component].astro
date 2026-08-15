@@ -1,0 +1,21 @@
+---
+// コンポーネントを単体でHTMLに展開するためのビルド専用ページ
+// 出力はastro.config.mjsのExportPhp()がphp/components/へ移し、distからは削除される
+export async function getStaticPaths() {
+    // propsを必須にしている仕組み用のコンポーネントは、単体で展開しても意味がないため除外する
+    const EXCLUDES = ['/src/components/Picture.astro'];
+    const modules = import.meta.glob('/src/components/**/*.astro');
+    return Object.keys(modules)
+        .filter(file => !EXCLUDES.includes(file))
+        .map(file => ({
+            params: { component: file.replace('/src/components/', '').replace(/\.astro$/, '') },
+            props: { file }
+        }));
+}
+
+// getStaticPathsは独立したスコープで動くため、描画側でもう一度読み込む
+const modules = import.meta.glob('/src/components/**/*.astro', { eager: true });
+const { file } = Astro.props;
+const Component = modules[file].default;
+---
+<Component />

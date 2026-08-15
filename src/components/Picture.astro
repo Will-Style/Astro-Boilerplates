@@ -1,0 +1,77 @@
+---
+// 画像を<picture>+srcsetで出力する
+// 幅の一覧はastro.config.mjsの変換処理が書き出したマニフェストから取得するため、
+// 使う側は原寸のパスとsizesを指定するだけでよい
+import manifest from '../../.astro/images-manifest.json';
+
+export interface Props {
+    src: string;
+    alt?: string;
+    sizes?: string;
+    class?: string;
+    loading?: 'lazy' | 'eager';
+    decoding?: 'async' | 'sync' | 'auto';
+    [key: string]: any;
+}
+
+const IMAGES_BASE = '/assets/images/';
+
+const {
+    src,
+    alt = '',
+    sizes = '100vw',
+    loading = 'lazy',
+    decoding = 'async',
+    class: className,
+    ...rest
+} = Astro.props;
+
+const images = manifest as Record<string, { width: number; height: number; widths: number[] }>;
+const stripExtension = (file: string) => file.replace(/\.[^./]+$/, '');
+
+const requested = src.startsWith(IMAGES_BASE) ? src.slice(IMAGES_BASE.length) : src;
+// 変換で生成した.webpや.avifを直接指定された場合も、元画像の情報を引き当てる
+const key = images[requested]
+    ? requested
+    : Object.keys(images).find(file => stripExtension(file) === stripExtension(requested)) ?? requested;
+const entry = images[key];
+
+if (!entry) {
+    // マニフェストに無い画像（外部URLやdata:を含む）は<img>のまま出す
+    console.warn(`[picture] 画像情報が見つかりません。imgとして出力します: ${src}`);
+}
+
+// 原寸はサフィックスなし、縮小版は-480のようなサフィックスが付く
+const variantPath = (width: number, ext: string) =>
+    `${IMAGES_BASE}${stripExtension(key)}${width === entry.width ? '' : `-${width}`}.${ext}`;
+
+const srcsetFor = (ext: string) =>
+    entry.widths.map(width => `${variantPath(width, ext)} ${width}w`).join(', ');
+
+const originalExt = key.split('.').pop()?.toLowerCase() ?? '';
+// webpが元画像の場合はwebpがフォールバックそのものになるため、<source>を重ねない
+const hasWebpSource = originalExt !== 'webp';
+const isResponsive = entry && entry.widths.length > 1;
+// フォールバックには元画像の形式を使う（.webp指定で呼ばれた場合もここで揃う）
+const fallbackSrc = entry ? `${IMAGES_BASE}${key}` : src;
+---
+{entry ? (
+    <picture>
+        <source type="image/avif" srcset={srcsetFor('avif')} sizes={sizes} />
+        {hasWebpSource && <source type="image/webp" srcset={srcsetFor('webp')} sizes={sizes} />}
+        <img
+            src={fallbackSrc}
+            srcset={isResponsive ? srcsetFor(originalExt) : undefined}
+            sizes={isResponsive ? sizes : undefined}
+            width={entry.width}
+            height={entry.height}
+            alt={alt}
+            class={className}
+            loading={loading}
+            decoding={decoding}
+            {...rest}
+        />
+    </picture>
+) : (
+    <img src={src} alt={alt} class={className} loading={loading} decoding={decoding} {...rest} />
+)}

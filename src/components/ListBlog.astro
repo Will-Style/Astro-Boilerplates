@@ -1,4 +1,5 @@
 ---
+import Picture from '/src/components/Picture.astro';
 export interface Props {
 	title: string;
     image: string;
@@ -15,6 +16,6 @@ const { title='タイトルが入ります。タイトルが入ります。タ�
                 <span class="c-card__cat">カテゴリー名カテゴリー名カテゴリー名カテゴリー名カテゴリー名</span>
             </div>
         </div>
-        <figure class="c-card__figure" data-scroll-trigger='mask'><picture><img src={image}　alt="" class="c-card__image"></picture></figure>
+        <figure class="c-card__figure" data-scroll-trigger='mask'><Picture src={image} sizes="(min-width: 768px) 33vw, 100vw" alt="" class="c-card__image" /></figure>
     </a>
 </article>

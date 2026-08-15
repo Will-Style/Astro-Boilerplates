@@ -66,7 +66,9 @@ const wpEmbedResizeScript = `
             { !blank && <Drawer />}
             { !blank && <Header />}
             <div id="content">
+                <!--astro-page:start-->
                 <slot />
+                <!--astro-page:end-->
             </div>
             { !blank && <Footer namespace={namespace} />}
         </div>

@@ -6,6 +6,8 @@
         "lint": "pnpm run style:lint --fix && pnpm run es:lint --fix",
         "dev": "pnpm run lint && astro dev --host",
         "start": "pnpm run lint && astro dev",
+        "img": "node astro.config.mjs --images",
+        "img:force": "node astro.config.mjs --images --force",
         "build": "astro build",
         "prod": "astro build",
         "preview": "pnpm run lint && astro preview",

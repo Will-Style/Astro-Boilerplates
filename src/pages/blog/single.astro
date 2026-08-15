@@ -1,4 +1,5 @@
 ---
+import Picture from '/src/components/Picture.astro';
 import Layout from '/src/layouts/Layout.astro';
 ---
 <Layout title="Blog">
@@ -28,7 +29,7 @@ import Layout from '/src/layouts/Layout.astro';
                                 </dd>
                             </div>
                             <div class="blog-single__details__col :author">
-                                <div class="blog__author"><figure class="blog__author__figure"> <img src="/assets/images/dummy.webp" class="blog__author__image" alt="" loading="lazy"></figure><div class="blog__author__content"><div class="blog__author__position">Author</div><div class="blog__author__name"> Mariko Nishizawa</div></div></div>
+                                <div class="blog__author"><figure class="blog__author__figure"> <Picture src="/assets/images/dummy.webp" class="blog__author__image" alt="" loading="lazy" /></figure><div class="blog__author__content"><div class="blog__author__position">Author</div><div class="blog__author__name"> Mariko Nishizawa</div></div></div>
                             </div>
                         </dl>
                     </section>
@@ -256,7 +257,7 @@ hljs.registerLanguage('javascript', require('highlight.js/lib/languages/javascri
 <ul class="blog__talkmember__ul">
     <li class="blog__talkmember__li">
         <figure class="blog__talkmember__figure">
-            <img src="/assets/images/dummy.jpg" class="blog__talkmember__image" alt="" loading="lazy" decoding="async" width="1600" height="1600">
+            <Picture src="/assets/images/dummy.jpg" sizes="120px" class="blog__talkmember__image" alt="" loading="lazy" decoding="async" />
         </figure>
         <div class="blog__talkmember__content">
             <div class="blog__talkmember__position">株式会社Planet Japan<br>代表取締役</div>
@@ -265,7 +266,7 @@ hljs.registerLanguage('javascript', require('highlight.js/lib/languages/javascri
     </li>
     <li class="blog__talkmember__li">
         <figure class="blog__talkmember__figure">
-            <img src="/assets/images/dummy.jpg" class="blog__talkmember__image" alt="" loading="lazy" decoding="async" width="1600" height="1600">
+            <Picture src="/assets/images/dummy.jpg" sizes="120px" class="blog__talkmember__image" alt="" loading="lazy" decoding="async" />
         </figure>
         <div class="blog__talkmember__content">
             <div class="blog__talkmember__position">Will Style Inc.<br>Director</div>
@@ -274,7 +275,7 @@ hljs.registerLanguage('javascript', require('highlight.js/lib/languages/javascri
     </li>
     <li class="blog__talkmember__li">
         <figure class="blog__talkmember__figure">
-            <img src="/assets/images/dummy.jpg" class="blog__talkmember__image" alt="" loading="lazy" decoding="async" width="1600" height="1600">
+            <Picture src="/assets/images/dummy.jpg" sizes="120px" class="blog__talkmember__image" alt="" loading="lazy" decoding="async" />
         </figure>
         <div class="blog__talkmember__content">
             <div class="blog__talkmember__position">会社名<br>役職</div>
@@ -283,7 +284,7 @@ hljs.registerLanguage('javascript', require('highlight.js/lib/languages/javascri
     </li>
     <li class="blog__talkmember__li">
         <figure class="blog__talkmember__figure">
-            <img src="/assets/images/dummy.jpg" class="blog__talkmember__image" alt="" loading="lazy" decoding="async" width="1600" height="1600">
+            <Picture src="/assets/images/dummy.jpg" sizes="120px" class="blog__talkmember__image" alt="" loading="lazy" decoding="async" />
         </figure>
         <div class="blog__talkmember__content">
             <div class="blog__talkmember__position">会社名<br>役職</div>
@@ -300,7 +301,7 @@ hljs.registerLanguage('javascript', require('highlight.js/lib/languages/javascri
 <div class="blog__talk__content">
 <div class="blog__talk__avatar">
     <figure class="blog__talk__avatar-figure">
-        <img src="/assets/images/dummy.jpg" class="blog__talk__avatar-image" alt="" loading="lazy" decoding="async" width="1600" height="1600">
+        <Picture src="/assets/images/dummy.jpg" sizes="120px" class="blog__talk__avatar-image" alt="" loading="lazy" decoding="async" />
     </figure>
 </div>
 <div class="blog__talk__body">
@@ -311,7 +312,7 @@ hljs.registerLanguage('javascript', require('highlight.js/lib/languages/javascri
 <div class="blog__talk__content">
 <div class="blog__talk__avatar">
     <figure class="blog__talk__avatar-figure">
-        <img src="/assets/images/dummy.jpg" class="blog__talk__avatar-image" alt="" loading="lazy" decoding="async" width="1600" height="1600">
+        <Picture src="/assets/images/dummy.jpg" sizes="120px" class="blog__talk__avatar-image" alt="" loading="lazy" decoding="async" />
     </figure>
 </div>
 <div class="blog__talk__body">
@@ -347,7 +348,7 @@ hljs.registerLanguage('javascript', require('highlight.js/lib/languages/javascri
                         <h4 class="blog__pagenavi__title">前の記事</h4>
                         <article class="blog__pagenavi__card">
                             <a href="" class="blog__pagenavi__card__link">
-                                <figure class="blog__pagenavi__card__figure"><img src="/assets/images/dummy.webp" alt="" class="c-card__image"></figure>
+                                <figure class="blog__pagenavi__card__figure"><Picture src="/assets/images/dummy.webp" alt="" class="c-card__image" /></figure>
                                 <div class="blog__pagenavi__card__content">
                                     <h3 class="blog__pagenavi__card__title">タイトルが入ります。タイトルが入ります。タイトルが入ります。タイトルが入ります。</h3>
                                     <time class="blog__pagenavi__card__time" aria-label="投稿日:">2023.05.08</time>
@@ -359,7 +360,7 @@ hljs.registerLanguage('javascript', require('highlight.js/lib/languages/javascri
                         <h4 class="blog__pagenavi__title">次の記事</h4>
                         <article class="blog__pagenavi__card">
                             <a href="" class="blog__pagenavi__card__link">
-                                <figure class="blog__pagenavi__card__figure"><img src="/assets/images/dummy.webp" alt="" class="c-card__image"></figure>
+                                <figure class="blog__pagenavi__card__figure"><Picture src="/assets/images/dummy.webp" alt="" class="c-card__image" /></figure>
                                 <div class="blog__pagenavi__card__content">
                                     <h3 class="blog__pagenavi__card__title">タイトルが入ります。タイトルが入ります。タイトルが入ります。タイトルが入ります。</h3>
                                     <time class="blog__pagenavi__card__time" aria-label="投稿日:">2023.05.08</time>
