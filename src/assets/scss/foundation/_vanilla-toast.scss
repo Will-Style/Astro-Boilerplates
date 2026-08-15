@@ -1,0 +1,9 @@
+// リンクのコピー（utilities/Share.js）で出すトースト。
+// JS だけを import していると位置も配色も付かず、フッターの下に素のテキストが
+// 流れるだけになるため、パッケージ側の CSS をそのまま読み込む
+@use 'vanilla-toast/vanilla-toast.css';
+
+#vanilla-toast-container {
+    // 固定ヘッダー（z-index: 100）より前に出す
+    z-index: 1000;
+}

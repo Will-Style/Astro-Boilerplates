@@ -11,6 +11,12 @@ import gsap from "gsap";
  */
 const CLOSING_CLASS = 'is-closing';
 
+// 指・マウスで開いたことを表すフラグ（html に付ける）。
+// showModal() は dialog 内の autofocus 要素へブラウザがフォーカスを移すため、
+// 環境によってはタップで開いただけでもハンバーガーにフォーカスリングが出る。
+// その抑制だけに使い、キーが押された時点で外す（キーボードで辿ってきた人には出す）
+const POINTER_CLASS = 'is-pointer-open';
+
 export default class {
     opened = false;
     closing = false;
@@ -26,6 +32,8 @@ export default class {
     }
     run(d) {
         this.body = d.body;
+        // 同じ関数を渡すので、開くたびに登録しても二重には積まれない
+        this.clearPointerOpen = () => d.documentElement.classList.remove(POINTER_CLASS);
         this.hamburgers = d.querySelectorAll(this.hamburger_id);
         this.drawer = d.querySelector('#' + this.drawer_id);
         if(this.drawer){
@@ -73,7 +81,8 @@ export default class {
     }
 
     drawerClick(d,e){
-
+        // キーボード（Enter / Space）から起きた click は detail が 0 になる
+        this.pointerOpen = Boolean(e && e.detail);
         this.drawerToggleClass(d);
     }
     drawerToggleClass(d){
@@ -100,6 +109,8 @@ export default class {
 
         if(!this.opened){
             this.drawer.classList.remove(CLOSING_CLASS);
+            // showModal() より前に決めておく（フォーカスは開いた時点で移るため）
+            this.pointerFocus(d);
             this.drawer.showModal();
             this.opened = true;
             this.expanded(true);
@@ -199,6 +210,16 @@ export default class {
                 });
             }
         }
+    }
+    // 自動フォーカスのリングを出すかどうかを html のクラスで伝える。
+    // キーを触った時点で外れるので、Tab で辿ってきたときのリングは残る
+    pointerFocus(d){
+        if(!this.pointerOpen){
+            this.clearPointerOpen();
+            return;
+        }
+        d.documentElement.classList.add(POINTER_CLASS);
+        d.addEventListener('keydown', this.clearPointerOpen, { once: true });
     }
     expanded(is){
         if(this.hamburgers.length > 0){

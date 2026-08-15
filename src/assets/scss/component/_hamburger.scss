@@ -17,6 +17,13 @@
 
     .is-open & {
     }
+    // 指・マウスで開いたときは、dialog の autofocus で移ったフォーカスの
+    // リングを出さない（押した本人には見えても邪魔なだけのため）。
+    // クラスはキー操作の時点で utilities/Drawer.js が外すので、
+    // キーボードで辿ってきたときのリングは通常どおり出る
+    .is-pointer-open &:focus {
+        outline: none;
+    }
     &__container {
         position: absolute;
 

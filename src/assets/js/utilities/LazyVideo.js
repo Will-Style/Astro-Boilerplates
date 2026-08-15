@@ -115,9 +115,13 @@ function observer() {
 export function observeLazyVideos(root = document) {
     const o = observer();
     const add = (v) => {
+        // controls の判定は登録済みでもやり直す。マークアップの時点で
+        // [data-lazy-video] が付いている動画は Video が [data-video-controls] を
+        // 付ける前にここへ来ることがあり（バンドル後の初期化順は import 順どおりに
+        // ならない）、登録済みだからと飛ばすと controls が出ないまま固定されてしまう
+        applyControls(v); // 画面外のうちに済ませ、表示された時点では出揃っている状態にする
         if (observed.has(v)) return;
         observed.add(v);
-        applyControls(v); // 画面外のうちに済ませ、表示された時点では出揃っている状態にする
         o.observe(v);
     };
     // 差し替えられた要素そのものが動画のこともあるので、root 自身も見る
