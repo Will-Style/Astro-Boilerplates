@@ -1,4 +1,6 @@
-import hljs from 'highlight.js';
+// 全言語版（highlight.js）は1MB近くあるため、主要言語のみのcommonビルドを使う
+// 対応言語: https://github.com/highlightjs/highlight.js/blob/main/SUPPORTED_LANGUAGES.md
+import hljs from 'highlight.js/lib/common';
 
 /**
  * [data-highlight] の中の <code> をシンタックスハイライトする。

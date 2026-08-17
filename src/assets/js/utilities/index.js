@@ -16,7 +16,7 @@ import Lenis from './Lenis';
 import Slider from './Slider';
 import ArchiveSelect from './ArchiveSelect';
 import Copyright from './Copyright';
-import Highlight from './Highlight';
+// import Highlight from './Highlight';
 import StickySide from './StickySide';
 import LazyVideo from './LazyVideo';
 import Video from './Video';
@@ -39,7 +39,7 @@ export {
     Slider,
     ArchiveSelect,
     Copyright,
-    Highlight,
+    // Highlight,
     StickySide,
     LazyVideo,
     Video
